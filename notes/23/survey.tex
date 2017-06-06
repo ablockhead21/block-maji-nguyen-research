@@ -1,2 +1,19 @@
 \section{Survey}
 Here, we have a survey of results and open problems concerning LPN.
+
+\begin{definition}[(Search) Learning Parity with Noise~\cite{??}]
+	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(n, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
+	\begin{align*}
+		\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{As}\xor\vec{e}\right)=\vec{s}\right] \leq \epsilon,
+	\end{align*}
+	where $\vec{s} \getsr \bbZ^\ell_2$, $\vec{A} \getsr \bbZ^{n\times \ell}_2$, and $\vec{e} \drawn \pred{Ber}^n_\tau$.
+\end{definition}
+Next we have the seemingly stronger version of LPN, namely Decisional LPN.
+\begin{definition}[(Decisional) Learning Parity with Noise~\cite{??}]
+	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(n, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
+	\begin{align*}
+	\abs{\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{As}\xor\vec{e}\right)\right] -
+	\underset{\vec{r}, \vec{A}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{r} \right)=\vec{s}\right] } \leq \epsilon,
+	\end{align*}
+	where $\vec{s} \getsr \bbZ^\ell_2$, $\vec{A} \getsr \bbZ^{n\times \ell}_2$, $\vec{e} \drawn \pred{Ber}^n_\tau$, and $\vec{r}\getsr\bbZ^n_2$.
+\end{definition}
