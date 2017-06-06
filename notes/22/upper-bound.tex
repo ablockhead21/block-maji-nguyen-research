@@ -1,0 +1,32 @@
+\section{Upper Bound}
+\begin{theorem} [Rusa-Szemeredi\cite{frankl1987subsets}]
+	\label{thm:RS}
+	Suppose $ F $ is a linear 3-graph on $ n $ vertices which contains no triangle. Then $ \abs F = o(n^2) $. 
+\end{theorem}
+
+\noindent Let $ S = \{s_1, s_2, \cdots, s_m\} $ and $ T =\{ t_1,t_2, \cdots, t_m\} $ such that 
+\begin{itemize}
+	\item For every $ i $, $ s_i \in [n] $ and $ t_i \in [n] $,
+	\item $ s_i + t_i = s_j + t_k $  if and only if $ i = j = k $.
+\end{itemize}
+We have following result for upper bounding $ m $ in the asymptotic sense. 
+\begin{theorem}
+	$ m = o(n) $
+\end{theorem}  
+
+\begin{proof}
+	We define a 3-graph as follows. 
+	$$ F = \{ \{(a,1), (a+s_i, 2), (a + s_i + t_i)\} : a \in [n], i \in [m] \} $$
+	First note that $ F $ is linear, i.e., for any two distinct edges $ U,V $, we have $ \abs{U \cap V} \leq 1 $. Clearly, $ \abs{F} = n \cdot m$, and the number of vertices is $ \Theta(n) $. Next, we will so that $ F $ contains no triangle. For the sake of contradiction, suppose $ F $ contains a triangle, say
+	$$  \{ (a, 1), (a+s_i, 2), (a+ s_i + t_i, 3)\}, $$
+	$$ \{ (a', 1), (a+s_j, 2), (a+ s_j + t_j, 3)\}, $$
+	$$ \{ (a'', 1), (a''+s_k, 2), (a+ s_k + t_k, 3)\}. $$
+	By symmetry, assume that $ a = a'$, $a' + s_j = a'' + s_k$, and $a + s_i+ t_i = a'' + s_k + t_k $.
+	These equations imply
+	$$ s_j - s_k = a'' - a' = a'' - a = (s_i + t_i) - (s_k + t_k)$$
+	It means that $ s_j + t_k = s_i + t_i $. By the property of $ S $ and $ T $, this implies $  i = j = k $. Thus, $ a = a' = a'' $, a contradiction.\\
+	Now, by applying \theoremref{RS}, $ \abs F = n \cdot m = o(n^2) $. Therefore, $ m = o(n) $. 
+\end{proof}
+
+\noindent \textbf{Remarks.} For the definition of (linear) 3-graph and triangle, see the paper \cite{frankl1987subsets}.
+
