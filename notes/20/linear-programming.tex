@@ -1,0 +1,25 @@
+\section{Non-linear, Non-convex Programming}
+In this section, we are interested in formulating the simple partition number of a graph $ G $ as a programming optimization problem. \\
+We can formulate the simple partition number problem as a graph coloring problem. Every edge has a unique color such that edges with the same color form a simple subgraph. We want to minimize the number of colors needed. Given a graph $ G = (L, R, E)$, it is trivial to see that the number of colors needed is at most $ \abs{E(G)} $. The informal formulation is as following. 
+\begin{enumerate}
+	\item Suppose we are given a set of $ k $ colors $ \{1, 2, \cdots , k \} $. Note that $ k $ is fixed. For each $  i \in [k] $, let $ y^i \in \zo $ be an indicator random variable for the event that the color $ i $ has been used in coloring. 
+	\item For each edge $ e \in E(G) $ and each $ i \in [k] $, let $ x_e^i \in \zo $ be an indicator random variable for the event that the edge $ e $ has color $ i $. Note that since every edge has a unique color, $ \sum\limits_{i = 1}^k x_e^i = 1 $. 
+	\item Any edge with color $ i $ implies that the color $ i $ has been used, i.e, $ x_e^i \leq y^i $. 
+	\item We want to make sure that the edges with the same color  form a simple subgraph $ G $. For any $ i \in [k]$, $ u, u' \in L $ and $ v, v' \in R  $, we have 
+	$$(x_{u,v}^i + x_{u',v'}^i) (x_{u,v'}^i + x_{u',v}^i)( x_{u,v}^i \cdot x_{u', v'}^i - x_{u, v'}^i \cdot x_{u', v}^i) = 0 $$
+\end{enumerate}
+Here is an integer programming formulation with variables $ y^i $ and $ x_e^i $. 
+
+minimize $ \sum\limits_{i =1}^k y^i $ 
+
+subjects to 
+\begin{enumerate}
+	\item $ y^i \in \{0,1 \} $ for every $ i \in [k] $
+	\item $ x_e^i \in \{ 0,1 \} $ for every $  i \in [k] $, $  e \in E(G) $
+	\item $ \sum\limits_{i =1}^k x_e^i = 1 $ for every $  i \in [k] $, $  e \in E(G) $
+	\item $ x_e^i \leq y^i $ for every $  i \in [k] $, $  e \in E(G) $
+	\item $(x_{u,v}^i + x_{u',v'}^i) (x_{u,v'}^i + x_{u',v}^i)( x_{u,v}^i \cdot x_{u', v'}^i - x_{u, v'}^i \cdot x_{u', v}^i) = 0 $ for every $ u, v\in L $ and $ u', v' \in R $
+\end{enumerate}
+note that this program is quartic (degree 4) and is not convex. We can relax this integer program to a real-number program by relaxing the second constraint, namely, $ 0 \leq x_e^i  \leq 1 $ for every $  i \in [k] $, $  e \in E(G) $. We are interested in whether the integer programing and the relaxed programming have the same optimal value or not. 
+
+
