@@ -17,3 +17,25 @@ Next we have the seemingly stronger version of LPN, namely Decisional LPN.
 	\end{align*}
 	where $\vec{s} \getsr \bbZ^\ell_2$, $\vec{A} \getsr \bbZ^{n\times \ell}_2$, $\vec{e} \drawn \pred{Ber}^n_\tau$, and $\vec{r}\getsr\bbZ^n_2$.
 \end{definition}
+
+\noindent Here is a summary for LPN. 
+\begin{enumerate}
+	\item Decisional and search problems are polynomially equivalent \cite{??}. 
+	\item The search LPN problem can be stated as the NP-complete problem of decoding random linear code \cite{??}.
+	\item The best knwon algorithms to recover an $ \ell $ bit secret need $ 2^{\Theta(\ell / \log \ell)} $ time and sample. If given only polynomially many $ q = \pred{poly}(\ell) $ samples, the running time of best known algorithms goes up to $ 2^{\Theta(\ell/ \log \log \ell)} $, and given only linearly many samples $ q = \Theta(\ell) $, it is $ 2^{\Theta(\ell)} $. Unlike most others, no fast quantum algorithms for LPN \cite{??}. 
+	\item The secret $ s $ is usually assumed to be uniformly random. This is the hardest distribution. Suprisingly, the uniform distribution is not the unique hardest distribution. The LPN problem where $ \vec{s} \getsr \pred{Ber}^n_\tau $ is as hard as for uniform $ \vec{s} \getsr  \bbZ^n_2 $. 
+	\textcolor{red}{Nothing is known about the hardness of LPN for general distributions of high min-entropy.} However, subspace LPN problem is equivalent to (as hard as) the LPN problem. 
+	\item Sampling of the random matrix $ A  \getsr \bbZ^{n\times \ell}_2 $ is the most expensive part in generating LPN. Using Toeplitz matrix requires only $ n + \ell $ random bits (as opposed $ n \cdot \ell $) \cite{??}. \textcolor{red}{Can we use  Wozencraft's technique to save randomness?} One major drawback of this is that it requires $ n = 2 \ell $.
+	\item  Exact LPN: a minor variation of LPN where $ \vec{e} $ has weight exactly $ n \tau $. \textcolor{red}{It is open whether decisional XLPN is equivalent to LNP or not.} 
+\end{enumerate} 
+
+\noindent Constructions of crypto primitives from LPN. 
+\begin{enumerate}
+	\item LPN -> OWF
+	\item LPN -> PRG
+	\item LPN -> secret-key encryption \cite{??}
+	\item LPN -> PKE \cite{??} (CRYPTO 2016). \textcolor{red}{More efficient PKE form constant-noise LPN?}
+	\item LPN -> PRF \cite{??} (EUROPCRYPT 2016). \textcolor{red}{Constant depth construction?}
+	\item \textcolor{red}{LPN -> CRHF}
+	\item \textcolor{red}{LPN -> FHE}
+\end{enumerate}
