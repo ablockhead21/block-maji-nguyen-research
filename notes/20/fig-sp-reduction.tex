@@ -1,0 +1,26 @@
+\begin{figure}[htp]
+\begin{center}
+
+\begin{tikzpicture}
+
+\draw[help lines] (-6,-3) grid (6,3);
+
+% intersection paths
+\draw[thick, fill=gray!30] (-4.5,.5) node(A1){} -- (-4,.5) node(B1){} .. controls (-3.9,.25) and (-3.9,-.25) .. (-4,-.5) node(C1){} -- (-4.5,-.5) node(D1){} .. controls (-4.6,-.25) and (-4.6,.25) .. (-4.5,.5);
+\draw[thick, fill=gray!30] (-2.5,.5) node(A2){} -- (-2,.5) node(B2){} .. controls (-1.9,.25) and (-1.9,-.25) .. (-2,-.5) node(C2){} -- (-2.5,-.5) node(D2){} .. controls (-2.6,-.25) and (-2.6,.25) .. (-2.5,.5);
+
+\node[fit=(A1)(C1)] (center1){};
+\node[fit=(A2)(C2)] (center2){};
+
+\draw[thick, fill=gray!30] (-4.5,.7) node(A3){} -- (-4,.7) node(B3){} .. controls (-3.9,1) and (-3.9,2.3) .. (-4.25,2.3) node(C3){} .. controls (-4.6,2.3) and (-4.6,1) .. (-4.5,.7);
+\draw[thick, fill=gray!30] (-2.5,.7) node(A4){} -- (-2,.7) node(B4){} .. controls (-1.9,1) and (-1.9,2.3) .. (-2.25,2.3) node(C4){} .. controls (-2.6,2.3) and (-2.6,1) .. (-2.5,.7);
+
+\node[fit=(A3)(B3)(C3)] (center3){};
+\node[fit=(A4)(B4)(C4)] (center4){};
+
+\draw[ultra thick] (center1.center) -- (center2.center) -- (center3.center) -- (center4.center) -- cycle;
+
+\end{tikzpicture}
+
+\end{center}
+\end{figure}
