@@ -1,10 +1,12 @@
 \section{Upper Bound}
-\begin{theorem} [Rusa-Szemeredi\cite{frankl1987subsets}]
+
+A proof of this theorem can be found in \cite{EFR86}.
+\begin{theorem} [Ruzsa-Szemer\'{e}di\cite{RS78}]
 	\label{thm:RS}
 	Suppose $ F $ is a linear 3-graph on $ n $ vertices which contains no triangle. Then $ \abs F = o(n^2) $. 
 \end{theorem}
 
-\noindent Let $ S = \{s_1, s_2, \cdots, s_m\} $ and $ T =\{ t_1,t_2, \cdots, t_m\} $ such that 
+\noindent We will use this theorem to bound our combinatorial problem. This proof is similar in spirit to the one found in \cite{FGV87}. Let $ S = \{s_1, s_2, \cdots, s_m\} $ and $ T =\{ t_1,t_2, \cdots, t_m\} $ such that 
 \begin{itemize}
 	\item For every $ i $, $ s_i \in [n] $ and $ t_i \in [n] $,
 	\item $ s_i + t_i = s_j + t_k $  if and only if $ i = j = k $.
@@ -28,5 +30,5 @@ We have following result for upper bounding $ m $ in the asymptotic sense.
 	Now, by applying \theoremref{RS}, $ \abs F = n \cdot m = o(n^2) $. Therefore, $ m = o(n) $. 
 \end{proof}
 
-\noindent \textbf{Remarks.} For the definition of (linear) 3-graph and triangle, see the paper \cite{frankl1987subsets}.
+\noindent \textbf{Remarks.} For the definition of (linear) 3-graph and triangle, see the paper \cite{FGV87}.
 
