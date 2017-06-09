@@ -1,0 +1,50 @@
+\noindent Let $ G = (L,R,E) $ be a bipartite graph. 
+
+\begin{theorem} \label{thm:reduction}
+	For any real-valued simple decomposition of size $ \Lambda $ of $ G $, there exists an integer-valued simple decomposition of size less than or equal to $ \Lambda $ of $ G $. 
+\end{theorem}
+
+\noindent We have following result as a corollary.
+\begin{corollary}
+	There always exists an optimal integer-valued simple decomposition of $ G $.
+\end{corollary}
+
+\noindent To prove \theoremref{reduction}, we shall give an algorithm that transforms any real-valued simple decomposition of size $ \Lambda $ of $ G $ to an integer-valued simple decomposition of size less than or equal to $ \Lambda $ of $ G $ as following.
+\begin{figure}
+	\begin{boxedalgo}
+	 Suppose $ G_1 = (L_1,R_1) $ and $ G_2 =  (L_2, R_2) $ are two bicliques such that $ L_1 \cap L_2 \neq \emptyset $ and $ R_1 \cap R_2 \neq \emptyset $. The following function takes as input these two bicliques, and returns one simple graph if these two bicliques are exactly the same or returns two simple graphs otherwise. 
+		\begin{algorithmic}
+			\Function{\sf Transform}{$ G_1, G_2 $}
+			
+			\State Let $ A = L_1 \cap L_2 $ and $ B = R_1 \cap R_2 $
+			
+			\State Construct $ G_1' = (L_1 \setminus A, R_1 \setminus B) + (A, B) + (L_2 \setminus A, R_2 \setminus B)$ 
+			
+			\State Construct $ G_2' = (L_1 \setminus A + L_2 \setminus B, A) + (A, R_1 \setminus B + R_2 \setminus B) $
+			
+			\State \Return $(G_1', G_2')$
+			\EndFunction
+		\end{algorithmic}
+	\end{boxedalgo}
+\end{figure}
+
+\begin{figure}
+\begin{boxedalgo}
+	Suppose $ G_1, G_2, \cdots, G_\Lambda $ is a real-valued simple decomposition of $ G $.
+	\begin{algorithmic}
+	\Function{{\sf OPT-INT-SP}}{$G, ( G_1, G_2, \cdots, G_\Lambda)$}
+	\While { exist 2 bicliques $ B_1 $ and $ B_2 $, such that $ B_1 $ is component of $ G_i $, $ B_2 $ is a component of $ G_j $ for some distinct $ i, j \in [\Lambda] $, and they share some edges} {}
+		\State Let $ (X, Y) = \sf Transform(B_1, B_2)  $
+		\State Let $ G_i \rightarrow  G_i - B_1 + X $ and $ G_j \rightarrow G_j - B_2 + Y $
+	\EndWhile
+	\State \Return $ (G_1, G_2, \cdots, G_{\Lambda}) $ 
+	\EndFunction
+	\end{algorithmic}
+\end{boxedalgo}
+\end{figure}
+
+\noindent \bf{Loop Invariants.} 
+
+\noindent \bf{Correctness.}
+
+\noindent \bf{Termination.}
