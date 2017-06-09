@@ -6,15 +6,15 @@
 %\draw[help lines] (-6,-3) grid (6,3);
 
 % dashed intersection line?
-\draw[dashed] (-3.5,.6) -- (3.5,.6) (-3.5,-.6) -- (3.5,-.6);
+\draw[dashed] (-7.3,.6) -- (-.7,.6) (-7.3,-.6) -- (-.7,-.6);
 
 % intersection paths
-\draw[thick, fill=gray!30] (-3,.5) node(A1){} -- (-2.5,.5) node(B1){} .. controls (-2.4,.25) and (-2.4,-.25) .. (-2.5,-.5) node(C1){} -- (-3,-.5) node(D1){} .. controls (-3.1,-.25) and (-3.1,.25) .. (-3,.5);
-\draw[thick, fill=gray!30] (-1,.5) node(A2){} -- (-.5,.5) node(B2){} .. controls (-0.4,.25) and (-0.4,-.25) .. (-.5,-.5) node(C2){} -- (-1,-.5) node(D2){} .. controls (-1.1,-.25) and (-1.1,.25) .. (-1,.5);
+\draw[thick, fill=gray!30] (-7,.5) node(A1){} -- (-6.5,.5) node(B1){} .. controls (-6.4,.25) and (-6.4,-.25) .. (-6.5,-.5) node(C1){} -- (-7,-.5) node(D1){} .. controls (-7.1,-.25) and (-7.1,.25) .. (-7,.5);
+\draw[thick, fill=gray!30] (-5,.5) node(A2){} -- (-4.5,.5) node(B2){} .. controls (-4.4,.25) and (-4.4,-.25) .. (-4.5,-.5) node(C2){} -- (-5,-.5) node(D2){} .. controls (-5.1,-.25) and (-5.1,.25) .. (-5,.5);
 
 % first top
-\draw[thick, fill=gray!30] (-3,.7) node(A3){} -- (-2.5,.7) node(B3){} .. controls (-2.4,1) and (-2.4,2.3) .. (-2.75,2.3) node(C3){} .. controls (-3.1,2.3) and (-3.1,1) .. (-3,.7);
-\draw[thick, fill=gray!30] (-1,.7) node(A4){} -- (-.5,.7) node(B4){} .. controls (-0.4,1) and (-0.4,2.3) .. (-.75,2.3) node(C4){} .. controls (-1.1,2.3) and (-1.1,1) .. (-1,.7);
+\draw[thick, fill=gray!30] (-7,.7) node(A3){} -- (-6.5,.7) node(B3){} .. controls (-6.4,1) and (-6.4,2.3) .. (-6.75,2.3) node(C3){} .. controls (-7.1,2.3) and (-7.1,1) .. (-7,.7);
+\draw[thick, fill=gray!30] (-5,.7) node(A4){} -- (-4.5,.7) node(B4){} .. controls (-4.4,1) and (-4.4,2.3) .. (-4.75,2.3) node(C4){} .. controls (-5.1,2.3) and (-5.1,1) .. (-5,.7);
 
 % edges
 \node[fit=(A1)(C1)] (center1){};
@@ -31,12 +31,12 @@
 \node[above left] at ($(center4.south east) + (-.15,.2)$) {\footnotesize $R_1$};
 
 % intersection paths 2
-\draw[thick, fill=gray!30] (3,.5) node(A5){} -- (2.5,.5) node(B5){} .. controls (2.4,.25) and (2.4,-.25) .. (2.5,-.5) node(C5){} -- (3,-.5) node(D5){} .. controls (3.1,-.25) and (3.1,.25) .. (3,.5);
-\draw[thick, fill=gray!30] (1,.5) node(A6){} -- (.5,.5) node(B6){} .. controls (0.4,.25) and (0.4,-.25) .. (.5,-.5) node(C6){} -- (1,-.5) node(D6){} .. controls (1.1,-.25) and (1.1,.25) .. (1,.5);
+\draw[thick, fill=gray!30] (-1,.5) node(A5){} -- (-1.5,.5) node(B5){} .. controls (-1.6,.25) and (-1.6,-.25) .. (-1.5,-.5) node(C5){} -- (-1,-.5) node(D5){} .. controls (-.9,-.25) and (-.9,.25) .. (-1,.5);
+\draw[thick, fill=gray!30] (-3,.5) node(A6){} -- (-3.5,.5) node(B6){} .. controls (-3.6,.25) and (-3.6,-.25) .. (-3.5,-.5) node(C6){} -- (-3,-.5) node(D6){} .. controls (-2.9,-.25) and (-2.9,.25) .. (-3,.5);
 
 % second bottom
-\draw[thick, fill=gray!30] (3,-.7) node(A7){} -- (2.5,-.7) node(B7){} .. controls (2.4,-1) and (2.4,-2.3) .. (2.75,-2.3) node(C7){} .. controls (3.1,-2.3) and (3.1,-1) .. (3,-.7);
-\draw[thick, fill=gray!30] (1,-.7) node(A8){} -- (.5,-.7) node(B8){} .. controls (0.4,-1) and (0.4,-2.3) .. (.75,-2.3) node(C8){} .. controls (1.1,-2.3) and (1.1,-1) .. (1,-.7);
+\draw[thick, fill=gray!30] (-1,-.7) node(A7){} -- (-1.5,-.7) node(B7){} .. controls (-1.6,-1) and (-1.6,-2.3) .. (-1.25,-2.3) node(C7){} .. controls (-.9,-2.3) and (-.9,-1) .. (-1,-.7);
+\draw[thick, fill=gray!30] (-3,-.7) node(A8){} -- (-3.5,-.7) node(B8){} .. controls (-3.6,-1) and (-3.6,-2.3) .. (-3.25,-2.3) node(C8){} .. controls (-2.9,-2.3) and (-2.9,-1) .. (-3,-.7);
 
 % edges
 \node[fit=(A5)(C5)] (center5){};
@@ -52,7 +52,78 @@
 \node[below right] at ($(center8.north west) + (0.15,-0.2)$) {\footnotesize $L_2$};
 \node[below left] at ($(center7.north east) + (-.15,-.2)$) {\footnotesize $R_2$};
 
+\node at (0,0) {\huge$\implies$};
+
+%%% first simple graph %%%
+
+% middle
+\draw[thick, fill=gray!30] (1,.5) node(A9){} -- (1.5,.5) node(B9){} .. controls (1.6,.25) and (1.6,-.25) .. (1.5,-.5) node(C9){} -- (1,-.5) node(D9){} .. controls (.9,-.25) and (.9,.25) .. (1,.5);
+\draw[thick, fill=gray!30] (3,.5) node(A10){} -- (3.5,.5) node(B10){} .. controls (3.6,.25) and (3.6,-.25) .. (3.5,-.5) node(C10){} -- (3,-.5) node(D10){} .. controls (2.9,-.25) and (2.9,.25) .. (3,.5);
+
+% bottom 
+\draw[thick, fill=gray!30] (1,-.7) node(A11){} -- (1.5,-.7) node(B11){} .. controls (1.6,-1) and (1.6,-2.3) .. (1.25,-2.3) node(C11){} .. controls (.9,-2.3) and (.9,-1) .. (1,-.7);
+\draw[thick, fill=gray!30] (3,-.7) node(A12){} -- (3.5,-.7) node(B12){} .. controls (3.6,-1) and (3.6,-2.3) .. (3.25,-2.3) node(C12){} .. controls (2.9,-2.3) and (2.9,-1) .. (3,-.7);
+
+% top
+\draw[thick, fill=gray!30] (1,.7) node(A13){} -- (1.5,.7) node(B13){} .. controls (1.6,1) and (1.6,2.3) .. (1.25,2.3) node(C13){} .. controls (.9,2.3) and (.9,1) .. (1,.7);
+\draw[thick, fill=gray!30] (3,.7) node(A14){} -- (3.5,.7) node(B14){} .. controls (3.6,1) and (3.6,2.3) .. (3.25,2.3) node(C14){} .. controls (2.9,2.3) and (2.9,1) .. (3,.7);
+
+% edges
+\node[fit=(A9)(B9)(C9)(D9)] (center9){};
+\node[fit=(A10)(C10)] (center10){};
+\node[fit=(A11)(B11)(C11)] (center11) {};
+\node[fit=(A12)(B12)(C12)] (center12) {};
+\node[fit=(A13)(B13)(C13)] (center13) {};
+\node[fit=(A14)(B14)(C14)] (center14) {};
+
+\draw[thick] ($(center9.center)+(0,0.1)$) -- ($(center10.center)+(0,0.1)$);
+\draw[thick, dashed] ($(center9.center)+(0,-0.1)$) -- ($(center10.center)+(0,-0.1)$);
+\draw[thick, dashed] (center11.center) -- (center12.center);
+\draw[thick] (center13.center) -- (center14.center);
+
+% labels
+\node[above right] at ($(center13.south west) + (0.15,0.2)$) {\footnotesize $L_1$};
+\node[above left] at ($(center14.south east) + (-.15,.2)$) {\footnotesize $R_1$};
+\node[above right] at ($(center9.south west) + (0.15,0.2)$) {\footnotesize $A$};
+\node[above left] at ($(center10.south east) + (-.15,.2)$) {\footnotesize $B$};
+\node[below right] at ($(center11.north west) + (0.15,-0.2)$) {\footnotesize $L_2$};
+\node[below left] at ($(center12.north east) + (-.15,-.2)$) {\footnotesize $R_2$};
+
+%%% second simple graph %%%
+
+% middle
+\draw[thick, fill=gray!30] (7,.5) node(A15){} -- (6.5,.5) node(B15){} .. controls (6.4,.25) and (6.4,-.25) .. (6.5,-.5) node(C15){} -- (7,-.5) node(D15){} .. controls (7.1,-.25) and (7.1,.25) .. (7,.5);
+\draw[thick, fill=gray!30] (5,.5) node(A16){} -- (4.5,.5) node(B16){} .. controls (4.4,.25) and (4.4,-.25) .. (4.5,-.5) node(C16){} -- (5,-.5) node(D16){} .. controls (5.1,-.25) and (5.1,.25) .. (5,.5);
+
+% top
+\draw[thick, fill=gray!30] (7,.7) node(A17){} -- (6.5,.7) node(B17){} .. controls (6.4,1) and (6.4,2.3) .. (6.75,2.3) node(C17){} .. controls (7.1,2.3) and (7.1,1) .. (7,.7);
+\draw[thick, fill=gray!30] (5,.7) node(A18){} -- (4.5,.7) node(B18){} .. controls (4.4,1) and (4.4,2.3) .. (4.75,2.3) node(C18){} .. controls (5.1,2.3) and (5.1,1) .. (5,.7);
+
+% bottom
+\draw[thick, fill=gray!30] (7,-.7) node(A19){} -- (6.5,-.7) node(B19){} .. controls (6.4,-1) and (6.4,-2.3) .. (6.75,-2.3) node(C19){} .. controls (7.1,-2.3) and (7.1,-1) .. (7,-.7);
+\draw[thick, fill=gray!30] (5,-.7) node(A20){} -- (4.5,-.7) node(B20){} .. controls (4.4,-1) and (4.4,-2.3) .. (4.75,-2.3) node(C20){} .. controls (5.1,-2.3) and (5.1,-1) .. (5,-.7);
+
+% edges
+\node[fit=(A15)(B15)(C15)(D15)] (center15){};
+\node[fit=(A16)(C16)] (center16){};
+\node[fit=(A17)(B17)(C17)] (center17) {};
+\node[fit=(A18)(B18)(C18)] (center18) {};
+\node[fit=(A19)(B19)(C19)] (center19) {};
+\node[fit=(A20)(B20)(C20)] (center20) {};
+
+\draw[thick] (center15.center) -- (center18.center) (center16.center) -- (center17.center);
+\draw[thick, dashed] (center15.center) -- (center20.center) (center16.center) -- (center19.center);
+
+% labels
+\node[above right] at ($(center18.south west) + (0.15,0.2)$) {\footnotesize $L_1$};
+\node[above left] at ($(center17.south east) + (-.15,.2)$) {\footnotesize $R_1$};
+\node[above right] at ($(center16.south west) + (0.15,0.2)$) {\footnotesize $A$};
+\node[above left] at ($(center15.south east) + (-.15,.2)$) {\footnotesize $B$};
+\node[below right] at ($(center20.north west) + (0.15,-0.2)$) {\footnotesize $L_2$};
+\node[below left] at ($(center19.north east) + (-.15,-.2)$) {\footnotesize $R_2$};
+
 \end{tikzpicture}
 
 \end{center}
+\caption{General outline of how our algorithm proceeds.}
 \end{figure}
