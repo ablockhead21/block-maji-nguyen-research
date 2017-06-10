@@ -2,7 +2,81 @@
 \begin{center}
 \begin{tikzpicture}
 
+% Command for creating top shape. First 4 arguments expect
+% 4 vertices of the form:
+% 	(x,y), (x+.25,y+2), (x+.75,y+2), (x+1,y) 
+% The 5th argument is the outline color, and the 6th
+% argument is the fill color.
+\newcommand{\mytop}[6]{
+\draw[thick, color=#5, fill=#6] (#1) .. controls ($(#1)+(0,.5)$) and ($(#1)+(0,1.5)$) .. (#2) .. controls ($(#2)+(.12,.25)$) and ($(#3)+(-.12,.25)$) .. (#3) .. controls ($(#4)+(0,1.5)$) and ($(#4)+(0,.5)$) .. (#4) -- cycle;
+}
 
+% Command for creating bottom shape. First 4 arguments
+% expect 4 vertices of the form:
+% 	(x,y), (x+.25,y-2), (x+.75,y-2), (x+1,y) 
+% The 5th argument is the outline color, and the 6th
+% argument is the fill color.
+\newcommand{\mybottom}[6]{
+\draw[thick, color=#5, fill=#6] (#1) .. controls ($(#1)+(0,-.5)$) and ($(#1)+(0,-1.5)$) .. (#2) .. controls ($(#2)+(.12,-.25)$) and ($(#3)+(-.12,-.25)$) .. (#3) .. controls ($(#4)+(0,-1.5)$) and ($(#4)+(0,-.5)$) .. (#4) -- cycle;
+}
+
+% helping polygon 1
+\draw[thick, gray] (0,0)node(A1){} -- (.25,2)node(A2){} -- (.75,2)node(A3){} -- (1,0)node(A4){} -- cycle;
+
+% top shape 1
+\mytop{A1.center}{A2.center}{A3.center}{A4.center}{black}{gray!30};
+
+% middle 1
+\draw[thick, fill=gray!30] (0,-1.2)[]node(B1){} rectangle (1, -.2)node(B2){};
+\node at ($(B1.north east)+(.05,.05)$) {\footnotesize $A$};
+
+% helping polygon 2
+\draw[thick, gray] (2,0)node(C1){} -- (2.25,2)node(C2){} -- (2.75,2)node(C3){} -- (3,0)node(C4){} -- cycle;
+
+% top shape 2
+\mytop{C1.center}{C2.center}{C3.center}{C4.center}{black}{gray!30};
+
+% middle 2
+\draw[thick, fill=gray!30] (2,-.2)node(D1){} rectangle (3,-1.2)node[](D2){};
+\node at ($(D2.north west)+(-.05,.05)$) {\footnotesize $B$};
+
+% fit boxes to center edges
+\node[fit=(A1)(A2)(A3)(A4)] (top1){};
+\node[fit=(B1)(B2)] (mid1){};
+\node[fit=(C1)(C2)(C3)(C4)] (top2){};
+\node[fit=(D1)(D2)] (mid2){};
+
+% edges for top {1,2} and middle {1,2}
+\draw[thick] (top1.center) -- (top2.center) -- (mid1.center) -- (mid2.center) -- cycle;
+
+% middle 3
+\draw[thick, fill=gray!30] (4.5,-1.2)node(E1){} rectangle (5.5,-.2)node(E2){};
+\node at ($(E1.north east)+(.05,.05)$) {\footnotesize $A$};
+
+% helping polygon 3
+\draw[thick, gray] (4.5,-1.4)node(F1){} -- (4.75,-3.4)node(F2){} -- (5.25,-3.4)node(F3){} -- (5.5,-1.4)node(F4){} -- cycle;
+
+% bottom 1
+\mybottom{F1.center}{F2.center}{F3.center}{F4.center}{black}{gray!30};
+
+% middle 4
+\draw[thick, fill=gray!30] (6.5,-.2) node(G1){} rectangle (7.5,-1.2) node(G2){};
+\node at ($(G2.north west)+(-.05,.05)$) {\footnotesize $B$};
+
+% helping polygon 4
+\draw[thick,gray] (6.5,-1.4)node(H1){} -- (6.75, -3.4)node(H2){} -- (7.25,-3.4)node(H3){} -- (7.5,-1.4)node(H4){} -- cycle;
+
+% bottom 2
+\mybottom{H1.center}{H2.center}{H3.center}{H4.center}{black}{gray!30};
+
+% fit boxes to center edges
+\node[fit=(E1)(E2)] (mid3){};
+\node[fit=(F1)(F2)(F3)(F4)] (bot1){};
+\node[fit=(G1)(G2)] (mid4){};
+\node[fit=(H1)(H2)(H3)(H4)] (bot2){};
+
+% edges for bottom {1,2} and middle {3,4}
+\draw[thick, dashed] (mid3.center) -- (mid4.center) -- (bot1.center) -- (bot2.center) -- cycle;
 
 \end{tikzpicture}
 \end{center}
