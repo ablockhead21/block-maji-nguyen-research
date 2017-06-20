@@ -2,14 +2,14 @@
 \subsection{Notations}
 In this section we define notations that we will use through out in this paper. 
 
-\noindent For any real number $ x $, let $ \| x \|_{\bbR /\bbZ} $ denote the distance between $ x $ and the nearest integer. 
+\noindent For any real number $ x $, let $ \| x \|_{\bbR /\bbZ}\colon \bbR \rightarrow [0,1/2] $ denote the distance between $ x $ and the nearest integer. 
 
-\noindent For any $ \theta \in \bbR$, let $ e(\theta) = e^{2\pi i \theta}$.
+\noindent For all $ \theta \in \bbR$, define $ e\colon \bbR \to \bbC$ such that $e(\theta) \mapsto \exp(2\pi i \theta)$.
 
 \subsection{Fourier Basics}
 
 \begin{lemma}
-	For any $ f, g : \bbZ_N \rightarrow \bbC $, we have $ \abs{\langle f, g \rangle} = N \abs{\langle \hat{f}, \hat{g} \rangle} $.
+	For any $ f, g : \bbZ_N \rightarrow \bbC $, we have $ \abs{\langle f, g \rangle} = N \abs{\langle \widehat{f}, \widehat{g} \rangle} $.
 \end{lemma}
 
 \begin{lemma} \label{L2-ineq}

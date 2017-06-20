@@ -8,7 +8,14 @@ $$ \Lambda(f,g,h) = \frac{1}{N^3} \sum\limits_{x,y,z \in \bbZ_N} f(x,y) g(z) h(x
 	$$ \Lambda(f,g,h) = \sum\limits_{k \in \bbZ_N} \widehat{f}(k,k) \widehat{g}(-k) \widehat{h}(-k) .$$
 \end{lemma}
 \begin{proof}
-	\TODO{TODO}
+	Directly by Fourier transformation, we have:
+	\begin{align*}
+		\Lambda(f,g,h) &= \frac{1}{N^3} \sum\limits_{x,y,z\in \bbZ_N} f(x,y)g(z)h(x+y-z)\\
+		&=\frac{1}{N^3} \sum\limits_{x,y,z\in \bbZ_N}\left(\sum\limits_{a,b\in\bbZ_N} \widehat{f}(a,b) e\left(\frac{ax + by}{N}\right) \right)\left(\sum\limits_{c\in \bbZ_N}\widehat{g}(c) e\left(\frac{cz}{N}\right) \right)\left(\sum\limits_{d\in \bbZ_N}\widehat{h}(d)e\left(\frac{d(x+y-z)}{N}\right) \right)\\
+		&=\frac{1}{N^3}\sum\limits_{a,b,c,d}\widehat{f}(a,b) \widehat{g}(c) \widehat{h}(d) \sum\limits_{x,y,z}e\left(\dfrac{(a+d)x + (b+d)y + (c-d)z}{N}\right)\\
+		&= \frac{1}{N^3}\sum\limits_{a\in\bbZ_N} \widehat{f}(a,a) \widehat{g}(-a) \widehat{h}(-a)\sum\limits_{x,y,z}e\left(0\right)\\
+		&= \sum\limits_{a\in\bbZ_N} \widehat{f}(a,a) \widehat{g}(-a) \widehat{h}(-a) & \qedhere
+	\end{align*}
 \end{proof}
 
 \noindent Note that if $ \mathbbm{1}_{B}, \mathbbm{1}_S, \mathbbm{1}_T $ are the indicator functions of the sets $ B, S, T $, respectively, then  $ N^3 \Lambda(\mathbbm{1}_B, \mathbbm{1}_S, \mathbbm{1}_T) $ counts the number of solutions in $ B $. For simplicity, from now let $ f = \mathbbm{1}_B, g = \mathbbm{1}_S, h = \mathbbm{1}_T $. 
