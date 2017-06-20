@@ -11,12 +11,15 @@
 More concretely, a $k$-graph is defined by the family $\bF$, where the family $\bF$ is a collection of $k$-edges with vertices from the set $X$. A proof of the following theorem can be found in \cite{EFR86}.
 \begin{theorem} [Ruzsa-Szemer\'{e}di\cite{RS78}]
 	\label{thm:RS}
-	Suppose $ \bF $ is a linear 3-graph on $ n $ vertices which contains no triangle. Then $ \abs F = o(n^2) $. 
+	Suppose $ \bF $ is a linear 3-graph on $ n $ vertices which contains no triangle. Then $ \abs \bF = o(n^2) $. 
 \end{theorem}
 
-\noindent We will use this theorem to bound our combinatorial problem. This proof is similar in spirit to the one found in \cite{FGV87}. Let $ S = \{s_1, s_2, \cdots, s_m\} $ and $ T =\{ t_1,t_2, \cdots, t_m\} $ such that 
+Intuitively, this theorem says that for a large enough set of vertices of size $n$, the total number of edges of a linear, triangle-free 3-graph $\bF$ is sub-quadratic. That is, for all positive constants $c$ and large enough $n$, $|\bF| < cn^2$.
+
+We will use this theorem to provide an upper bound on the maximum possible $m$ for our combinatorial problem. This proof is similar in spirit to the one found in \cite{FGV87}. A key difference between our proof and \cite{FGV87} is that our additions {\em will not} be performed modulo some abelian group of odd order. Our proof works for all integers. Let $ S = \{s_1, s_2, \cdots, s_m\} $ and $ T =\{ t_1,t_2, \cdots, t_m\} $ such that 
 \begin{itemize}
-	\item For every $ i $, $ s_i \in [n] $ and $ t_i \in [n] $,
+	\item for every $ i $, $ s_i, t_i \in \{0,1,\dotsc, n-1\} $,
+	\item for all $i$ and $j$, $s_i + t_j < n$, and
 	\item $ s_i + t_i = s_j + t_k $  if and only if $ i = j = k $.
 \end{itemize}
 We have following result for upper bounding $ m $ in the asymptotic sense. 
@@ -25,9 +28,9 @@ We have following result for upper bounding $ m $ in the asymptotic sense.
 \end{theorem}  
 
 \begin{proof}
-	We define a 3-graph as follows. 
-	$$ \bF = \{ \{(a,1), (a+s_i, 2), (a + s_i + t_i)\} : a \in [n], i \in [m] \} $$
-	First we show that $ F $ is linear, i.e., for any two distinct edges $ U,V $, we have $ \abs{U \cap V} \leq 1 $. Suppose not, that is there exist two distinct edges $U$ and $V$ such that $\abs{U\intersect V} \geq 2$. This implies there exists distinct $i$ and $j$ such that
+	Let $X = [2n] \times \{1,2,3\}$ be the set of all possible vertices. Note $|X| = 6n$. We define the following 3-graph. 
+	$$ \bF = \{ \{(a,1), (a+s_i, 2), (a + s_i + t_i,3)\} : a \in [n], i \in [m] \} $$
+	Note that $\bF \subseteq \binom{X}{3}$ since $a \in [n]$ and for all $i$, $s_i + t_i < n$. We show that $ \bF $ is linear, i.e., for any two distinct edges $ U,V \in \bF$, we have $ \abs{U \cap V} \leq 1 $. Suppose not, that is there exist two distinct edges $U$ and $V$ such that $\abs{U\intersect V} \geq 2$. This implies there exists distinct $i$ and $j$ such that
 	\begin{align*}
 		U &= \{ (a,1), (a+s_i,2), (a+s_i + t_i, 3) \}\\
 		V &= \{ (a',1), (a'+s_j,2), (a'+s_j+t_j,3) \}
@@ -39,16 +42,16 @@ We have following result for upper bounding $ m $ in the asymptotic sense.
 	\end{align*}
 	From these two equations, it must be the case that $t_i = t_j$. This again contradicts the assumption that $S$ and $T$ are solutions to our combinatorial problem, since $i$ and $j$ are distinct. Therefore, $\abs{U\cap V} \leq 1$ for all distinct $U, V \in \bF$.
 	
-	Next we have $ \abs{\bF} = n \cdot m$, and the number of vertices is at most $6n$ and at least $n$. We will so that $ \bF $ contains no triangle. For the sake of contradiction, suppose $ F $ contains a triangle, say
+	Next we have $ \abs{\bF} = n \cdot m$, and the number of vertices is exactly $|X| = 6n$ (note there may exist vertices with degree 0 in $\bF$). We show that $ \bF $ contains no triangle. For the sake of contradiction, suppose $ \bF $ contains a triangle, say
 	$$  \{ (a, 1), (a+s_i, 2), (a+ s_i + t_i, 3)\}, $$
 	$$ \{ (a', 1), (a+s_j, 2), (a+ s_j + t_j, 3)\}, $$
 	$$ \{ (a'', 1), (a''+s_k, 2), (a+ s_k + t_k, 3)\}. $$
 	By symmetry, assume that $ a = a'$, $a' + s_j = a'' + s_k$, and $a + s_i+ t_i = a'' + s_k + t_k $.
 	These equations imply
 	$$ s_j - s_k = a'' - a' = a'' - a = (s_i + t_i) - (s_k + t_k)$$
-	It means that $ s_j + t_k = s_i + t_i $. By the property of $ S $ and $ T $, this implies $  i = j = k $. Thus, $ a = a' = a'' $, a contradiction.
+	It means that $ s_j + t_k = s_i + t_i $. By the properties of $ S $ and $ T $, this implies $  i = j = k $. Thus, $ a = a' = a'' $, a contradiction.
 	
-	Now, by applying \theoremref{RS}, $ \abs F = n \cdot m = o((6n)^2) = o(n^2) $. Therefore $ m = o(n) $. 
+	Finally, by applying \theoremref{RS}, $ \abs \bF = n \cdot m = o((6n)^2) = o(n^2) $. Therefore $ m = o(n) $. 
 \end{proof}
 
 %\noindent \textbf{Remarks.} For the definition of (linear) 3-graph and triangle, see the paper \cite{FGV87}.
