@@ -1,16 +1,99 @@
 \section{Better Upper Bound}
+Let $ S, T $ be ordered sequences with $S = \{s_1, s_2, \cdots, s_m \}  $ and $ T = \{t_1, t_2, \cdots, t_m\} $. Suppose $ m = \delta N $.  Let $ B = \{(s_i,t_i): i \in [m] \} $.\\
 We shall need a function counting the number of solutions $ s_i +t_i = s_j + t_k $ for our combinatorial problem. Given $ f : \bbZ_N \times \bbZ_N \rightarrow \bbC $, and $ g, h : \bbZ_N \rightarrow \bbC $, we define
 $$ \Lambda(f,g,h) = \frac{1}{N^3} \sum\limits_{x,y,z \in \bbZ_N} f(x,y) g(z) h(x+y-z) .$$
 
-\begin{lemma}
+\begin{lemma} \label{lem:to-Fourier}
 	Given $ f : \bbZ_N \times \bbZ_N \rightarrow \bbC $, and $ g, h : \bbZ_N \rightarrow \bbC $, we have
-	$$ \Lambda(f,g,h) = \sum\limits_{k \in \bbZ_N} f(k,k) g(-k) h(-k) .$$
+	$$ \Lambda(f,g,h) = \sum\limits_{k \in \bbZ_N} \widehat{f}(k,k) \widehat{g}(-k) \widehat{h}(-k) .$$
 \end{lemma}
 \begin{proof}
 	\TODO{TODO}
 \end{proof}
 
-\begin{lemma} \label{L2-ineq}
-	For every $ f : \bbZ_N \times \bbZ_N \rightarrow \bbC $, and $ g, h : \bbZ_N \rightarrow \bbC $, we have
-	$$ \Lambda(f,g,h) \leq \sup_{k \in \bbZ_N} \abs{\hat{f}(k,k)} \cdot ||g||_{L^2} \cdot ||h||_{L^2} $$
-\end{lemma} 
+\noindent Note that if $ \mathbbm{1}_{B}, \mathbbm{1}_S, \mathbbm{1}_T $ are the indicator functions of the sets $ B, S, T $, respectively, then  $ N^3 \Lambda(\mathbbm{1}_B, \mathbbm{1}_S, \mathbbm{1}_T) $ counts the number of solutions in $ B $. For simplicity, from now let $ f = \mathbbm{1}_B, g = \mathbbm{1}_S, h = \mathbbm{1}_T $. 
+
+\subsection{Few solutions to our combinatorial problem implies big Fourier coefficient.} The following lemma states that a lack of solutions to our combinatorial problem in $ B $ leads to the existence of a large Fourier coefficient.  
+\begin{lemma} \label{lem:big-Fourier}
+	One of the following must hold:
+	\begin{enumerate}
+		\item $ \Lambda(f,g,h) > \dfrac{\delta^3}{2N}$
+		\item There exists a non-zero $ k $ such that $ \abs{\hat{f}(k,k)} \geq \dfrac{\delta^2}{2N} $
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Suppose  $ \Lambda(f,g,h) \leq \dfrac{\delta^3}{2N}$, we have:
+	\begin{align*}
+		\dfrac{\delta^3}{2N} & \geq \Lambda(f,g,h) \\
+		& = \sum\limits_{k \in \bbZ_N} \widehat{f}(k,k) \widehat{g}(-k) \widehat{h}(-k)  & \text{by \lemmaref{to-Fourier}} \\
+		& = \widehat{f}(0,0) \widehat{g}(0) \widehat{h}(0) + \sum\limits_{k \neq 0} \widehat{f}(k,k) \widehat{g}(-k) \widehat{h}(-k) \\
+		& = \dfrac{\delta^3}{N} + \sum\limits_{k \neq 0} \widehat{f}(k,k) \widehat{g}(-k) \widehat{h}(-k) \\
+	\end{align*}
+	Therefore, 
+	\begin{align*}
+		\dfrac{\delta^3}{2N} 
+		& \leq \abs{\sum\limits_{k \neq 0} \widehat{f}(k,k) \widehat{g}(-k) \widehat{h}(-k)} \\
+		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)}\abs{\sum\limits_{k \in \bbZ_N}  \widehat{g}(-k) \widehat{h}(-k)} \\
+		& = \sup_{k \neq 0} \abs{\widehat{f}(k, k)} N \abs{\langle \widehat{g}, \widehat{h} \rangle} \\
+		& = \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \abs{\langle f, g \rangle}  & \text{by \lemmaref{}} \\
+		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \| g \|_{L^2} \| h \|_{L^2} \\
+		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \cdot \sqrt{\delta} \cdot \sqrt{\delta}  		
+	\end{align*} 
+Hence, there exists a non-zero $ k $ such that $ \abs{\widehat{f}(k, k)} \geq \dfrac{\delta^2}{2N} $.
+\end{proof}
+
+\noindent Note that the first case in \lemmaref{big-Fourier} implies that there exists a non-trivial solution to our combinatorial problem since $ N^3 \Lambda(f,g,h) \geq \dfrac{\delta^3 N^2}{2} \geq \delta N $ when $ N $ is large enough, namely, $ N \geq \dfrac{2}{\delta^2} $.
+
+\subsection{Big Fourier coefficient implies density increment}
+\begin{lemma} \label{lem:e-ineq}
+	For any real number $ x $, we have $ \abs{e(x) - 1} \leq 2 \pi \| x \|_{\bbR_\bbZ}  $.
+\end{lemma}
+
+\begin{lemma}
+	Let $ f : \bbZ \times \bbZ_N \rightarrow \bbC $ be a function satisfying $ \sum\limits_{n \in \bbZ \times \bbZ_N} f(n) = 0 $ and $\sum\limits_{n \in \bbZ \times \bbZ_N} \abs{f(n)} \leq \delta N $. Suppose that there exists $ k $ such that $ \abs{\widehat{f}(k, k)} \geq \dfrac{\delta^2}{2N} $. Then there exist two arithmetic progressions. 
+\end{lemma}
+
+\begin{proof}
+	Note that $ \widehat{f}(0,0) = 0 $, so $ k \neq 0 $. By Dirichlet's approximation theorem there exist coprime integers $ b $ and $ h $ such that $ 1 \leq b \leq h \leq \sqrt{N} $ and that $ \abs{\dfrac{k}{N} - \dfrac{b}{h}} \leq \dfrac{1}{h \sqrt{N}} $. Thus $ \left\| \dfrac{k}{h}\right\|_{\bbR_\bbZ/\bbZ} \leq \dfrac{1}{\sqrt{N}} $. \\
+	We divide the set $ \{0, 1, \cdots, N-1\} $ into $ h $ congruence classes modulo $ h $ as following. 
+	$$ \cC(a) = \{a , a+h, a+ 2h, \cdots\} \cap \{0, 1, \cdots, N-1\} = \{a, a+h, \cdots, a+(N_a -1 )h \} $$
+	Then we divide $ [0, N_a -1] $ into $ M $, which is chosen sometime later, intervals of same length $ M' = N_a/M $ and define
+	$$ J_m(a) = \{a + j_m h , a+ (j_m +1)h, \cdots, a + (j_m + M' -1)h \} $$
+	Therefore, we have 
+	$$ \bbZ_N \times \bbZ_N = (\cup_{a \in [h]} \cC(a)) \times (\cup_{a \in [h]} \cC(a)) = \cup_{a \in [h]} \cup_{a' \in [h]}' \cup_{m =1}^{M} \cup_{m' = 1}^M J_m(a) \times J_{m'}(a') $$.
+	Furthermore, we have 
+	\begin{align*}
+		\dfrac{\delta^2}{2N} &\leq \abs{\widehat{f}(k,k)} = \dfrac{1}{N^2} \abs{\sum\limits_{(x,y) \in \bbZ_N \times \bbZ_N}  f(x,y) \cdot e\left(-\dfrac{(x+y)k}{N}\right)}\\
+		& = \dfrac{1}{N^2} \abs{\sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y) e\left(-\dfrac{(x+y)k}{N}\right)}
+	\end{align*}
+
+	Let $ \dfrac{k}{N} = \dfrac{b}{h} + \theta $ with $ \abs{\theta} \leq \dfrac{1}{h\sqrt{N}} $. For $ x \in J_m(a) $, let $ x = a + h(j_m + l) $, and for $ y \in J_{m'}(a') $, let $ y = a' + (j_{m'} + l')h $. Then we have
+	\begin{align*}
+	\abs{e\left(-\dfrac{(x+y)k}{N}\right)} 
+	&= \abs{e\left(- \left( \dfrac{b}{h} + \theta \right) (a + a' + h(j_m + j_{m'} + l + l'))\right)} 	 \\
+	& = \abs{e\left( -\dfrac{(a+a')b}{h}\right) e\left( (a + a' + h(j_m + j_{m'} + l + l')) \theta\right)} \\
+	& \leq \abs{ e\left( (a + a' + h(j_m + j_{m'} + l + l')) \theta\right)}\\
+	& \leq \abs{e(a+ a' + h(j_m +j_{m'})) + e(a+ a' + h(j_m +j_{m'})) (e(h(l+l')\theta) - 1)} \\
+	& \leq 1 + \abs{e(h(l+l')\theta) - 1}  \\
+	& \leq 1 + 2\pi  \| h(l+l')\theta \|_{\bbR /\bbZ} \\
+	& \leq 1 + \dfrac{2 \pi  (L+L)} {\sqrt{N}} \\
+	& = 1 + \dfrac{4 \pi L}{\sqrt{N}} 
+	\end{align*}
+	Hence
+	\begin{align*}
+	\dfrac{\delta^2}{2N} 
+	&\leq \dfrac{1}{N^2}\abs{\sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y)} + \dfrac{1}{N^2} \sum\limits_{(x,y) \in \bbZ \times \bbZ} \abs{f(x,y)} \dfrac{4 \pi L}{\sqrt{N}} \\
+	& \leq  \dfrac{1}{N^2} \sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \abs{\sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y)} + \dfrac{4 \pi L \delta}{N\sqrt{N}}	
+	\end{align*}
+	Now, we choose $ M $ large enough so that $ \dfrac{4 \pi L}{\sqrt{N}} \approx \dfrac{\delta^2}{4N} $. Then we get
+	$$ \dfrac{1}{N^2}\sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \abs{\sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y)} \geq \dfrac{\delta^2}{4N} $$
+	Since $ \sum\limits_{n \in \bbZ \times \bbZ_N} f(n) = 0  $, 
+	$$ \dfrac{1}{N^2}\sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \max \left(0, \sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y) \right) \geq \dfrac{\delta^2}{8N} $$
+\end{proof}
+	
+	\noindent By averaging argument, there exist some arithmetic progressions $ J_m(a) $ and $ J_{m'}(a') $ of length at least ... 
+
+\subsection{Iteration.}
+Let $ g = \mathbbm{1}_B - \dfrac{\delta}{N} \mathbbm{1}_{\bbZ_N \times \bbZ_N} $. 
+
