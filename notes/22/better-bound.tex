@@ -24,7 +24,7 @@ $$ \Lambda(f,g,h) = \frac{1}{N^3} \sum\limits_{x,y,z \in \bbZ_N} f(x,y) g(z) h(x
 \begin{lemma} \label{lem:big-Fourier}
 	One of the following must hold:
 	\begin{enumerate}
-		\item $ \Lambda(f,g,h) > \dfrac{\delta^3}{2N}$
+		\item $ \Lambda(f,g,h) > \dfrac{\delta^3}{2N}$, or
 		\item There exists a non-zero $ k $ such that $ \abs{\hat{f}(k,k)} \geq \dfrac{\delta^2}{2N} $
 	\end{enumerate}
 \end{lemma}
@@ -41,11 +41,11 @@ $$ \Lambda(f,g,h) = \frac{1}{N^3} \sum\limits_{x,y,z \in \bbZ_N} f(x,y) g(z) h(x
 	\begin{align*}
 		\dfrac{\delta^3}{2N} 
 		& \leq \abs{\sum\limits_{k \neq 0} \widehat{f}(k,k) \widehat{g}(-k) \widehat{h}(-k)} \\
-		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)}\abs{\sum\limits_{k \in \bbZ_N}  \widehat{g}(-k) \widehat{h}(-k)} \\
-		& = \sup_{k \neq 0} \abs{\widehat{f}(k, k)} N \abs{\langle \widehat{g}, \widehat{h} \rangle} \\
-		& = \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \abs{\langle f, g \rangle}  & \text{by \lemmaref{}} \\
-		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \| g \|_{L^2} \| h \|_{L^2} \\
-		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \cdot \sqrt{\delta} \cdot \sqrt{\delta}  		
+		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \sum\limits_{k \in \bbZ_N}  \abs{\widehat{g}(-k) \widehat{h}(-k)} & \text{by triangle inequality} \\
+		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \left(\sum\limits_{k \in \bbZ_N} \abs{\widehat{g}(-k)^2}\right)^{1/2} \left(\sum\limits_{k \in \bbZ_N} \abs{\widehat{h}(-k)^2}\right)^{1/2} & \text{by Cauchy-Schwarz inequality} \\
+		& = \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \left(\underset{n \in \bbZ_N} \bbE \abs{h(x)}^2 \right)^{1/2} \left(\underset{n \in \bbZ_N} \bbE \abs{g(x)}^2 \right)^{1/2}  & \text{by Parseval's identity}\\
+		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \cdot \delta^{1/2} \cdot \delta^{1/2} \\
+		& \leq \sup_{k \neq 0} \abs{\widehat{f}(k, k)} \cdot \delta  		
 	\end{align*} 
 Hence, there exists a non-zero $ k $ such that $ \abs{\widehat{f}(k, k)} \geq \dfrac{\delta^2}{2N} $.
 \end{proof}
@@ -90,7 +90,7 @@ Hence, there exists a non-zero $ k $ such that $ \abs{\widehat{f}(k, k)} \geq \d
 	Hence
 	\begin{align*}
 	\dfrac{\delta^2}{2N} 
-	&\leq \dfrac{1}{N^2}\abs{\sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y)} + \dfrac{1}{N^2} \sum\limits_{(x,y) \in \bbZ \times \bbZ} \abs{f(x,y)} \dfrac{4 \pi L}{\sqrt{N}} \\
+	&\leq \dfrac{1}{N^2} \sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \abs{\sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y)} + \dfrac{1}{N^2} \sum\limits_{(x,y) \in \bbZ \times \bbZ} \abs{f(x,y)} \dfrac{4 \pi L}{\sqrt{N}} \\
 	& \leq  \dfrac{1}{N^2} \sum\limits_{a = 1}^h \sum\limits_{a' = 1} ^h \sum\limits_{m = 1}^M \sum\limits_{m' = 1}^M \abs{\sum\limits_{(x,y) \in J_m(a) \times J_{m'}(a')} f(x,y)} + \dfrac{4 \pi L \delta}{N\sqrt{N}}	
 	\end{align*}
 	Now, we choose $ M $ large enough so that $ \dfrac{4 \pi L \delta}{N\sqrt{N}} \approx \dfrac{\delta^2}{4N} $. Then we get
@@ -104,5 +104,6 @@ Hence, there exists a non-zero $ k $ such that $ \abs{\widehat{f}(k, k)} \geq \d
 
 \subsection{Iteration.}
 Let $ g = \mathbbm{1}_B - \dfrac{\delta}{N} \mathbbm{1}_{\bbZ_N \times \bbZ_N} $. Then according to \lemmaref{big-Fourier} and the assumption that $ B $ does not contain any non-trivial solutions, we must be in the second case, namely, there exists $ k \neq 0 $ such that $ \widehat{\mathbbm{1}_B}(k,k) \geq \dfrac{\delta^2}{2N} $. So $ \widehat{g}(k, k) \geq \dfrac{\delta^2}{2N} $. By applying \lemmaref{density-increment}, there exist two arithmetic progressions $ P_1  = \{ a + h(j_m + l): l \in \bbZ_{N_1} $ and $ P_2  = \{ a' + h(j_{m'} + l): l \in  \bbZ_{N_1} \} $ such that the mean value of $ g $ on $ P_1 \times P_2 $ is at least $ \dfrac{\delta^2}{8N} $, where $ N_1 = \abs{P_1} \geq \dfrac{\delta \sqrt{N}}{4 \pi} $. Let $ B_1 = \{ (l, l') \in \bbZ_{N_1} \times \bbZ_{N_1}: (a + h(j_m + l), a' + h(j_{m'} + l')) \in (P_1 \times P_2) \cap A \} $. Thus, we obtain a subset $ B_1 $ of $ \bbZ_{N_1} \times \bbZ_{N_1} $ with 
-$$ \abs{B_1} \geq \left(\dfrac{\delta}{N} + \dfrac{\delta^2}{8N}\right) N_1 \geq \dfrac{\delta + \delta^2/8} {N_1} = \dfrac{\delta_1}{N_1} $$
+$$ \abs{B_1} \geq \left(\dfrac{\delta}{N} + \dfrac{\delta^2}{8N}\right) N_1^2 $$
+The density of the set $ B_1 $ is $ \alpha_1 = \left(\dfrac{\delta}{N} + \dfrac{\delta^2}{8N}\right) \geq \alpha = \dfrac{\delta}{N} $.
 
