@@ -31,7 +31,7 @@
 \node at ($(B1.north east)+(.05,.05)$) {\footnotesize $A$};
 
 % helping polygon 2
-\draw[thick, gray] ($(A4.center)+(1,0)$)node(C1){} -- ($(C1.center)+(.25,2)$)node(C2){} -- ($(C2.center)+(.5,0)$)node(C3){} -- ($(C1.center)+(1,0)$)node(C4){} -- cycle;
+\draw[thick, gray] ($(A4.center)+(.6,0)$)node(C1){} -- ($(C1.center)+(.25,2)$)node(C2){} -- ($(C2.center)+(.5,0)$)node(C3){} -- ($(C1.center)+(1,0)$)node(C4){} -- cycle;
 
 % top shape 2
 \mytop{C1.center}{C2.center}{C3.center}{C4.center}{black}{gray!30};
@@ -46,11 +46,15 @@
 \node[fit=(C1)(C2)(C3)(C4)] (top2){};
 \node[fit=(D1)(D2)] (mid2){};
 
+\draw[decorate, decoration={brace, amplitude=12pt}] ($(B1.center)+(-.2,0)$) -- ($(A2.west)+(-.2,.2)$) node[black,midway, xshift=-7mm] {$L_1$};
+
+\draw[decorate,decoration={brace,amplitude=12pt, mirror}] ($(D2.center)+(.2,0)$) -- ($(C3.east)+(.2,.2)$) node[black,midway, xshift=7mm] {$R_1$};
+
 % edges for top {1,2} and middle {1,2}
 \draw[thick] (top1.center) -- (top2.center) -- (mid1.center) -- (mid2.center) -- cycle;
 
 % middle 3
-\draw[thick, fill=gray!30] ($(D2.center)+(1,0)$)node(E1){} rectangle ($(E1.center)+(1,1)$)node(E2){};
+\draw[thick, fill=gray!30] ($(D2.center)+(1.25,0)$)node(E1){} rectangle ($(E1.center)+(1,1)$)node(E2){};
 \node at ($(E1.north east)+(.05,.05)$) {\footnotesize $A$};
 
 % helping polygon 3
@@ -60,7 +64,7 @@
 \mybottom{F1.center}{F2.center}{F3.center}{F4.center}{black}{gray!30};
 
 % middle 4
-\draw[thick, fill=gray!30] ($(E2.center)+(1,0)$) node(G1){} rectangle ($(G1.center)+(1,-1)$) node(G2){};
+\draw[thick, fill=gray!30] ($(E2.center)+(.6,0)$) node(G1){} rectangle ($(G1.center)+(1,-1)$) node(G2){};
 \node at ($(G2.north west)+(-.05,.05)$) {\footnotesize $B$};
 
 % helping polygon 4
@@ -75,9 +79,133 @@
 \node[fit=(G1)(G2)] (mid4){};
 \node[fit=(H1)(H2)(H3)(H4)] (bot2){};
 
+\draw[decorate, decoration={brace, amplitude=12pt,mirror}] ($(E1.center)+(-.2,1)$) -- ($(F2.west)+(-.2,-.2)$) node[black,midway, xshift=-7mm] {$L_2$};
+
+\draw[decorate,decoration={brace,amplitude=12pt}] ($(G2.center)+(.2,1)$) -- ($(H3.east)+(.2,-.2)$) node[black,midway, xshift=7mm] {$R_2$};
+
 % edges for bottom {1,2} and middle {3,4}
 \draw[thick, dashed] (mid3.center) -- (mid4.center) -- (bot1.center) -- (bot2.center) -- cycle;
 
+%%% whole 1
+%% middle
+\draw[thick, fill=gray!30] ($(G2.center)+(2.5,0)$)node(I1){} rectangle ($(I1.center)+(1,1)$)node(I2){};
+\node at ($(I1.north east)+(.05,.05)$) {\footnotesize $A$};
+
+%% top
+% helping polygon
+\draw[thick, gray] ($(I1.center)+(0,1.2)$)node(J1){} -- ($(J1.center)+(.25,2)$)node(J2){} -- ($(J2.center)+(.5,0)$)node(J3){} -- ($(J1.center)+(1,0)$)node(J4){} -- cycle;
+
+% region
+\mytop{J1.center}{J2.center}{J3.center}{J4.center}{black}{gray!30};
+
+%% bottom
+% helping polygon
+\draw[thick,gray] ($(I1.center)+(0,-.2)$)node(K1){} -- ($(K1.center)+(.25,-2)$)node(K2){} -- ($(K2.center)+(.5,0)$)node(K3){} -- ($(K1.center)+(1,0)$)node(K4){} -- cycle;
+
+% region
+\mybottom{K1.center}{K2.center}{K3.center}{K4.center}{black}{gray!30}
+
+%%% whole 2
+%% middle
+\draw[thick, fill=gray!30] ($(I2.center)+(.6,0)$)node(L1){} rectangle ($(L1.center)+(1,-1)$)node(L2){};
+\node at ($(L2.north west)+(-.05,.05)$) {\footnotesize $B$};
+
+%% top
+% helping polygon
+\draw[thick,gray] ($(L1.center)+(0,0.2)$)node(M1){} --
+($(M1.center)+(.25,2)$)node(M2){} -- ($(M2.center)+(0.5,0)$)node(M3){} -- ($(M1.center)+(1,0)$)node(M4){} -- cycle;
+
+% region
+\mytop{M1.center}{M2.center}{M3.center}{M4.center}{black}{gray!30};
+
+%% bottom
+% helping polygon
+\draw[thick,gray] ($(L1.center)+(0,-1.2)$)node(N1){} --
+($(N1.center)+(.25,-2)$)node(N2){} -- ($(N2.center)+(0.5,0)$)node(N3){} -- ($(N1.center)+(1,0)$)node(N4){} -- cycle;
+
+% region
+\mybottom{N1.center}{N2.center}{N3.center}{N4.center}{black}{gray!30}
+
+%%% fit boxes for whole 1 and whole 2
+\node[fit=(J1)(J2)(J3)(J4)] (wt1) {};
+\node[fit=(M1)(M2)(M3)(M4)] (wt2) {};
+\node[fit=(I1)(I2)] (wm1) {};
+\node[fit=(L1)(L2)] (wm2) {};
+\node[fit=(K1)(K2)(K3)(K4)] (wb1) {};
+\node[fit=(N1)(N2)(N3)(N4)] (wb2) {};
+
+%%% edges for whole 1 and whole 2
+\draw[thick] (wt1.center) -- (wt2.center);
+\draw[thick] ($(wm1.center)+(0,.05)$) -- ($(wm2.center)+(0,.05)$);
+\draw[thick, dashed] ($(wm1.center)+(0,-.05)$) -- ($(wm2.center)+(0,-.05)$);
+\draw[thick, dashed] (wb1.center) -- (wb2.center);
+
+%%% whole 3
+%% middle
+\draw[thick, fill=gray!30] ($(L2.center)+(1,0)$)node(O1){} rectangle ($(O1.center)+(1,1)$)node(O2){};
+\node at ($(O1.north east)+(.05,.05)$) {\footnotesize $A$};
+
+%% top
+% helping polygon
+\node at ($(O1.center)+(0,1.2)$) (P1){};
+\node at ($(P1.center)+(0.25,2)$) (P2) {};
+\node at ($(P2.center)+(.5,0)$) (P3) {};
+\node at ($(P1.center)+(1,0)$) (P4) {};
+
+% region
+\mytop{P1.center}{P2.center}{P3.center}{P4.center}{black}{gray!30};
+
+%% bottom
+% helping polygon
+\node at ($(O1.center)+(0,-.2)$) (Q1){};
+\node at ($(Q1.center)+(.25,-2)$) (Q2){};
+\node at ($(Q2.center)+(0.5,0)$) (Q3){};
+\node at ($(Q1.center)+(1,0)$) (Q4){};
+
+% region
+\mybottom{Q1.center}{Q2.center}{Q3.center}{Q4.center}{black}{gray!30}
+
+%%% whole 4
+%% middle
+\draw[thick, fill=gray!30] ($(O2.center)+(0.6,0)$)node(R1){} rectangle ($(R1.center)+(1,-1)$)node(R2){};
+\node at ($(R2.north west)+(-.05,.05)$){\footnotesize $B$};
+
+%% top
+% helping nodes
+\node at ($(R1.center)+(0,.2)$) (S1){};
+\node at ($(S1.center)+(.25,2)$) (S2){};
+\node at ($(S2.center)+(.5,0)$) (S3){};
+\node at ($(S1.center)+(1,0)$) (S4){};
+
+% region
+\mytop{S1.center}{S2.center}{S3.center}{S4.center}{black}{gray!30};
+
+%% bottom
+% helping nodes
+\node at ($(R1.center)+(0,-1.2)$) (T1){};
+\node at ($(T1.center)+(.25,-2)$) (T2){};
+\node at ($(T2.center)+(.5,0)$) (T3){};
+\node at ($(T1.center)+(1,0)$) (T4){};
+
+% region
+\mybottom{T1.center}{T2.center}{T3.center}{T4.center}{black}{gray!30};
+
+%%% fit boxes for whole 3 and 4
+\node[fit=(P1)(P2)(P3)(P4)] (wt3){};
+\node[fit=(S1)(S2)(S3)(S4)] (wt4){};
+\node[fit=(O1)(O2)] (wm3){};
+\node[fit=(R1)(R2)] (wm4){};
+\node[fit=(Q1)(Q2)(Q3)(Q4)] (wb3){};
+\node[fit=(T1)(T2)(T3)(T4)] (wb4){};
+
+%%% edges for whole 3 and 4
+\draw[thick] (wt3.center) -- (wm4.center) (wt4.center) -- (wm3.center);
+\draw[thick,dashed] (wm3.center) -- (wb4.center) (wm4.center) -- (wb3.center);
+
+%%% middle implies
+\node at ($(mid4.center)!0.5!(wm1.center)$) {\huge$\implies$};
+
 \end{tikzpicture}
 \end{center}
+\caption{General outline of how our algorithm proceeds at each step.}
 \end{figure}

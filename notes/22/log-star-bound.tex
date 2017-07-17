@@ -1,0 +1,61 @@
+\section{Bound with $\log^* n$}
+
+Using a similar proof as the one in \sectionref{upper-bound}, the upper bound of $o(n)$ is improved to $O\left(\frac{n}{\log^* n}\right)$. We outline the necessary components to yield this result.
+
+\subsection{Preliminaries~\cite{Lee15}}
+
+\begin{definition}[Graph Property]
+	Any family of graphs \cP is a {\em graph property}.
+	A property \cP is {\em monotone decreasing} if for all $G \in \cP$, if $G' \subseteq G$, then $G' \in \cP$. For monotone decreasing \cP and any graph $G$, the {\em distance} of $G$ to \cP is defined as
+	\begin{align*}
+		\underset{H\in \cP, H\subseteq G}{\min}\abs{E(G)-E(H)}.
+	\end{align*}
+\end{definition}
+The distance from $G$ to \cP is equivalently the minimum $k$ such that removing at most $k$ edges of $G$ yields a graph in property \cP. For a graph $H$, a graph $G$ is said to be $H$-free if $H \not\subseteq G$. Let $\cP_H$ is the set of all $H$-free graphs (note that $\cP_H$ is monotone decreasing). For a graph $G$, we say that $G$ is $k$-far from being $H$-free if
+\begin{align*}
+	\underset{H'\in \cP_H, H'\subseteq G}{\min}\abs{E(G)-E(H')} \geq k.
+\end{align*}
+
+\subsection{Graph Removal Lemma}
+The Graph Removal Lemma appears in various forms. We state first the lemma as defined in \cite{Lee15}.
+
+\begin{lemma}[Removal Lemma~\cite{Lee15}]\label{lem:graph-removal-1}
+	For all $\delta$ there exists $\epsilon$ such that for sufficiently large $n$, if $G$ is a graph on $n$ vertices that is $\delta n^2$-far from begin $H$-free, then $G$ contains at least $\epsilon n^{\abs{V(H)}}$ copies of $H$.
+\end{lemma}
+As noted in \cite{Lee15} and \cite{Fox11}, proving \lemmaref{graph-removal-1} using Szemer\'edi's Regularity Lemma yields a tower-type dependency between $\delta$ and $\epsilon$, where $\epsilon^{-1}$ is a tower of twos of height roughly $\delta^{-5}$. Fox improves this to the following.
+
+\begin{lemma}[Removal Lemma~\cite{Fox11}\label{lem:graph-removal-2}]
+	For each graph $H$ on $h$ vertices, if $\epsilon^{-1}$ is a tower of twos of height $5h^4\log \delta^{-1}$, then every graph $G$ on $n$ vertices with at most $\epsilon n^h$ copies of $H$ can be made $H$-free by removing $\delta n^2$ edges.
+\end{lemma}
+
+\subsection{Our Result}
+Our proof follows the proof of Roth's Theorem found in \cite{Lee15}.
+
+\begin{theorem}
+	For all $\delta$ there exists $n_0$ such that for all $n \geq n_0$, if $S=\{s_1,\dotsc,s_m\},T=\{t_1,\dotsc,t_m\} \subseteq [n]$ are ordered sets and $|S| = |T| \geq \delta n$, then $S$ and $T$ do not satisfy our combinatorial problem.
+\end{theorem}
+\begin{proof}
+	Consider the 3-partite graph $G$ with vertex sets $V_1 = V_2 = V_3 = [2n]$, where each vertex set has labels $[2n]$. We define the edge-set as follows:
+	\begin{enumerate}
+		\item $(v,w) \in V_1 \times V_2$ if there exists $i$ such that $w-v = s_i \in S$.
+		\item $(v,w) \in V_2 \times V_3$ if there exists $j$ such that $w-v = t_j \in T$.
+		\item $(v,w) \in V_1 \times V_3$ if there exists $k$ such that $w-v = s_k + t_k$ for $s_k \in S$, $t_k \in T$.
+	\end{enumerate}
+	A triangle in $G$ is a set of vertices $\{v_1, v_2, v_3\}$ such that $(v_1,v_2) \in V_1 \times V_2$, $(v_2,v_3) \in V_2\times V_3$, and $(v_1,v_3) \in V_1\times V_3$. We say that a triangle in $G$ is trivial if for triangle $v_i \in V_i$, there exists $k$ such that
+	\begin{align*}
+		(v_2 - v_1) = s_k,\ (v_3-v_2) = t_k,\ (v_3-v_1) = s_k+t_k.
+	\end{align*}
+	For each $k \in [m]$, there are at least $n$ 'associated' trivial triangles (if $v_i \in V_i$ is a trivial triangle, then $v_i + 1 \in V_i$ is also a trivial triangle). Since $|S| = |T| \geq \delta n$ and all trivial triangles are edge-disjoint, we have that $G$ is at least $\delta n^2$ far from being triangle free.
+	
+	By \lemmaref{graph-removal-1}, there exists at least $\epsilon n^3$ triangles in $G$. There are at most $2n^2$ trivial triangles in $G$, so for sufficiently large $n$, we have $\delta n^2 \leq 2n^2 < \epsilon n^3$. This implies there exists a non-trivial triangle $v_1, v_2, v_3$ such that
+	\begin{align*}
+		(v_2 - v_1) = s_i,\ (v_3 - v_2) = t_j,\ (v_3 - v_1) = s_k + t_k,
+	\end{align*}
+	for $i,j,k$ not all the same. This implies that $s_i + t_j = s_k + t_k$, which shows that $S$ and $T$ are not solutions to our combinatorial problem.
+\end{proof}
+
+The proof itself doesn't yield bounds on $\delta$, but the use of the removal lemma implicitly bounds $\delta$. By \cite{Fox11}, we know that $\epsilon^{-1}$ is a tower of twos of height $O\left(\log \frac{1}{\delta}\right)$. By the above proof, the inequality $\delta n^2 < \epsilon n^3$ must be satisfied, namely $\delta \epsilon^{-1} < n$. If $\log \frac{1}{\delta} = \log^* n$, then we know $\delta^{-1} = 2^{\log^* n}$, and by definition of $\log^* n$, we have $n \leq \epsilon^{-1} < 2n$ since $\epsilon^{-1}$ is a tower of twos of height $\log^* n$. So we have
+\begin{align*}
+	\delta \epsilon^{-1} = O\left(\dfrac{n}{2^{\log^* n}}\right) \leq O\left(\dfrac{n}{\log^* n}\right) < n
+\end{align*}
+implying that $\delta^{-1} = O(\log^* n)$ satisfies the inequality and thus implying that if $|S|=|T| \leq O\left(\dfrac{n}{\log^* n}\right)$, then $S$ and $T$ can satisfy our combinatorial problem.
