@@ -2,21 +2,32 @@
 
 Using a similar proof as the one in \sectionref{upper-bound}, the upper bound of $o(n)$ is improved to $O\left(\frac{n}{\log^* n}\right)$. We outline the necessary components to yield this result.
 
-\subsection{Preliminaries~\cite{Lee15}}
+\subsection{Preliminaries}
 
-\begin{definition}[Graph Property]
+\begin{definition}[$\log^* n$]
+	For any real number $n$, define $\log^*\colon \bbR -\rightarrow \bbN$ as
+	\begin{align*}
+		\log^*n = \begin{cases}
+			0 & n \leq 2\\
+			\log^* (\log n) & n > 2\\
+		\end{cases}
+	\end{align*}
+	where $\log$ is taken to be base 2.
+\end{definition}
+
+\begin{definition}[Graph Property~\cite{Lee15}]
 	Any family of graphs \cP is a {\em graph property}.
 	A property \cP is {\em monotone decreasing} if for all $G \in \cP$, if $G' \subseteq G$, then $G' \in \cP$. For monotone decreasing \cP and any graph $G$, the {\em distance} of $G$ to \cP is defined as
 	\begin{align*}
 		\underset{H\in \cP, H\subseteq G}{\min}\abs{E(G)-E(H)}.
 	\end{align*}
 \end{definition}
-The distance from $G$ to \cP is equivalently the minimum $k$ such that removing at most $k$ edges of $G$ yields a graph in property \cP. For a graph $H$, a graph $G$ is said to be $H$-free if $H \not\subseteq G$. Let $\cP_H$ is the set of all $H$-free graphs (note that $\cP_H$ is monotone decreasing). For a graph $G$, we say that $G$ is $k$-far from being $H$-free if
+The distance (\cite{Lee15}) from $G$ to \cP is equivalently the minimum $k$ such that removing at most $k$ edges of $G$ yields a graph in property \cP. For a graph $H$, a graph $G$ is said to be $H$-free if $H \not\subseteq G$. Let $\cP_H$ is the set of all $H$-free graphs (note that $\cP_H$ is monotone decreasing). For a graph $G$, we say that $G$ is $k$-far from being $H$-free if
 \begin{align*}
 	\underset{H'\in \cP_H, H'\subseteq G}{\min}\abs{E(G)-E(H')} \geq k.
 \end{align*}
 
-\subsection{Graph Removal Lemma}
+\subsection{Graph Removal Lemma~\cite{Lee15}}
 The Graph Removal Lemma appears in various forms. We state first the lemma as defined in \cite{Lee15}.
 
 \begin{lemma}[Removal Lemma~\cite{Lee15}]\label{lem:graph-removal-1}
@@ -54,8 +65,14 @@ Our proof follows the proof of Roth's Theorem found in \cite{Lee15}.
 	for $i,j,k$ not all the same. This implies that $s_i + t_j = s_k + t_k$, which shows that $S$ and $T$ are not solutions to our combinatorial problem.
 \end{proof}
 
-The proof itself doesn't yield bounds on $\delta$, but the use of the removal lemma implicitly bounds $\delta$. By \cite{Fox11}, we know that $\epsilon^{-1}$ is a tower of twos of height $O\left(\log \frac{1}{\delta}\right)$. By the above proof, the inequality $\delta n^2 < \epsilon n^3$ must be satisfied, namely $\delta \epsilon^{-1} < n$. If $\log \frac{1}{\delta} = \log^* n$, then we know $\delta^{-1} = 2^{\log^* n}$, and by definition of $\log^* n$, we have $n \leq \epsilon^{-1} < 2n$ since $\epsilon^{-1}$ is a tower of twos of height $\log^* n$. So we have
+The proof itself doesn't yield bounds on $\delta$, but the use of the removal lemma implicitly bounds $\delta$. By \cite{Fox11}, we know that $\epsilon^{-1}$ is a tower of twos of height $O\left(\log \frac{1}{\delta}\right)$. By the above proof, the inequality $\delta n^2 < \epsilon n^3$ must be satisfied, namely $\delta \epsilon^{-1} < n$. If $\log \frac{1}{\delta} = \log^* n$, then we know $\delta^{-1} = 2^{\log^* n}$, and by definition of $\log^* n$, we have $(\log n) \leq \epsilon^{-1} < n$ since $\epsilon^{-1}$ is a tower of twos of height $O(\log^* n)$ (if a number $r$ is a tower of twos of height $k$, then $\log\p{k-1} r = 2$ for $k-1 = \log^* r$ by our definition of $\log^*$, where $\log\p{s}$ is $\log$ applied $s$ times). So we have
 \begin{align*}
-	\delta \epsilon^{-1} = O\left(\dfrac{n}{2^{\log^* n}}\right) \leq O\left(\dfrac{n}{\log^* n}\right) < n
+	\delta \epsilon^{-1} < \delta n = O\left(\dfrac{n}{2^{\log^* n}}\right) \leq O\left(\dfrac{n}{\log^* n}\right) < n
 \end{align*}
 implying that $\delta^{-1} = O(\log^* n)$ satisfies the inequality and thus implying that if $|S|=|T| \leq O\left(\dfrac{n}{\log^* n}\right)$, then $S$ and $T$ can satisfy our combinatorial problem.
+
+\paragraph{Remark.} Asymptotically, it is true that
+\begin{align*}
+	\dfrac{n}{2^{\log^*n}} \ll \dfrac{n}{\log^* n}
+\end{align*}
+since $\log^* n$ is increasing as $n \rightarrow \infty$.
