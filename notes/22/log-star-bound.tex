@@ -4,12 +4,12 @@ Using a similar proof as the one in \sectionref{upper-bound}, the upper bound of
 
 \subsection{Preliminaries}
 
-\begin{definition}[$\log^* n$]
+\begin{definition}[$\log^* n$]\label{def:logstar}
 	For any real number $n$, define $\log^*\colon \bbR -\rightarrow \bbN$ as
 	\begin{align*}
 		\log^*n = \begin{cases}
 			0 & n \leq 2\\
-			\log^* (\log n) & n > 2\\
+			1 + \log^* (\log n) & n > 2\\
 		\end{cases}
 	\end{align*}
 	where $\log$ is taken to be base 2.
@@ -65,7 +65,7 @@ Our proof follows the proof of Roth's Theorem found in \cite{Lee15}.
 	for $i,j,k$ not all the same. This implies that $s_i + t_j = s_k + t_k$, which shows that $S$ and $T$ are not solutions to our combinatorial problem.
 \end{proof}
 
-The proof itself doesn't yield bounds on $\delta$, but the use of the removal lemma implicitly bounds $\delta$. By \cite{Fox11}, we know that $\epsilon^{-1}$ is a tower of twos of height $O\left(\log \frac{1}{\delta}\right)$. By the above proof, the inequality $\delta n^2 < \epsilon n^3$ must be satisfied, namely $\delta \epsilon^{-1} < n$. If $\log \frac{1}{\delta} = \log^* n$, then we know $\delta^{-1} = 2^{\log^* n}$, and by definition of $\log^* n$, we have $(\log n) \leq \epsilon^{-1} < n$ since $\epsilon^{-1}$ is a tower of twos of height $O(\log^* n)$ (if a number $r$ is a tower of twos of height $k$, then $\log\p{k-1} r = 2$ for $k-1 = \log^* r$ by our definition of $\log^*$, where $\log\p{s}$ is $\log$ applied $s$ times). So we have
+The proof itself doesn't yield bounds on $\delta$, but the use of the removal lemma implicitly bounds $\delta$. By \cite{Fox11}, we know that $\epsilon^{-1}$ is a tower of twos of height $O\left(\log \frac{1}{\delta}\right)$. By the above proof, the inequality $\delta n^2 < \epsilon n^3$ must be satisfied, namely $\delta \epsilon^{-1} < n$. If $\log \frac{1}{\delta} = \log^* n$, then we know $\delta^{-1} = 2^{\log^* n}$, and by definition of $\log^* n$, we (roughly) have $\log n \leq \epsilon^{-1} < n$ since $\epsilon^{-1}$ is a tower of twos of height $O(\log^* n)$ (if a number $r$ is a tower of twos of height $k$, then $\log\p{k-1} r = 2$ for $k-1 = \log^* r$ by our definition of $\log^*$ (see \defref{logstar}), where $\log\p{s}$ is $\log$ applied $s$ times). So we have
 \begin{align*}
 	\delta \epsilon^{-1} < \delta n = O\left(\dfrac{n}{2^{\log^* n}}\right) \leq O\left(\dfrac{n}{\log^* n}\right) < n
 \end{align*}
@@ -75,4 +75,4 @@ implying that $\delta^{-1} = O(\log^* n)$ satisfies the inequality and thus impl
 \begin{align*}
 	\dfrac{n}{2^{\log^*n}} \ll \dfrac{n}{\log^* n}
 \end{align*}
-since $\log^* n$ is increasing as $n \rightarrow \infty$.
+since $\log^* n$ is increasing as $n \rightarrow \infty$. So the bound of $O\left(\frac{n}{2^{\log^* n}}\right)$ is asymptotically better than $O\left(\frac{n}{\log^* n}\right)$.

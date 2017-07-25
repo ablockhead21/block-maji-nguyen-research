@@ -1,0 +1,82 @@
+\section{Bound with $\log^* n$}
+
+Using a similar proof as the one in \sectionref{upper-bound}, the upper bound of $o(n)$ is improved to $O\left(\frac{n}{2^{\log^* n}}\right)$. We outline the necessary components to yield this result.
+
+\subsection{Graph Removal Lemma}
+
+The Graph Removal Lemma is a powerful tool which appears in many different forms. The following form of the lemma can be found in both \cite{Verstraete} and \cite{Fox11}.
+
+\begin{lemma}[Removal Lemma]\label{lem:removal-lemma}
+	Let $G$ be an $n$-vertex graph containing $o(n^k)$ complete graphs of order $k$. Then $o(n^2)$ edges may be deleted from $G$ to obtain a graph containing no complete subgraph of order $k$.
+\end{lemma}
+
+The proof of this lemma has traditionally used Szemer\'edi's Regularity Lemma. A new proof which avoids the regularity lemma was developed by \cite{Fox11} and obtains better bounds than using the regularity lemma directly.
+
+\begin{lemma}[\cite{Fox11} Removal Lemma]\label{lem:fox-removal-lemma}
+	For each graph $H$ on $h$ vertices, if $\delta^{-1}$ is a tower of twos of height $5h^4\log \epsilon^{-1}$, then every graph $G$ with at most $\delta n^h$ copies of $H$ can be made $H$-free by removing $\epsilon n^2$ edges.
+\end{lemma}
+
+For notational purposes, a tower of integers $c$ of height $k$ is denoted $\prescript{k}{}{c}$. As noted in \cite{Fox11}, the bounds obtained by \lemmaref{fox-removal-lemma} are better than using the regularity lemma to prove the result; using the regularity lemma yields that $\delta^{-1}$ is a tower of twos of height polynomial in $\epsilon^{-1}$ ($\epsilon^{-5}$~\cite{Lee15}). We examine the case where $H$ is the complete graph on $3$ vertices; \ie, $H$ is a triangle. So if $\delta^{-1}$ is a tower of twos of height $5(3^4)\log \epsilon^{-1} = 405\log \epsilon^{-1} = O(\log \frac{1}{\epsilon})$, then we are interested in the inequality $\epsilon n^2 < \delta n^3$, which holds for sufficiently large $n$. To proceed, we first define the $\log^*$ function.
+
+\begin{definition}[$\log^* n$]\label{def:logstar}
+	For any real number $n$, define $\log^*\colon \bbR \rightarrow \bbN$ as
+	\begin{align*}
+	\log^*n = \begin{cases}
+	0 & n \leq 1\\
+	1 + \log^* (\log n) & n > 1\\
+	\end{cases}
+	\end{align*}
+	where $\log$ is taken to be base 2.
+\end{definition}
+
+\noindent Note $\log^*$ can be defined with respect to any logarithm base $b > 1$, and any constant $c$ (\ie, $n \leq c$).
+
+Let $405\log \frac{1}{\epsilon} = \log^* n$, then $\epsilon^{-1} = 2^{\nicefrac{(\log^* n)}{405}}$, and by definition of $\log^* n$, we have 
+\begin{align*}
+	\delta^{-1} &= \prescript{(405\log\epsilon^{-1})}{}{2}\\
+	&=\prescript{(\log^* n)}{}{2}\\
+	&= n
+\end{align*}
+(if $r$ is a tower of twos of height $k$, then $\log\p{k} r = 1$ for $k = \log^* r$ by definition of $\log^*$ (see \defref{logstar}), where $\log\p{s} x$ is $\log$ applied $s$ times to $x$). So we have
+\begin{align*}
+\epsilon \delta^{-1} = \epsilon n = \dfrac{n}{2^{\nicefrac{(\log^* n)}{405}}} = O\left(\dfrac{n}{2^{\log^* n}}\right) < n
+\end{align*}
+implying that $\epsilon^{-1} = O\left(\log^* n\right)$ satisfies the inequality. We now use the above outline to prove a result about our combinatorial problem.
+
+\paragraph{Remark.} Note that for any constant $c$,
+\begin{align*}
+	\lim_{n \to \infty} \dfrac{\log^* n}{c} \to \infty.
+\end{align*}
+
+\subsection{Our Result}
+
+We prove the following theorem. The proof is similar in spirit to the proof of Roth's Theorem found in \cite{Verstraete}.
+
+\begin{theorem}\label{thm:comb-prob}
+	Let $S = \{s_1,\dotsc,s_m\} \subseteq [n]$ and $T = \{t_1,\dotsc,t_m\} \subseteq [n]$ be two ordered sets of the same cardinality $m$ such that $S$ and $T$ are a solution to our combinatorial problem. Then for sufficiently large $n$, we have $m = O\left(\frac{n}{2^{\log^* n}}\right)$.
+\end{theorem}
+\begin{proof}
+	Consider the undirected 3-partite graph $G$ with vertex sets $X = [n]$, $Y = [2n]$, and $Z = [3n]$. Then, we define the edge set of $G$ as the union of the following edge sets:
+	\begin{enumerate}
+		\item $E(X,Y) = \left\lbrace\ \{x, x+s_i\} \colon x\in[n], i\in[m], s_i \in S\right\rbrace$
+		\item $E(Y,Z) = \left\lbrace\ \{x+s_i, x+s_i+t_i\} \colon x\in[n], i\in[m], s_i \in S, t_i \in T\right\rbrace$
+		\item $E(X,Z) = \left\lbrace\ \{x, x+s_i+t_i\} \colon x\in[n], i\in[m], s_i \in S, t_i \in T\right\rbrace$.
+	\end{enumerate}
+	Since $x \in [n]$ and $|S| = |T| = m$, we have that $|E(X,Y)| = |E(Y,Z)| = |E(X,Z)| = nm$, and so $|E(G)| = 3nm$. It is also the case that $G$ is a union of triangles. We prove the following claim.
+	\begin{claim}
+		G is a union of edge-disjoint triangles.
+	\end{claim}
+	\begin{proof}[Proof of Claim]
+		First note that by construction, the triangles of $G$ are exactly specified by vertices $\{x, x+s_i, x+s_i + t_i\}$ for all $x \in [n]$, $i \in [m]$, $s_i \in S$, and $t_i \in T$. In particular, the edge set of each triangle is
+		\begin{align*}
+			\{ \{x,x+s_i\}, \{x+s_i,x+s_i+t_i\}, \{x,x+s_i+t_i\} \}
+		\end{align*}
+		Suppose there exists two triangles $\{x,x+s_i,x+s_i+t_i\}$ and $\{y, y+s_j, y+s_j+t_j\}$ such that they are not edge-disjoint. First suppose that they share the edge $\{x,x+s_i\} = \{y,y+s_j\}$. This implies $x = y$ and $s_i = s_j$. By our combinatorial problem, $s_i = s_j$ if and only if $i = j$. So this implies that $t_i = t_j$ and thus these triangles are the same.
+		%Further, this implies that $x+s_i+t_i = y+s_j+t_j$ and $t_i = t_j$, so $s_i + t_i = s_j + t_j$. If $i \neq j$, this violates the assumption that $S$ and $T$ are solutions to our combinatorial problem. So $i = j$ must be the case, and thus these triangles are the same.
+		
+		Next suppose the shared edge is $\{x+s_i, x+s_i+t_i\} = \{y+s_j, y+s_j+t_j\}$. So we have $x + s_i = y+s_j$ and $x+s_i+t_i = y+s_j+t_j$, which implies $t_i = t_j$. Again, by our combinatorial problem, this implies $i = j$, which further implies $x = y$ and $s_i = s_j$. Thus, the triangles are the same.
+		
+		Finally suppose the shared edge is $\{x, x+s_i+t_i\} = \{y, y+s_j+t_j\}$. Clearly $x = y$, and we have $s_i + t_i = s_j + t_j$. If this is true but $i\neq j$, then $(s_i,t_i)$ and $(s_j, t_j)$ violate the assumption that $S$ and $T$ were a solution to our combinatorial problem. So $i = j$ and again the triangles are the same. Thus, $G$ is a union of edge-disjoint triangles.
+	\end{proof}
+	By the above claim, the number of triangles in $G$ is exactly $nm$. Since $S,T \subseteq [n]$, we have $nm \leq n^2 = o(n^3)$. For sufficiently large $n$, we have $n^2 < \delta n^3$ for $\delta$ specified in \lemmaref{fox-removal-lemma}. Thus $G$ has at most $\delta n^3$ triangles and again by \lemmaref{fox-removal-lemma}, we can remove at $\epsilon n^2$ edges to make $G$ triangle free. Since $G$ is a union of edge-disjoint triangles, there are exactly $nm$ triangles and it suffices to remove one edge from each triangle to destroy all triangles in $G$. So removing $nm$ edges is sufficient for $G$ becoming triangle-free. Thus, we have $nm = \epsilon n^2$, which yields $m = \epsilon n = O\left(\dfrac{n}{2^{\log^* n}}\right)$ as desired.
+\end{proof}
