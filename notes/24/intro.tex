@@ -4,11 +4,25 @@
 	{\setbeamercolor{block title}{bg=gray, fg=white}
 	\begin{block}{Note}
 	\begin{itemize}
+<<<<<<< HEAD
 		\item  The preprocessing phase is independent of the functionality or the inputs fed to the functionality by the parties.
 		\item Secret shares $(r_A, r_B)  $ are vulnerable to leakage attacks
+=======
+		\item A fundamental cryptographic resource for computing securely over private data
+		\item Offline prepocessing phase: generates correlated {\em private shares} $ (r_A, r_B) \sim (R_A, R_B) $, provides $r_A$ to Alice and $r_B$ to Bob 
+		%\item Online phase: uses the shares to securely compute intended functionality
+		\item Secret shares vulnerable to leakage attacks
+%		\item  A graph-theoretic representation of correlation: a weighted bipartite graph $  G = (L, R, E) $
+%		\begin{itemize}
+%	  		\item $ L $: the set of all possible private shares $ r_A $ for Alice
+%	  		\item $ R $: the set of all possible private shares $ r_B $ for Bob
+%			\item Weight of the edge $ (r_A, r_B) $ is  $ p(r_A, r_B) $
+%		\end{itemize}
+>>>>>>> c83dc67fa4142b0cce7b969744c63dcf67de0c1c
 	\end{itemize}
 	\end{block}}
 
+<<<<<<< HEAD
 %	\begin{itemize}
 %		\item A fundamental cryptographic resource for computing securely over private data
 %		\item Offline prepocessing phase: generates correlated {\em private shares} $ (r_A, r_B) \sim (R_A, R_B) $, provides $r_A$ to Alice and $r_B$ to Bob 
@@ -24,6 +38,8 @@
 %	\end{itemize}
 \end{frame}
 
+=======
+>>>>>>> c83dc67fa4142b0cce7b969744c63dcf67de0c1c
 %\begin{frame}{Correlation (Examples)}
 %	\input{fig-correlation}
 %\end{frame}
@@ -49,11 +65,18 @@
 \subsection{Correlation Extractor}
 \begin{frame}{Correlation Extractor (CorrExt)}
 	\begin{itemize}
+<<<<<<< HEAD
 		\item Introduced by Ishai, Kushilevitz, Ostrovsky, and Sahai at FOCS 2009 \cite{FOCS:IKOS09} to address leakage attacks. 
 		\item Take leaky correlations as input and produce secure independent
 		copies of oblivious transfer (OT)
 		\begin{definition}[Correlation Extractor (CorrExt)]
 			$ (n,m,t,\epsilon) $-CorrExt for $ (R_A, R_B) $: 
+=======
+		\item introduced by \cite{FOCS:IKOS09} (FOCS 2009) to address leakage attacks. 
+		\item take leaky correlations as input and produce secure independent
+		copies of oblivious transfer (OT)
+		\item $ (n,m,t,\epsilon) $-correlation extractor (CorrExt) for $ (R_A, R_B) $: 
+>>>>>>> c83dc67fa4142b0cce7b969744c63dcf67de0c1c
 			\begin{itemize}
 				\item $n$-bit secret shares $ (r_A, r_B) \sim (R_A, R_B) $ 
 				\item The total number of leakage bits $ t $

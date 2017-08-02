@@ -1,6 +1,61 @@
 \begin{figure}
 \begin{center}
-Goal: Alice and Bob want to produce $m-\OLE$ over 
+{\small Goal: Alice and Bob want to produce $m$ {\OLE}s over \GF{2}.}
+\hrule
+
+\begin{tikzpicture}[every node/.style={fill=white}]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{midground}
+\pgfsetlayers{background,midground,main}
+
+\begin{pgfonlayer}{midground}
+	\node[draw, rectangle] (IP) {$\IP[\bbK]^{[t]}$};
+	\node[below = 12pt of IP, draw, ellipse] (p1) {protocol 1};
+	\draw[->, thick] (IP) -- (p1);
+\end{pgfonlayer}
+
+\node[below=12pt of p1, draw, rectangle] (ROLE) {$\ROLE[\bbK]$};
+\draw[->, thick] (p1) -- (ROLE);
+\node[below=12pt of ROLE, draw, ellipse] (p2) {protocol 2};
+\draw[->, thick] (ROLE) -- (p2);
+\node[below=12pt of p2, draw, rectangle] (OLE) {\OLE[\bbK]};
+\draw[->, thick] (p2) -- (OLE);
+
+\begin{pgfonlayer}{background}
+	\onslide<2>{
+	\node[draw, cloud,cloud ignores aspect, fit=(IP.center)(ROLE.center)(p1), cloud puffs=15, cloud puff arc=150, fill=green!50] (cloud1) {};
+	\node[right=of cloud1, align=center] (GIMS) {\footnotesize Generalization of\\ \footnotesize\cite{C:GIMS15} protocol};
+	\draw[->, thick] (GIMS) -- (cloud1);
+	}
+\end{pgfonlayer}
+
+
+\onslide<3>{
+
+\node[below left= -10pt and 26pt of ROLE, fill=none] (Alice) {\underline{Alice}};
+\node[below right= -10pt and 26pt of ROLE, fill=none] (Bob) {\underline{Bob}};
+
+\node[fill=none] (input1) at (Alice|-p2) {$A,B$};
+\node[fill=none] (input2) at (Bob|-p2) {$X$};
+
+\draw[->, thick] (input1) -- (p2);
+\draw[->, thick] (input2) -- (p2);
+
+\node[fill=none] (output) at (Bob|-OLE) {$Z$};
+%\node[right=2pt of output.center] (o2) {$=AX+B$};
+\draw[->, thick] (OLE) -- (output);}
+
+\begin{pgfonlayer}{midground}
+\onslide<3>{
+\node[draw, cloud, cloud ignores aspect, fill=blue!50, fit=(Alice.center)(Bob.center)(output.center)(ROLE.center), cloud puffs=17, cloud puff arc=120] (cloud2) {};
+}
+\end{pgfonlayer}
+
+\onslide<3>{
+\node[right= 1mm of cloud2, align=left] {\footnotesize $Z = AX + B$\\\footnotesize Protocol 2 is realtively simple\\\footnotesize \underline{Idea:} embed $m$ {\OLE}s over\\\footnotesize\ \ \GF{2} into one \OLE over \bbK};
+}
+\end{tikzpicture}
 
 \end{center}
 \end{figure}
