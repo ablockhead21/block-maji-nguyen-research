@@ -1,0 +1,72 @@
+\documentclass[
+  xcolor={svgnames}, 
+  hyperref={citecolor=DeepPink4,linkcolor=DarkRed,urlcolor=DarkBlue}
+]{beamer}
+\input{headers}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{beaver} % or try albatross, beaver, crane, ...
+  \usefonttheme{serif}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+  \setbeamerfont{page number in foot}{size=\large}
+  \setbeamertemplate{footline}[frame number]
+
+} 
+
+\makeatletter
+\let\slideno\beamer@slideinframe
+\makeatother
+
+\title[]{Secure Computation based on Leaky Correlations: High Resilience Setting}
+\author[BMN]{Alexander R. Block, Hemanta K. Maji, \textcolor{red}{Hai H. Nguyen}}
+\institute{Purdue University}
+
+\date{\today}
+
+\begin{document}
+\begin{frame}
+\titlepage
+
+\begin{center}
+	\includegraphics[scale=0.25]{alex}\ \
+	\includegraphics[scale=0.04]{maji} \ \ 
+	\includegraphics[scale=0.4]{hai}
+\end{center}
+\end{frame}
+
+%\pagenumbering{num_style}
+
+%\begin{frame}
+%\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+%\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+%\end{frame}
+
+%\begin{frame}
+%  \titlepage
+%\end{frame}
+
+\section{Introduction}
+
+%\input{outline}
+
+\input{intro}
+
+\input{results-informal}
+
+\input{results-formal}
+
+\input{technical-contributions}
+
+\input{conclusions-open-probs}
+
+\bibliographystyle{alpha}
+\bibliography{math, crypto}
+\end{document}

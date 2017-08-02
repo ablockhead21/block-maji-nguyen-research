@@ -1,0 +1,70 @@
+\begin{figure}[htb] \footnotesize
+\begin{center}
+\begin{tikzpicture}[
+  vert/.style = {node distance = 5mm, circle, draw, fill = black!10, thick, inner sep = 1pt},  
+  bdd/.style = {rectangle, draw, inner sep = 5mm}, 
+                   ]
+
+%%% First Correlation 
+\node [vert] (a00) at (0,0) {00}; 
+\node [vert, below = of a00] (a01) {01}; 
+\node [vert, below = of a01] (a10) {10}; 
+\node [vert, below = of a10] (a11) {11}; 
+
+\node [vert, node distance = 10mm, right = of a00] (b00) {00}; 
+\node [vert, below = of b00] (b01) {01}; 
+\node [vert, below = of b01] (b10) {10}; 
+\node [vert, below = of b10] (b11) {11}; 
+
+
+\draw (a00) -- (b00)  (a00) -- (b01)  (a00) -- (b10)  (a00) -- (b11); 
+\draw (a01) -- (b00)  (a01) -- (b10); 
+\draw (a10) -- (b00)  (a10) -- (b01); 
+\draw (a11) -- (b00)  (a11) -- (b11); 
+
+%\pause 
+
+\node at (2.3,-1.7) {=}; 
+
+\node [vert] (c00) at (3,0) {00}; 
+\node [vert, below = of c00] (c01) {01}; 
+\node [vert, below = of c01] (c10) {10}; 
+\node [vert, below = of c10] (c11) {11}; 
+
+\node [vert, node distance = 10mm, right = of c00] (d00) {00}; 
+\node [vert, below = of d00] (d01) {01}; 
+\node [vert, below = of d01] (d10) {10}; 
+\node [vert, below = of d10] (d11) {11};
+
+\draw[draw=red!70!black] (c00) -- (d00)  (c00) -- (d11);
+\draw[draw=blue!70!black] (c01) -- (d10);
+\draw[draw=green!70!black] (c10) -- (d01);
+\draw[draw=red!70!black] (c11) -- (d00)  (c11) -- (d11);
+
+
+\node at (5.3, -1.7) {+};
+
+\node [vert] (e00) at (6,0) {00}; 
+\node [vert, below = of e00] (e01) {01}; 
+\node [vert, below = of e01] (e10) {10}; 
+\node [vert, below = of e10] (e11) {11}; 
+
+\node [vert, node distance = 10mm, right = of e00] (f00) {00}; 
+\node [vert, below = of f00] (f01) {01}; 
+\node [vert, below = of f01] (f10) {10}; 
+\node [vert, below = of f10] (f11) {11};
+
+\draw[draw=red!70!black] (e00) -- (f01)  (e00) -- (f10);
+\draw[draw=green!70!black] (e01) -- (f00);
+\draw[draw=green!70!black] (e10) -- (f00);
+
+
+\end{tikzpicture}
+\end{center}
+%\caption{A decomposition of $ \IP {} $ into 2 simple graphs.}
+\label{fig:IP^2-sp-decomp}
+\end{figure}
+
+
+
+

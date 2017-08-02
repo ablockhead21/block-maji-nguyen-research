@@ -1,0 +1,73 @@
+\subsection{Correlated Private Randomness}
+\begin{frame}{Correlated Private Randomness (Correlation)}
+	\begin{itemize}
+		\item A fundamental cryptographic resource for computing securely over private data
+		\item Offline prepocessing phase: generates correlated {\em private shares} $ (r_A, r_B) \sim (R_A, R_B) $, provides $r_A$ to Alice and $r_B$ to Bob 
+		%\item Online phase: uses the shares to securely compute intended functionality
+		\item Secret shares vulnerable to leakage attacks
+		\item  A graph-theoretic representation of correlation: a weighted bipartite graph $  G = (L, R, E) $
+		\begin{itemize}
+	  		\item $ L $: the set of all possible private shares $ r_A $ for Alice
+	  		\item $ R $: the set of all possible private shares $ r_B $ for Bob
+			\item Weight of the edge $ (r_A, r_B) $ is  $ p(r_A, r_B) $
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Correlation (Examples)}
+	\input{fig-correlation}
+\end{frame}
+		%\item Equivalent Abstraction: A graph-theoretic representation 
+		%\begin{itemize}
+		%	\item A weighted bipartite graph $ G = (L, R, E) $
+		%	  \begin{itemize}
+		%	  \item $ L $: the set of all possible private shares $ r_A $ for Alice
+		%	  \item $ R $: the set of all possible private shares $ r_B $ for Bob
+		%	  \item Weight of the edge $ (r_A, r_B) $ is  $ p(r_A, r_B) $
+		%	  \end{itemize} 
+		%\end{itemize}
+		
+\subsection{Oblivious Transfer}
+\begin{frame}{Oblivious Transfer}
+	\begin{itemize}
+		\item 1-out-of-2 \OT:
+		\includegraphics[scale = 0.5]{OT-1}
+		\item Random oblivious transfer (\ROT):
+		\begin{itemize}
+			\item samples $ x_0, x_1, b  $ independently and uniformly at random 
+			\item provides secret shares $ (x_0, x_1) $ to Alice and $ (b, x_b) $ to Bob
+		\end{itemize}
+	\end{itemize}
+ 	%\tiny \footfullcite{https://www.slideshare.net/DavidEvansUVa/darmstadt-48999286}
+\end{frame}
+
+\subsection{Correlation Extractor}
+\begin{frame}{Correlation Extractor}
+	\begin{itemize}
+		\item introduced by \cite{IKOS} (FOCS 2009) to address leakage attacks. 
+		\item take leaky correlations as input and produce secure independent
+		copies of oblivious transfer (OT)
+		\item $ (n,m,t,\epsilon) $-correlation extractor for $ (R_A, R_B) $: 
+			\begin{itemize}
+				\item $n$-bit secret shares $ (r_A, r_B) \sim (R_A, R_B) $ 
+				\item The total number of leakage bits $ t $
+				\item Simulation error $ \epsilon $
+				\item Produces $ m $ OT's
+			\end{itemize}
+		%
+		%		\item Criteria for a good correlation extractor:
+		%\begin{itemize}
+		%	\item Number of OTs produced $ (m) $
+		%	\item Number of leakage bits $ (t) $
+		%	\item Simulation error $ (\epsilon) $
+		%	\item Round complexity of protocol $ (\#) $
+		%\end{itemize}
+		\item A direct analog of privacy amplification and randomness extractor
+	\end{itemize}
+\end{frame}
+	
+	%\input{fig-example1}
+
+%\begin{frame}{Introduction (Examples)}
+	%\input{fig-example1}
+%\end{frame}

@@ -1,0 +1,114 @@
+\section{Main Technical Contributions}
+\begin{frame}{Construction Overview of Our Correlation Extractor}
+	\begin{itemize}
+		\item $ \IP[\bbK]^{[t]} \rightarrow \ROLE[\bbK] \rightarrow \OLE[\bbK]$, where $ \bbK = \GF{2^{\delta n}} $
+		\item Simultaneously embed $ \OLE[\GF 2]^m $ into one $ \OLE[\bbK] $
+		\item This embedding relies on finding solutions to a new combinatorial problem
+		
+		\TODO{draw a picture}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Our Combinatorial Problem}
+	
+	{\setbeamercolor{block title}{bg=ForestGreen, fg=white}
+	\begin{block}{Our Combinatorial Problem}
+		Find two ordered sets $ S = (s_1, s_2, \cdots, s_m) $ and $ T = (t_1, t_2, \cdots, t_m) $ \st
+		\begin{itemize}
+			\item $ s_i, t_i $ are non-negative integers
+			\item $ s_i + t_i < n $
+			\item $ s_i + t_i \neq s_j + t_k  $ for every $ i, j, k $ that are not simultaneously equal
+			\item $ m $ is maximized 
+		\end{itemize} 
+	\end{block}}
+
+	{\setbeamercolor{block title}{bg=Gray, fg=white}
+	\begin{block}{Note}
+		This problem is a generalization of 3-free set (set that avoids any arithmetic progressions of length 3) problem.
+	\end{block}}
+\end{frame}
+
+\begin{frame}{Our Embedding Problem}
+	\begin{itemize}
+	\item Our aim: Suppose there is an oracle that performs OLE over an extension field $ \bbK $. By making only one call to this oracle, no other communication allows, how many OLEs over the field $ \bbF $ can be calculated? %\pause
+	\item More concretely: 
+	\begin{itemize}
+		\item Given an oracle that take as input $ A, B \in \bbK  $ from Alice and $ X \in \bbK $ from Bob, and outputs $ Z = A\cdot X + B $ to Bob. %\pause
+		
+		\item  Alice: $ (a_0, a_1, \cdots, a_{m-1}) \in \bbF^m $ and $ (b_0, b_1, \cdots, b_{m-1}) \in \bbF^m $. %\pause
+		\item  Bob: $ (x_0, x_1, \cdots, x_{m-1}) \in \bbF^m $. %\pause
+		\item  We want Bob to obtain $ (z_0, z_1, \cdots, z_{m-1}) \in \bbF^m $, where $ z_i = a_i \cdot x_i + b_i $. %\pause
+		\item Intuitively, we want to maximize $ m $ and embed $ OLE(\bbF)^m $ into one $ OLE(\bbK) $ %\pause
+	\end{itemize}
+	\item Easy to embed for $ m = 1 $ but can we do better? 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Embedding}
+	\begin{itemize}
+		\item Given $ S = (s_0, s_1, \cdots, s_{m-1}) $ and $ T = (t_0, t_1, \cdots, t_{m-1}) $ to be a solution to the combinatorial problem. %\pause
+		\item $  A = \sum_{i = 0}^{m-1} a_i \zeta^{s_i} $ %\pause
+		\item $ B = \sum_{i=0}^{n-1} r_i \zeta^i $, where \\ $ r_i = \begin{cases}
+		b_k & ,\text{ if } i = s_k + t_k \text{ for some } k \in \{0, 1, \cdots, m-1\} \\
+		U_{\bbF} & ,\text{ otherwise.}
+		\end{cases} $ %\pause
+		\item $ X = \sum_{i=0}^{m-1} x_i \zeta^{t_i} $ %\pause
+		\item Invoke the oracle, Bob receives $ Z = AX + B $. %\pause
+		\item $ A X = \sum\limits_{i,j} a_i x_j \zeta^{s_i + t_j} = \sum\limits_{i} a_i x_i \zeta^{s_i + t_i} + \sum\limits_{j \neq k} a_j x_k \zeta^{s_j + t_k} $. %\pause
+		\item The coefficient of $ \zeta^{s_i + t_i} $ in $ Z $ is $ z_i = a_i x_i + b_i $ since $ s_i + t_i \neq s_j + t_k $.
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Simple Partition Number}
+	\begin{definition}
+		A \textit{simple graph} is a bipartite graph such that each of its
+		connected component is a biclique
+	\end{definition}
+
+	\begin{definition}
+		The \textit{simple partition number} of a bipartite graph $G$, represented
+		by $\sp G$, is the minimum number of simple graphs needed to
+		partition its edges.
+	\end{definition}
+	\input{fig-ip2-decomp}
+\end{frame}
+
+\begin{frame}{Connection between Maximum Leakage and Simple Partition Number}
+	\begin{lemma}[Connecting Max. Resilience to $\sp G $]
+		Suppose $ G = (R_A, R_B) $ is a correlation and there exist $\Lambda$ simple graphs $ G^{(1)}, G^{(2)}, \cdots, G^{(\Lambda)} $ that partition the edges of the graph $ G $. 
+		Then $ G $ is not resilient to $ \log \Lambda $ bits of leakage.
+	\end{lemma}
+	%\pause
+	
+	\begin{block}{Intuition}
+		Small simple partition number implies low maximum leakage resilience
+	\end{block}
+
+	\underline{Proof outline.} 
+	\begin{itemize}
+		%\item Consider $ \pi $ resilient to $ \log \Lambda $-bit leakage and securely implements one $\pred{OLE} $.
+		\item Consider the leakage $ \cL: E(G) \rightarrow [\Lambda] $ \st $ \forall e \in E(G), \cL(e) = \ell $ and $ e \in E(G^{(\ell)}) $ 
+		\item Conditioned on the leakage being $ \ell $, the correlaiton $ (R_A, R_B | \ell) \equiv G\p\ell$ is a simple correlation 
+		\item Simple correlations are useless for correlation extractor by \cite{}.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Estimating Simple Partition Number and Proof of Theorem 2}
+	\begin{lemma}
+		$ \sp{\IP ({\bbF^n})} \leq \abs{\bbF} ^{\ceil{(n+1)/2}}$
+	\end{lemma}
+\end{frame}
+
+\begin{frame}{Relevant Prior Work on Common Information}
+	\begin{itemize}
+		\item Mutual information $ I(R_A, R_B) $: the number of bits of the secret key that two parties can agree on
+		\item \gacs-\korner \cite{} common information  $ K(R_A, R_B) $: the largest entropy of the common random variable that each party can generate based on their respective secret share, corresponding to \textit{number of connected components}
+		\item Wyner's common information \cite{} $ J(R_A, R_B) $: minimum amount of leakage that kills the possibility of key agreement, corresponding to \textit{biclique partition number}
+	\end{itemize}
+	\begin{block}{Conjecture}
+		Simple partition number is a tight measure of leakage resilience
+	\end{block}
+	
+\end{frame}
