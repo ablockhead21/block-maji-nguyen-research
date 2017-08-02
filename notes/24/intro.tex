@@ -5,27 +5,18 @@
 		\item Offline prepocessing phase: generates correlated {\em private shares} $ (r_A, r_B) \sim (R_A, R_B) $, provides $r_A$ to Alice and $r_B$ to Bob 
 		%\item Online phase: uses the shares to securely compute intended functionality
 		\item Secret shares vulnerable to leakage attacks
-		\item  A graph-theoretic representation of correlation: a weighted bipartite graph $  G = (L, R, E) $
-		\begin{itemize}
-	  		\item $ L $: the set of all possible private shares $ r_A $ for Alice
-	  		\item $ R $: the set of all possible private shares $ r_B $ for Bob
-			\item Weight of the edge $ (r_A, r_B) $ is  $ p(r_A, r_B) $
-		\end{itemize}
+%		\item  A graph-theoretic representation of correlation: a weighted bipartite graph $  G = (L, R, E) $
+%		\begin{itemize}
+%	  		\item $ L $: the set of all possible private shares $ r_A $ for Alice
+%	  		\item $ R $: the set of all possible private shares $ r_B $ for Bob
+%			\item Weight of the edge $ (r_A, r_B) $ is  $ p(r_A, r_B) $
+%		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Correlation (Examples)}
-	\input{fig-correlation}
-\end{frame}
-		%\item Equivalent Abstraction: A graph-theoretic representation 
-		%\begin{itemize}
-		%	\item A weighted bipartite graph $ G = (L, R, E) $
-		%	  \begin{itemize}
-		%	  \item $ L $: the set of all possible private shares $ r_A $ for Alice
-		%	  \item $ R $: the set of all possible private shares $ r_B $ for Bob
-		%	  \item Weight of the edge $ (r_A, r_B) $ is  $ p(r_A, r_B) $
-		%	  \end{itemize} 
-		%\end{itemize}
+%\begin{frame}{Correlation (Examples)}
+%	\input{fig-correlation}
+%\end{frame}
 		
 \subsection{Oblivious Transfer}
 \begin{frame}{Oblivious Transfer}
@@ -42,12 +33,12 @@
 \end{frame}
 
 \subsection{Correlation Extractor}
-\begin{frame}{Correlation Extractor}
+\begin{frame}{Correlation Extractor (CorrExt)}
 	\begin{itemize}
-		\item introduced by \cite{IKOS} (FOCS 2009) to address leakage attacks. 
+		\item introduced by \cite{FOCS:IKOS09} (FOCS 2009) to address leakage attacks. 
 		\item take leaky correlations as input and produce secure independent
 		copies of oblivious transfer (OT)
-		\item $ (n,m,t,\epsilon) $-correlation extractor for $ (R_A, R_B) $: 
+		\item $ (n,m,t,\epsilon) $-correlation extractor (CorrExt) for $ (R_A, R_B) $: 
 			\begin{itemize}
 				\item $n$-bit secret shares $ (r_A, r_B) \sim (R_A, R_B) $ 
 				\item The total number of leakage bits $ t $
