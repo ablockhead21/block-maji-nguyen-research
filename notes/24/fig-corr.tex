@@ -1,0 +1,21 @@
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[every node/.style={minimum width=1cm}]
+\node [alice] (alice) {};
+\node[bob, right=5cm of alice,  mirrored] (bob){};
+%\draw[->, thick] (alice) -- coordinate[near start] (aux) (bob);
+\node[draw, ellipse, above right=1.3cm of alice, thick] (dealer) {$ (r_A, r_B) \sim (R_A, R_B) $}; 
+\draw[->, thick] (dealer)--(alice) node[midway,left]{$ r_A $};
+\draw[->, thick] (dealer)--(bob) node [midway, right] {$ r_B $};
+\draw[dashed, thick] ($(alice.south west) + (0,-0.2)$) -- ($(bob.south east)+(0,-0.2)$);
+\draw [->, thick ] ($(alice.south) + (1, -0.5)$) -- ($(bob.south) + (-1, -0.5)$);
+\draw [<-, thick ] ($(alice.south) + (1, -1)$) -- ($(bob.south) + (-1, -1)$) node [midway, below] (dots) {$ \vdots $};
+\draw [->, thick ] ($(alice.south) + (1, -2)$) -- ($(bob.south) + (-1, -2)$);
+
+\node[fit=(alice)(bob)(dealer)] (help1){};
+\node[left=of help1, align=center] (off) {Preprocessing \\ Phase};
+
+\node[align=center] (on) at (off|-dots.north) {Online \\ Phase};
+\end{tikzpicture}
+\end{center}
+\end{figure}
