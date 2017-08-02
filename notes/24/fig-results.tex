@@ -1,26 +1,27 @@
 \begin{table}
 \begin{center}
 {\renewcommand{\arraystretch}{2.5}
-%\onslide<2> {}
+\onslide<2> {}
 %\onslide<3-> {}
-\begin{tabular}%{ m{1.7cm} | m{1.9cm} | m{1.5cm} | m{1.5cm} | m{1.0cm} | m{1.2cm} |}\hline 
-	{ c | c | c | c | c | c |} \hline 
-& Correlation  &  $m$ & $t$ & $\eps$ & \# \\\hline
+\begin{tabular}{|>{\centering\arraybackslash} m{1.7cm} | >{\centering\arraybackslash} m{1.9cm} | >{\centering\arraybackslash} m{1.5cm} | >{\centering\arraybackslash} m{1.5cm} | >{\centering\arraybackslash} m{1.0cm} | >{\centering\arraybackslash} m{1.0cm} |}\hline 
+%	{| c | c | c | c | c | c |} \hline 
+
+Paper & Correlation  &  $m$ & $t$ & $\eps$ & \# \\\hline
 %%%
 \cite{FOCS:IKOS09} & \ROT[n/2] & $\alpha n$ & $\beta n$ & $2^{-\gamma n}$ & 4\\\hline
 %%%
-\pause
-%\ifnum\slideno>1 
+%\pause 
 \multirow{2}{*}{\cite{C:GIMS15}} & \ROT[n/2] & $ \dfrac{n}{\poly\log n}$ & $(\nicefrac14 - g) n$ & $2^{-g n/m}$ & 2 \\\cline{2-6}
 %%%
+\ifnum\slideno>1
 & \IP[\GF{2}^{n}] & $1$ & $(\nicefrac12 - g) n$ & $2^{-gn}$ & 2 \\
 \hline
 %%%
-\pause
+%\pause
 %\ifnum\slideno>2 
 %Our Work & \ROLE[\GF{2^n}] & $n^{1-o(1)}$ & $(\nicefrac12 - g) n$ & $2^{-gn}$ & 2\\\hline 
 \textcolor{red}{Our Work} & \textcolor{red}{\IP[\bbF^{n/\log\abs\bbF}]} & \textcolor{red}{$n^{1-o(1)}$} & \textcolor{red}{$(\nicefrac12 - g) n$} & \textcolor{red}{$2^{-gn}$} & \textcolor{red}{2}\\\hline 
-%\fi \fi
+\fi %\fi
 \end{tabular}}
 %\end{tabular}
 \end{center}

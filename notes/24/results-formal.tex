@@ -2,7 +2,16 @@
 	\begin{theorem}
 	[High Resilience High Production Correlation Extractor]
 	\label{thm:construction}
-	For all constants $0<\delta<g<1/2$, there exists a correlation $(R_A,R_B)$, where each party gets $n$-bit secret share, such that there exists a two-round $(n,m,t,\eps)$-correlation extractor for $(R_A,R_B)$, where $m=(\delta n)^{1-o(1)}$, $t=(\nicefrac12-g)n$, and $\eps=2^{-(g-\delta)n/2}$. 
+	For all constants $0<\delta<g<1/2$
+	\begin{itemize}
+		\item $ \exists $ a correlation $(R_A,R_B)$, 
+		\item each party gets $n$-bit secret share
+	\end{itemize}
+	such that 
+	\begin{itemize}
+		\item $ \exists $ a two-round $(n,m,t,\eps)$-correlation extractor for $(R_A,R_B)$,
+		\item where $m=(\delta n)^{1-o(1)}$, \pause $t=(\nicefrac12-g)n$, \pause and $\eps=2^{-(g-\delta)n/2}$.
+	\end{itemize} 
 	\end{theorem}
 	\pause
 	{\setbeamercolor{block title}{bg=purple, fg=white}
@@ -18,10 +27,22 @@
 \begin{frame}{Main Result II}
 	\begin{theorem}[Hardness of Correlation Extraction]
 	\label{thm:hardness} 
-	Let $(\bbF,+,\cdot)$ be an arbitrary field. 
-	There exists a universal constant $\eps^*>0$ such that, for $(R_A,R_B)=\IP [\bbF^k] $, %or $(R_A,R_B)=\ROLE[\GF{2^{n/2}}]$, 
-	any $(n,1,(n/k)\ceil{(k+1)/2},\eps)$-correlation extractor for $(R_A,R_B)$ has $\eps\geq\eps^*$, where $n=k\log\abs\bbF$.  
+	Let $(\bbF,+,\cdot)$ be an arbitrary field.
+	\begin{itemize}
+		\item $ \exists $ a universal constant $\eps^*>0$
+	\end{itemize}
+	such that
+	\begin{itemize}
+		\item  for $(R_A,R_B)=\IP [\bbF^k] $, %or $(R_A,R_B)=\ROLE[\GF{2^{n/2}}]$, 
+		\item any $(n,1,%(n/k)\ceil{(k+1)/2}
+		n/2,\eps)$-CorrExt for $(R_A,R_B)$ has $\eps\geq\eps^*$,
+		\item  where $n=k\log\abs\bbF$.  
+	\end{itemize}
 \end{theorem}
 
-\textit{Note:} This result proves the optimality of the leakage resilience achieved by our extractor.
+{\setbeamercolor{block title}{bg=Gray, fg=white}
+\begin{block}{Note}
+	This result proves the \underline{optimality} of the leakage resilience achieved by our extractor.
+\end{block}}
+
 \end{frame}
