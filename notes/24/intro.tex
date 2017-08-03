@@ -1,13 +1,15 @@
 \subsection{Correlated Private Randomness}
 \begin{frame}{Correlated Private Randomness (Correlation)}
 \input{fig-corr}
-	{\setbeamercolor{block title}{bg=gray, fg=white}
-	\begin{block}{Note}
+
+
+\onslide<3->{\setbeamercolor{block title}{bg=gray, fg=white}
+\begin{block}{Notes}
 	\begin{itemize}
 		\item  The preprocessing phase is independent of the functionality or the inputs fed to the functionality by the parties.
-		\item Secret shares $(r_A, r_B)  $ are vulnerable to leakage attacks
+		\item Secret shares $(r_A, r_B)  $ are vulnerable to leakage attacks.
 	\end{itemize}
-	\end{block}}
+\end{block}}
 
 %	\begin{itemize}
 %		\item A fundamental cryptographic resource for computing securely over private data
@@ -38,6 +40,8 @@
 	\caption{1-out-of-2 \OT}
 	\end{figure}
 	
+	\pause
+	
 	\begin{definition}[Random Oblivious Transfer (\ROT)]
 	\begin{itemize}
 		\item samples $ x_0, x_1, b  $ independently and uniformly at random 
@@ -51,15 +55,16 @@
 \begin{frame}{Correlation Extractor (CorrExt)}
 	\begin{itemize}
 		\item Introduced by Ishai, Kushilevitz, Ostrovsky, and Sahai at FOCS 2009 \cite{FOCS:IKOS09} to address leakage attacks. 
-		\item Take leaky correlations as input and produce secure independent
+		\item Takes leaky correlations as input and produce secure independent
 		copies of oblivious transfer (OT)
+		\pause
 		\begin{definition}[Correlation Extractor (CorrExt)]
-			$ (n,m,t,\epsilon) $-CorrExt for $ (R_A, R_B) $: 
+			A $ (n,m,t,\epsilon) $-CorrExt for $ (R_A, R_B) $: 
 			\begin{itemize}
-				\item $n$-bit secret shares $ (r_A, r_B) \sim (R_A, R_B) $ 
-				\item The total number of leakage bits $ t $
-				\item Simulation error $ \epsilon $
-				\item Produces $ m $ OT's
+				\item Takes $n$-bit secret shares $ (r_A, r_B) \sim (R_A, R_B) $ as input
+				\item Produces $ m $ independent OT's
+				\item Allows $ t $-bits of leakage on the secret share
+				\item Has simulation error $ \epsilon $
 			\end{itemize}
 		\end{definition}
 		%
@@ -70,7 +75,9 @@
 		%	\item Simulation error $ (\epsilon) $
 		%	\item Round complexity of protocol $ (\#) $
 		%\end{itemize}
+		\pause
 		\item A direct analog of privacy amplification and randomness extractor
+		\item But ensure security against insider attacks
 	\end{itemize}
 \end{frame}
 	

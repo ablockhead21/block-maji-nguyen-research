@@ -1,15 +1,31 @@
 \section{Main Technical Contributions}
-\begin{frame}{Construction Overview of Our Correlation Extractor}
+\begin{frame}{CorrExt Construction Overview I}
+%	\begin{itemize}
+%		\item $ \IP[\bbK]^{[t]} \rightarrow \ROLE[\bbK] \rightarrow \OLE[\bbK]$, where $ \bbK = \GF{2^{\delta n}} $
+%		\item Simultaneously embed $ \OLE[\GF 2]^m $ into one $ \OLE[\bbK] $
+%		\item This embedding relies on finding solutions to a new combinatorial problem
+%		
+%		\TODO{draw a picture}
+%	\end{itemize}
+	\begin{definition}[Oblivious Linear-Function Evaluation (\OLE)]
+		An oblivious linear-function evaluation over a field $ \bbF $
+		\begin{itemize}
+			\item represented as $ \OLE[\bbF] $
+			\item takes $ (A,B) \in \bbF^2 $ from Alice, and $ X \in \bbF $ from Bob
+			\item provides $ Z = AX +B $ to Bob 
+		\end{itemize}  
+	\end{definition}
+	{\setbeamercolor{block title}{bg=Gray, fg=white}
+	\begin{block}{Notes}
 	\begin{itemize}
-		\item $ \IP[\bbK]^{[t]} \rightarrow \ROLE[\bbK] \rightarrow \OLE[\bbK]$, where $ \bbK = \GF{2^{\delta n}} $
-		\item Simultaneously embed $ \OLE[\GF 2]^m $ into one $ \OLE[\bbK] $
-		\item This embedding relies on finding solutions to a new combinatorial problem
-		
-		\TODO{draw a picture}
+		\item  \OT is equivalent $ \OLE[\GF{2}] $ since $ x_b = (x_1 - x_0)b + x_0 $.
+		\item Random oblivious linear-function evaluation $ (\ROLE) $ is a randomized version of $ \OLE $.
 	\end{itemize}
+	\end{block}}
+	
 \end{frame}
 
-\begin{frame}{TEMP}
+\begin{frame}{CorrExt Construction Overview II}
 	\input{fig-ext-construction}
 \end{frame}
 
@@ -25,14 +41,16 @@
 			\item $ m $ is maximized 
 		\end{itemize} 
 	\end{block}}
+	\pause
 
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
 	\begin{block}{Note}
 		This problem is a generalization of the 3-free set (set that avoids any arithmetic progressions of length 3) problem.
 	\end{block}}
 
+	\pause
 	\begin{lemma}
-		We prove that $ m = n^{1 - o(1)} $
+		We prove that $ m = n^{1 - o(1)} $.
 	\end{lemma}
 \end{frame}
 
