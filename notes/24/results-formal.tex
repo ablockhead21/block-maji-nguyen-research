@@ -2,23 +2,22 @@
 	\begin{theorem}
 	[High Resilience, High Production CorrExt]
 	\label{thm:construction}
-	For all constants $0<\delta<g<1/2$
+	For all constants $0<\delta<1/2$
 	\begin{itemize}
-		\item $ \exists $ a correlation $(R_A,R_B)$, 
-		\item each party gets $n$-bit secret share
+		\item $ \exists $ a correlation $(R_A,R_B)$, and
+		\item $ \exists $ a two-round $(n,m = n^{1-o(1)},t,\eps)$-CorrExt for $(R_A,R_B)$
 	\end{itemize}
 	such that 
 	\begin{itemize}
-		\item $ \exists $ a two-round $(n,m,t,\eps)$-CorrExt for $(R_A,R_B)$,
-		\item where $m=(\delta n)^{1-o(1)}$, \pause $t=(\nicefrac12-g)n$, \pause and $\eps=2^{-(g-\delta)n/2}$.
+		\item if $t=(\nicefrac12-g)n$ then $\eps=2^{-(g-\delta)n/2}$.
 	\end{itemize} 
 	\end{theorem}
 	\pause
 	{\setbeamercolor{block title}{bg=purple, fg=white}
 	\begin{block}{Questions}
 		\begin{itemize}
-		\item Does there exist a CorrExt for $ \IP[\bbF^n] $ that achieves over $ \nicefrac{1}{2} $ fractional resilience? \pause
-		\item More generally, can we upper-bound the maximum leakage resilience of any correlation? 
+		\item Does there exist a CorrExt for $ \IP[\bbF^n] $ that can achieves over $ \nicefrac{1}{2} $ fractional leakage resilience? \pause
+		\item More generally, can we meaningfully \underline{upper-bound} the maximum leakage resilience of any correlation? 
 		\end{itemize}
 	\end{block}
 	}
@@ -35,8 +34,7 @@
 	\begin{itemize}
 		\item  for $(R_A,R_B)=\IP [\bbF^k] $, %or $(R_A,R_B)=\ROLE[\GF{2^{n/2}}]$, 
 		\item any $(n,1,%(n/k)\ceil{(k+1)/2}
-		n/2,\eps)$-CorrExt for $(R_A,R_B)$ has $\eps\geq\eps^*$,
-		\item  where $n=k\log\abs\bbF$.  
+		n/2,\eps)$-CorrExt for $(R_A,R_B)$ has $\eps\geq\eps^*$, where $n=k\log\abs\bbF$.  
 	\end{itemize}
 \end{theorem}
 

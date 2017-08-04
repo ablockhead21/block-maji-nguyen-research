@@ -44,6 +44,7 @@
 	
 	\begin{definition}[Random Oblivious Transfer (\ROT)]
 	\begin{itemize}
+		\item a randomized version of \OT
 		\item samples $ x_0, x_1, b  $ independently and uniformly at random 
 		\item provides secret shares $ (x_0, x_1) $ to Alice and $ (b, x_b) $ to Bob
 	\end{itemize}
@@ -55,17 +56,17 @@
 \begin{frame}{Correlation Extractor (CorrExt)}
 	\begin{itemize}
 		\item Introduced by Ishai, Kushilevitz, Ostrovsky, and Sahai at FOCS 2009 \cite{FOCS:IKOS09} to address leakage attacks. 
-		\item Takes leaky correlations as input and produce secure independent
+		\item Takes leaky correlations as input and produces secure independent
 		copies of oblivious transfer (OT)
 		\pause
 		\begin{definition}[Correlation Extractor (CorrExt)]
 			A $ (n,m,t,\epsilon) $-CorrExt for $ (R_A, R_B) $: 
 			\begin{itemize}
 				\item Is a two-party interactive protocol	
-				\item Takes $n$-bit secret shares $ (r_A, r_B) \sim (R_A, R_B) $ as input
-				\item Produces $ m $ independent OT's
-				\item Allows $ t $-bits of leakage on the secret share
-				\item Secures against semi-honest adversaries with simulation error $ \epsilon $
+				\item Takes \underline{$n$-bit secret shares} $ (r_A, r_B) \sim (R_A, R_B) $ as input
+				\item Produces \underline{$ m $ independent OT's}
+				\item Allows \underline{$ t $-bits of leakage} on the secret share
+				\item Secures against semi-honest adversaries with \underline{simulation error $ \epsilon $}
 			\end{itemize}
 		\end{definition}
 		%

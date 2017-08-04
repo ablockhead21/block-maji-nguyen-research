@@ -5,26 +5,26 @@
 \node[bob, right=5cm of alice,  mirrored] (bob){};
 %\draw[->, thick] (alice) -- coordinate[near start] (aux) (bob);
 \node[draw, ellipse, above right=1.3cm of alice, thick] (dealer) {$ (r_A, r_B) \sim (R_A, R_B) $}; 
-\draw[->, thick] (dealer)--(alice) node[midway,left]{$ r_A $};
-\draw[->, thick] (dealer)--(bob) node [midway, right] {$ r_B $};
+\draw[->, > = stealth, thick] (dealer)--(alice) node[midway,left]{$ r_A $};
+\draw[->, > = stealth, thick] (dealer)--(bob) node [midway, right] {$ r_B $};
 \draw[dashed, thick] ($(alice.south west) + (0,-0.2)$) -- ($(bob.south east)+(0,-0.2)$);
 
 \node[fit=(alice)(bob)(dealer)] (help1){};
 \node[left=of help1, align=center] (off) {Preprocessing \\ Phase};
 \onslide<2->{
-\draw [->, thick ] ($(alice.south) + (1, -0.5)$) -- ($(bob.south) + (-1, -0.5)$);
-\draw [<-, thick ] ($(alice.south) + (1, -1)$) -- ($(bob.south) + (-1, -1)$) node [midway, below] (dots) {$ \vdots $};
-\draw [->, thick ] ($(alice.south) + (1, -2)$) -- ($(bob.south) + (-1, -2)$);
+\draw [->, > = stealth, thick ] ($(alice.south) + (1, -0.5)$) -- ($(bob.south) + (-1, -0.5)$);
+\draw [<-, > = stealth, thick ] ($(alice.south) + (1, -1)$) -- ($(bob.south) + (-1, -1)$) node [midway, below] (dots) {$ \vdots $};
+\draw [->, > = stealth, thick ] ($(alice.south) + (1, -2)$) -- ($(bob.south) + (-1, -2)$);
 
 \node[align=center] (on) at (off|-dots.north) {Online \\ Phase};
 }
 
 \onslide<4>{
-\draw [->, thick, dashed] (alice) --(bob) node[midway, above]{$ \mathcal{L}_{Bob}(r_A) $};
+\draw [->, > = stealth, thick, dashed] (alice) --(bob) node[midway, above]{$ \mathcal{L}_{Bob}(r_A) $};
 }
 
 \onslide<5>{
-	\draw [->, thick, dashed] (bob) --(alice) node[midway, above]{$ \mathcal{L}_{Alice}(r_B) $};
+	\draw [->, > = stealth, thick, dashed] (bob) --(alice) node[midway, above]{$ \mathcal{L}_{Alice}(r_B) $};
 }
 
 \end{tikzpicture}

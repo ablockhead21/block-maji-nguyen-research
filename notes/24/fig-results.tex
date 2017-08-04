@@ -2,7 +2,7 @@
 \begin{center}
 {\renewcommand{\arraystretch}{2.5}
 \onslide<2> {}
-%\onslide<3-> {}
+\onslide<3-> {}
 \begin{tabular}{|>{\centering\arraybackslash} m{1.7cm} | >{\centering\arraybackslash} m{1.9cm} | >{\centering\arraybackslash} m{1.5cm} | >{\centering\arraybackslash} m{1.5cm} | >{\centering\arraybackslash} m{1.0cm} | >{\centering\arraybackslash} m{1.0cm} |}\hline 
 %	{| c | c | c | c | c | c |} \hline 
 
@@ -17,11 +17,13 @@ Paper & Correlation  &  $m$ & $t$ & $\eps$ & \# \\\hline \hline
 & \IP[\GF{2}^{n}] & $1$ & $(\nicefrac12 - g) n$ & $2^{-gn}$ & 2 \\
 \hline
 %%%
-%\pause
-%\ifnum\slideno>2 
+\ifnum\slideno>2 
 %Our Work & \ROLE[\GF{2^n}] & $n^{1-o(1)}$ & $(\nicefrac12 - g) n$ & $2^{-gn}$ & 2\\\hline 
-\textcolor{red}{Our Work} & \textcolor{red}{\IP[\bbF^{n/\log\abs\bbF}]} & \textcolor{red}{$n^{1-o(1)}$} & \textcolor{red}{$(\nicefrac12 - g) n$} & \textcolor{red}{$2^{-gn}$} & \textcolor{red}{2}\\\hline 
-\fi %\fi
+\textcolor{red}{Our Work} &
+\only<3->{\textcolor{red}{\IP[\bbF^{n/\log\abs\bbF}]}} &
+\only<4->{\textcolor{red}{$n^{1-o(1)}$}} & \only<5->{\textcolor{red}{$(\nicefrac12 - g) n$}} & \only<6->{\textcolor{red}{$2^{-gn}$}} & 
+\only<7->{\textcolor{red}{2}} \\\hline 
+\fi \fi
 \end{tabular}}
 %\end{tabular}
 \end{center}
