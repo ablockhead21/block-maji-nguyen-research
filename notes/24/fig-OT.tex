@@ -1,0 +1,37 @@
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[every node/.style={minimum width=0.8cm}, > = stealth]
+
+\onslide<1->{
+%\node [alice] (alice) {Alice};	
+%\node [bob, right= 5cm of alice, mirrored] (bob){Bob};
+\node [label=below:Alice](alice) {\includegraphics[height=1cm]{canal_alice_dep.pdf}};
+\node [label = below:Bob, right= 4cm of alice] (bob) {\includegraphics[height=1cm]{canal_bob_dep.pdf}};
+\draw [<->, thick] (alice)--(bob);
+}
+%%%
+
+%\begin{pgfonlayer}{background}
+\onslide<2->{
+\node [above = 0.6cm of alice] (m1){$ (x_0, x_1) \in \{0,1\}^2 $} ;
+\node[draw, cloud,cloud ignores aspect, fit=(m1), cloud puffs=20.5, cloud puff arc=100] (cloud1) {};
+}
+%\end{pgfonlayer}
+
+\onslide<3->{
+%\begin{pgfonlayer}{background}
+\node [above = 0.6cm of bob] (m2){$ b \in \{0,1\} $} ;
+\node[draw, cloud,cloud ignores aspect, fit=(m2), cloud puffs=20.5, cloud puff arc=100] (cloud1) {};
+%\end{pgfonlayer}
+}
+%%%
+\onslide<5>{
+\node [below = 0.6cm of alice, rounded rectangle, fill = pink!50] (text1) {does not know $ b $};
+}
+\onslide<4->{
+\node [below = 0.6cm of bob,rounded rectangle, fill = pink!50] (text1=2) {learns $ x_b $ but nothing about $ x_{\overline{b}} $ };
+}
+
+\end{tikzpicture}
+\end{center}
+\end{figure}
