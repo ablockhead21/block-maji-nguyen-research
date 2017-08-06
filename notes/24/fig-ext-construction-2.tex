@@ -1,0 +1,45 @@
+\begin{figure}
+{\small Goal: Alice and Bob want to produce $m$ {\OLE}s over \GF{2}.}
+\hrule
+\begin{center}
+	
+\begin{tikzpicture}[every node/.style={fill=white}, >=stealth]
+
+%% Leaky IP
+\node[draw, rectangle, align=center] (IP) {\IP[\bbK] with \\ $t$-bits leaked};
+
+%% OLE K
+\node[draw, rectangle, right=.21\linewidth of IP] (OLEk) {\OLE[\bbK]};
+
+%% m-OLE
+\node[draw, rectangle, right=.21\linewidth of OLEk, align=center] (mOLE) {$m$-copies of\\ \OLE[\GF{2}]};
+
+\begin{pgfonlayer}{background}
+
+%% second arrow
+\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway] {\scriptsize \OLE[]-Extraction};
+
+\only<2>{
+%% first cloud
+\node[draw, cloud, cloud ignores aspect, fit=(IP.center)(OLEk.center), cloud puffs=15, inner ysep=1.5em, inner xsep=1em] (cloud1) {};
+}
+
+%% first arrow
+\draw[thick, ->] (IP) -- (OLEk) node[above, midway] {\scriptsize Protocol};
+
+\only<3>{
+%% second cloud
+\node[draw, cloud, cloud ignores aspect, fit=(OLEk.center)(mOLE.center), cloud puffs=17, inner ysep=1.5em, inner xsep=1em] (cloud2) {};
+
+%% second arrow (again)
+\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway] {\scriptsize \OLE[]-Extraction};
+}
+
+
+\end{pgfonlayer}
+
+
+\end{tikzpicture}
+
+\end{center}
+\end{figure}
