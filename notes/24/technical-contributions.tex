@@ -18,8 +18,9 @@
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
 	\begin{block}{Notes}
 	\begin{itemize}
-		\item  \OT is equivalent $ \OLE[\GF{2}] $ since $ x_b = (x_1 - x_0)b + x_0 $.
-		\item Random oblivious linear-function evaluation $ (\ROLE) $ is a randomized version of $ \OLE $.
+		\item Alice knows nothing about $ X $, and Bob knows nothing about $ A $.
+		\item  \OT is functionally equivalent $ \OLE[\GF{2}] $ since $ x_b = (x_1 - x_0)b + x_0 $.
+		%\item Random oblivious linear-function evaluation $ (\ROLE) $ is a randomized version of $ \OLE $.
 	\end{itemize}
 	\end{block}}
 	
@@ -28,7 +29,15 @@
 \begin{frame}{CorrExt Construction Overview II}
 	\input{fig-ext-construction-2}
 	\only<2>{Natural generalization of \cite{C:GIMS15} protocol for \IP[] to arbitrary fields.}
-	\only<3>{test}
+	\only<3,4>{Embed $ m $ copies of $\OLE[\GF{2}] $ into \underline{one} $ \OLE[\bbK] $}
+	\only<4>{\setbeamercolor{block title}{bg=Gray, fg=white}
+		\begin{block}{Notes}
+			\begin{itemize}
+				\item This embedding relies on finding solutions to a combinatorial problem.
+				\item The bigger value of $ m $, the better production rate.
+			\end{itemize}
+		\end{block}
+	}
 \end{frame}
 
 \begin{frame}{Our Combinatorial Problem}
@@ -97,12 +106,13 @@
 		A \textit{simple graph} is a bipartite graph such that each of its
 		connected component is a biclique
 	\end{definition}
-
+	\pause
 	\begin{definition}
 		The \textit{simple partition number} of a bipartite graph $G$, represented
 		by $\sp G$, is the minimum number of simple graphs needed to
 		partition its edges.
 	\end{definition}
+	\pause
 	\input{fig-ip2-decomp}
 \end{frame}
 
@@ -111,12 +121,12 @@
 		Suppose $ G = (R_A, R_B) $ is a correlation and there exist $\Lambda$ simple graphs $ G^{(1)}, G^{(2)}, \cdots, G^{(\Lambda)} $ that partition the edges of the graph $ G $. 
 		Then $ G $ is not resilient to $ \log \Lambda $ bits of leakage.
 	\end{lemma}
-	%\pause
+	\pause
 	
 	\begin{block}{Intuition}
 		Small simple partition number implies low maximum leakage resilience
 	\end{block}
-
+	\pause
 	\underline{Proof outline.} 
 	\begin{itemize}
 		%\item Consider $ \pi $ resilient to $ \log \Lambda $-bit leakage and securely implements one $\pred{OLE} $.
@@ -127,20 +137,44 @@
 
 \end{frame}
 
-\begin{frame}{Estimating Simple Partition Number and Proof of Theorem 2}
-	\begin{lemma}
-		$ \sp{\IP ({\bbF^n})} \leq \abs{\bbF} ^{\ceil{(n+1)/2}}$
-	\end{lemma}
+\begin{frame}{Estimating Simple Partition Number}
+	\input{fig-sp}
+	{\setbeamercolor{block title}{bg=Gray, fg=white}
+		\begin{block}{Note}
+			\begin{itemize}
+				\item $ s $ is the secret share size
+				\item $ (\log \pred{sp})/s $ is the upper bound on the maximum leakage resilience.
+			\end{itemize}
+		\end{block}
+	}
+%	\begin{lemma}
+%		$ \sp{\IP ({\bbF^n})} \leq \abs{\bbF} ^{\ceil{(n+1)/2}}$
+%	\end{lemma}
 \end{frame}
 
 \begin{frame}{Relevant Prior Work on Common Information}
-	\begin{itemize}
-		\item Mutual information $ I(R_A, R_B) $: the number of bits of the secret key that two parties can agree on
-		\item \gacs-\korner \cite{} common information  $ K(R_A, R_B) $: the largest entropy of the common random variable that each party can generate based on their respective secret share, corresponding to \textit{number of connected components}
-		\item Wyner's common information \cite{} $ J(R_A, R_B) $: minimum amount of leakage that kills the possibility of key agreement, corresponding to \textit{biclique partition number}
-	\end{itemize}
-%	\begin{block}{Conjecture}
-%		Simple partition number is a tight measure of leakage resilience
-%	\end{block}
-	
+
+	{\setbeamercolor{block title}{bg=red, fg=white}
+	\begin{block}{Mutual information $ I(R_A, R_B) $}
+		\begin{itemize}
+			\item The number of bits of the secret key that two parties can agree on
+		\end{itemize}
+	\end{block}}
+	\pause
+	{\setbeamercolor{block title}{bg=brown, fg=white}
+	\begin{block}{\gacs-\korner \cite{} common information  $ K(R_A, R_B) $}
+		\begin{itemize}
+			\item the largest entropy of the common random variable that each party can generate based on their respective secret share
+			\item corresponding to \textit{number of connected components}
+		\end{itemize}
+	\end{block}}
+	\pause
+	{\setbeamercolor{block title}{bg=blue, fg=white}
+	\begin{block}{Wyner's common information \cite{} $ J(R_A, R_B) $}
+		\begin{itemize}
+			\item minimum amount of leakage that kills the possibility of key agreement
+			\item corresponding to \textit{biclique partition number}
+		\end{itemize}
+	\end{block}}
 \end{frame}
+
