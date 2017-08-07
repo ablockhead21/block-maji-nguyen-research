@@ -7,7 +7,11 @@
 %\node [bob, right= 5cm of alice, mirrored] (bob){Bob};
 \node [label=below:Alice](alice) {\includegraphics[height=1cm]{canal_alice_dep.pdf}};
 \node [label = below:Bob, right= 4cm of alice] (bob) {\includegraphics[height=1cm]{canal_bob_dep.pdf}};
-\draw [<->, thick] (alice)--(bob);
+\draw [{Triangle[length=5mm, width=26pt]}-{Triangle[length=5mm, width=26pt]}, line width=16pt, draw=green!30!white] (alice)--(bob);
+
+%\node[right=2mm of alice] (p1) {};
+%\node[left=2mm of bob] (p2) {};
+%\node[double arrow, draw, fill=white, fit=(p1.center)(p2.center), minimum width=1.3cm,] {};
 }
 %%%
 
