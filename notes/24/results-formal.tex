@@ -16,7 +16,7 @@
 	{\setbeamercolor{block title}{bg=purple, fg=white}
 	\begin{block}{Questions}
 		\begin{itemize}
-		\item Does there exist a correlation extractor for $ \IP[\bbF^n] $ that can achieves over $ \nicefrac{1}{2} $ fractional leakage resilience? \pause
+		\item Does there exist a correlation extractor for $ \IP[\bbF^n] $ that achieves over $ \nicefrac{n}{2} $ leakage resilience? \pause
 		\item More generally, can we meaningfully \underline{upper-bound} the maximum leakage resilience of any correlation? 
 		\end{itemize}
 	\end{block}
@@ -28,19 +28,19 @@
 	\label{thm:hardness} 
 	Let $(\bbF,+,\cdot)$ be an arbitrary field.
 	\begin{itemize}
-		\item $ \exists $ a universal constant $\eps^*>0$
+		\item $ \exists $ a \underline{universal constant} $\eps^*>0$
 	\end{itemize}
 	such that
 	\begin{itemize}
 		\item  for $(R_A,R_B)=\IP [\bbF^k] $, %or $(R_A,R_B)=\ROLE[\GF{2^{n/2}}]$, 
 		\item any $(n,1,%(n/k)\ceil{(k+1)/2}
-		n/2,\eps)$-CorrExt for $(R_A,R_B)$ has $\eps\geq\eps^*$, where $n=k\log\abs\bbF$.  
+		n/2,\eps)$-CorrExt for $(R_A,R_B)$ has $\eps\geq\eps^*$, where $n=k\log\abs\bbF$ (the length of secret share of each party).  
 	\end{itemize}
 \end{theorem}
 
 {\setbeamercolor{block title}{bg=Gray, fg=white}
 \begin{block}{Note}
-	This result proves the \underline{optimality} of the leakage resilience achieved by our extractor.
+	This result proves the \underline{optimality} of the leakage resilience achieved by our extractor and the \cite{C:GIMS15} extractor.
 \end{block}}
 
 \end{frame}

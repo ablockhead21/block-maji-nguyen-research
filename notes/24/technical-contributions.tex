@@ -7,6 +7,7 @@
 %		
 %		\TODO{draw a picture}
 %	\end{itemize}
+	A natural generalization of \OT:
 	\begin{definition}[Oblivious Linear-Function Evaluation (\OLE)]
 		An oblivious linear-function evaluation over a field $ \bbF $
 		\begin{itemize}
@@ -18,8 +19,9 @@
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
 	\begin{block}{Notes}
 	\begin{itemize}
-		\item Alice knows nothing about $ X $, and Bob knows nothing about $ A $.
-		\item  \OT is functionally equivalent $ \OLE[\GF{2}] $ since $ x_b = (x_1 - x_0)b + x_0 $.
+		\item Alice gains no additional advantage in predicting $ X $
+		\item Bob gains no additional advantage in predicting  $ A $
+		\item  \OT is functionally equivalent $ \OLE[\GF{2}] $ since $ x_b = (x_1 - x_0)b + x_0 $
 		%\item Random oblivious linear-function evaluation $ (\ROLE) $ is a randomized version of $ \OLE $.
 	\end{itemize}
 	\end{block}}
@@ -48,7 +50,7 @@
 		\begin{itemize}
 			\item $ s_i, t_i $ are non-negative integers
 			\item $ s_i + t_i < n $
-			\item $ s_i + t_i \neq s_j + t_k  $ for every $ i, j, k $ that are not simultaneously equal
+			\item $ s_i + t_i \neq s_j + t_k  $ for every $ i, j, k $ that are not all equal
 			\item $ m $ is maximized 
 		\end{itemize} 
 	\end{block}}
@@ -58,56 +60,85 @@
 	\begin{block}{Notes}
 		\begin{itemize}
 			\item This problem is a generalization of the 3-free set (sets that avoid any arithmetic progressions of length 3) problem.
-			\item Using the 3-free set, we get $ m = n^{1-o(1)} $.
+			\begin{itemize}
+				\item Under the constraints $ s_i = t_i $, our combinatorial problem is identical to the 3-free set problem 
+			\end{itemize}
+			\item Using existing explicit construction of the 3-free set, we achieve $ m = n^{1-o(1)} $
+			\item In an ongoing work, we show that $ m = o(n) $
 		\end{itemize}
 		
 	\end{block}}
 
-	\pause
-	\begin{lemma}
-		Recently we show that $ m = o(n) $.
-	\end{lemma}
+%	\pause
+%	\begin{lemma}
+%		Recently we show that $ m = o(n) $.
+%	\end{lemma}
 \end{frame}
 
-\begin{frame}{Our Embedding Problem}
-	\begin{itemize}
-	\item Our aim: Suppose there is an oracle that performs OLE over an extension field $ \bbK $. By making only one call to this oracle, no other communication allows, how many OLEs over the field $ \bbF $ can be calculated? %\pause
-	\item More concretely: 
-	\begin{itemize}
-		\item Given an oracle that take as input $ A, B \in \bbK  $ from Alice and $ X \in \bbK $ from Bob, and outputs $ Z = A\cdot X + B $ to Bob. %\pause
-		
-		\item  Alice: $ (a_0, a_1, \cdots, a_{m-1}) \in \bbF^m $ and $ (b_0, b_1, \cdots, b_{m-1}) \in \bbF^m $. %\pause
-		\item  Bob: $ (x_0, x_1, \cdots, x_{m-1}) \in \bbF^m $. %\pause
-		\item  We want Bob to obtain $ (z_0, z_1, \cdots, z_{m-1}) \in \bbF^m $, where $ z_i = a_i \cdot x_i + b_i $. %\pause
-		\item Intuitively, we want to maximize $ m $ and embed $ OLE(\bbF)^m $ into one $ OLE(\bbK) $ %\pause
-	\end{itemize}
-	\item Easy to embed for $ m = 1 $ but can we do better? 
+%\begin{frame}{Our Embedding Problem}
+%	\begin{itemize}
+%	\item Our aim: Suppose there is an oracle that performs OLE over an extension field $ \bbK $. By making only one call to this oracle, no other communication allows, how many OLEs over the field $ \bbF $ can be calculated? %\pause
+%	\item More concretely: 
+%	\begin{itemize}
+%		\item Given an oracle that take as input $ A, B \in \bbK  $ from Alice and $ X \in \bbK $ from Bob, and outputs $ Z = A\cdot X + B $ to Bob. %\pause
+%		
+%		\item  Alice: $ (a_0, a_1, \cdots, a_{m-1}) \in \bbF^m $ and $ (b_0, b_1, \cdots, b_{m-1}) \in \bbF^m $. %\pause
+%		\item  Bob: $ (x_0, x_1, \cdots, x_{m-1}) \in \bbF^m $. %\pause
+%		\item  We want Bob to obtain $ (z_0, z_1, \cdots, z_{m-1}) \in \bbF^m $, where $ z_i = a_i \cdot x_i + b_i $. %\pause
+%		\item Intuitively, we want to maximize $ m $ and embed $ OLE(\bbF)^m $ into one $ OLE(\bbK) $ %\pause
+%	\end{itemize}
+%	\item Easy to embed for $ m = 1 $ but can we do better? 
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Embedding}
+%	\begin{itemize}
+%		\item Given $ S = (s_0, s_1, \cdots, s_{m-1}) $ and $ T = (t_0, t_1, \cdots, t_{m-1}) $ to be a solution to the combinatorial problem. %\pause
+%		\item $  A = \sum_{i = 0}^{m-1} a_i \zeta^{s_i} $ %\pause
+%		\item $ B = \sum_{i=0}^{n-1} r_i \zeta^i $, where \\ $ r_i = \begin{cases}
+%		b_k & ,\text{ if } i = s_k + t_k \text{ for some } k \in \{0, 1, \cdots, m-1\} \\
+%		U_{\bbF} & ,\text{ otherwise.}
+%		\end{cases} $ %\pause
+%		\item $ X = \sum_{i=0}^{m-1} x_i \zeta^{t_i} $ %\pause
+%		\item Invoke the oracle, Bob receives $ Z = AX + B $. %\pause
+%		\item $ A X = \sum\limits_{i,j} a_i x_j \zeta^{s_i + t_j} = \sum\limits_{i} a_i x_i \zeta^{s_i + t_i} + \sum\limits_{j \neq k} a_j x_k \zeta^{s_j + t_k} $. %\pause
+%		\item The coefficient of $ \zeta^{s_i + t_i} $ in $ Z $ is $ z_i = a_i x_i + b_i $ since $ s_i + t_i \neq s_j + t_k $.
+%	\end{itemize}
+%	
+%\end{frame}
+
+\begin{frame}{Upper-Bounding Leakage Resilience}
+
+{\setbeamercolor{block title}{bg=Gray, fg=white}
+	\begin{block}{Question}
+		Which techniques can be used to upper-bound the maximum leakage resilience of a correlation?
+	\end{block}
+}
+{\setbeamercolor{block title}{bg=Gray, fg=white}
+	\begin{block}{Answer: Partition Argument}
+		\begin{itemize}
+			\item $ n/2 $ samples of the ROT correlation cannot be resilient to more than $ n/4 $ bits of leakage
+			\item Alice emulates $ n/4 $ independent samples
+			\item Bob emulates $ n/4 $ independent samples
+			\item Reimagine any correlation extractor
+		\end{itemize}		
+	\end{block}
+}
+
+\begin{itemize}
+	\item But applies only to ``multiple independent samples of small correlations"
+	\item \textcolor{red}{What if secret shares are sampled from big correlations, for example, $ \IP[\bbF^n] $?}
 \end{itemize}
-\end{frame}
 
-\begin{frame}{Embedding}
-	\begin{itemize}
-		\item Given $ S = (s_0, s_1, \cdots, s_{m-1}) $ and $ T = (t_0, t_1, \cdots, t_{m-1}) $ to be a solution to the combinatorial problem. %\pause
-		\item $  A = \sum_{i = 0}^{m-1} a_i \zeta^{s_i} $ %\pause
-		\item $ B = \sum_{i=0}^{n-1} r_i \zeta^i $, where \\ $ r_i = \begin{cases}
-		b_k & ,\text{ if } i = s_k + t_k \text{ for some } k \in \{0, 1, \cdots, m-1\} \\
-		U_{\bbF} & ,\text{ otherwise.}
-		\end{cases} $ %\pause
-		\item $ X = \sum_{i=0}^{m-1} x_i \zeta^{t_i} $ %\pause
-		\item Invoke the oracle, Bob receives $ Z = AX + B $. %\pause
-		\item $ A X = \sum\limits_{i,j} a_i x_j \zeta^{s_i + t_j} = \sum\limits_{i} a_i x_i \zeta^{s_i + t_i} + \sum\limits_{j \neq k} a_j x_k \zeta^{s_j + t_k} $. %\pause
-		\item The coefficient of $ \zeta^{s_i + t_i} $ in $ Z $ is $ z_i = a_i x_i + b_i $ since $ s_i + t_i \neq s_j + t_k $.
-	\end{itemize}
-	
 \end{frame}
 
 \begin{frame}{Simple Partition Number}
-	\begin{definition}
+	\begin{definition}[Simple Graph]
 		A \textit{simple graph} is a bipartite graph such that each of its
 		connected component is a biclique
 	\end{definition}
 	\pause
-	\begin{definition}
+	\begin{definition}[Simple Partition Number]
 		The \textit{simple partition number} of a bipartite graph $G$, represented
 		by $\sp G$, is the minimum number of simple graphs needed to
 		partition its edges.

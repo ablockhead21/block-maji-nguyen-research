@@ -6,8 +6,8 @@
 \onslide<3->{\setbeamercolor{block title}{bg=gray, fg=white}
 \begin{block}{Notes}
 	\begin{itemize}
-		\item  The preprocessing phase is independent of the functionality or the inputs fed to the functionality by the parties.
-		\item Secret shares $(r_A, r_B)  $ are vulnerable to leakage attacks.
+		\item  The preprocessing phase is independent of the functionality or the inputs fed to the functionality by the parties
+		\item Secret shares $(r_A, r_B)  $ are vulnerable to leakage attacks
 	\end{itemize}
 \end{block}}
 
@@ -56,7 +56,7 @@
 \subsection{Correlation Extractor}
 \begin{frame}{Correlation Extractor (CorrExt)}
 	\begin{itemize}
-		\item Introduced by Ishai, Kushilevitz, Ostrovsky, and Sahai at FOCS 2009 \cite{FOCS:IKOS09} to address leakage attacks. 
+		\item Introduced by Ishai, Kushilevitz, Ostrovsky, and Sahai at FOCS 2009 \cite{FOCS:IKOS09} to address leakage attacks 
 		\item Takes leaky correlations as input and produces secure independent
 		copies of oblivious transfer (OT)
 		\pause
@@ -65,8 +65,8 @@
 			\begin{itemize}
 				\item Is a two-party interactive protocol	
 				\item Takes \underline{$n$-bit secret shares} $ (r_A, r_B) \sim (R_A, R_B) $ as input
-				\item Produces \underline{$ m $ independent OT's}
-				\item Allows \underline{$ t $-bits of leakage} on the secret shares
+				\item Produces \underline{$ m $ independent secure OT's}
+				\item Allows \underline{$ t $-bits of leakage} on the secret shares $ (r_A, R_B) $
 				\item Is secure against semi-honest adversaries with \underline{simulation error $ \epsilon $}
 			\end{itemize}
 		\end{definition}
@@ -78,9 +78,9 @@
 		%	\item Simulation error $ (\epsilon) $
 		%	\item Round complexity of protocol $ (\#) $
 		%\end{itemize}
-		\pause
-		\item A direct analog of privacy amplification and randomness extractor
-		\item But ensure security against insider attacks
+%		\pause
+%		\item A direct analog of privacy amplification and randomness extractor
+%		\item But ensure security against insider attacks
 	\end{itemize}
 \end{frame}
 	
