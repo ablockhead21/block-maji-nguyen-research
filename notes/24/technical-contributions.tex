@@ -51,9 +51,9 @@
 	\begin{block}{Our Combinatorial Problem}
 		Find two ordered sets $ S = (s_1, s_2, \cdots, s_m) $ and $ T = (t_1, t_2, \cdots, t_m) $ \st
 		\begin{itemize}
-			\item $ s_i, t_i $ are non-negative integers
+			\item $ s_i$ and $ t_i $ are non-negative integers
 			\item $ s_i + t_i < n $
-			\item $ s_i + t_i \neq s_j + t_k  $ for every $ i, j, k $ that are not all equal
+			\item $ s_i + t_i \neq s_j + t_k  $ for every $ i, j, k $ that are not all identical
 			\item $ m $ is maximized 
 		\end{itemize} 
 	\end{block}}
@@ -62,12 +62,13 @@
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
 	\begin{block}{Notes}
 		\begin{itemize}
-			\item This problem is a generalization of the 3-free set (sets that avoid any arithmetic progressions of length 3) problem.
+			\onslide<2->{\item This problem is a generalization of the 3-free set problem\only<2>{\footnote{3-free set problem is a problem of constructing dense sets of integers that are free of arithmetic progressions of length 3}} %(sets that avoid any arithmetic progressions of length 3) problem.
 			\begin{itemize}
 				\item Under the constraints $ s_i = t_i $, our combinatorial problem is identical to the 3-free set problem 
-			\end{itemize}
-			\item Using existing explicit construction of the 3-free set, we achieve $ m = n^{1-o(1)} $
-			\item In an ongoing work, we show that $ m = o(n) $
+			\end{itemize}}
+			\only <3>{
+			\item Using existing explicit constructions of the 3-free set, we achieve $ m = n^{1-o(1)} $
+			\item In an ongoing work, for our combinatorial problem, we show that $ m = o(n) $}
 		\end{itemize}
 		
 	\end{block}}
@@ -117,21 +118,25 @@
 		Which techniques can be used to upper-bound the maximum leakage resilience of a correlation?
 	\end{block}
 }
-{\setbeamercolor{block title}{bg=Gray, fg=white}
-	\begin{block}{Answer: Partition Argument}
-		\begin{itemize}
-			\item $ n/2 $ samples of the ROT correlation cannot be resilient to more than $ n/4 $ bits of leakage
-			\item Alice emulates $ n/4 $ independent samples
-			\item Bob emulates $ n/4 $ independent samples
-			\item Reimagine any correlation extractor
-		\end{itemize}		
+{\setbeamercolor{block title}{bg=Turquoise, fg=white}
+	\begin{block}{Answer}
+		Partition argument
+%		\begin{itemize}
+%			\item $ n/2 $ samples of the ROT correlation cannot be resilient to more than $ n/4 $ bits of leakage
+%			\item Alice emulates $ n/4 $ independent samples
+%			\item Bob emulates $ n/4 $ independent samples
+%			\item Reimagine any correlation extractor
+%		\end{itemize}		
 	\end{block}
 }
-
+{\setbeamercolor{block title}{bg=Maroon, fg=white}
+\begin{block}{Concerns}
 \begin{itemize}
 	\item This technique applies only to ``multiple independent samples of small correlations"
-	\item \textcolor{red}{What if secret shares are sampled from big correlations, for example, $ \IP[\bbF^n] $?}
+	\item \textcolor{red}{What if secret shares are sampled from globally correlated correlations, for example, $ \IP[\bbF^n] $?}
 \end{itemize}
+\end{block}
+}
 
 \end{frame}
 
@@ -149,25 +154,41 @@
 	\pause
 	\input{fig-ip2-decomp}
 \end{frame}
+\begin{frame}{Graph Representation of Correlations}
+	\begin{definition}[Graph of a Correlation]
+		A weighted bipartite graph $  G = (L, R, E) $
+		\begin{itemize}
+	  		\item $ L $: the set of all possible private shares $ r_A $ for Alice
+	  		\item $ R $: the set of all possible private shares $ r_B $ for Bob
+			\item Weight of the edge $ (r_A, r_B) $ is  $ p(r_A, r_B) $
+		\end{itemize}
+	\end{definition}
+	\input{fig-correlation}
+\end{frame}
 
 \begin{frame}{Connection between Maximum Leakage and Simple Partition Number}
 	\begin{lemma}[Connecting Max. Resilience to $\sp G $]
-		Suppose $ G = (R_A, R_B) $ is a correlation and there exist $\Lambda$ simple graphs $ G^{(1)}, G^{(2)}, \cdots, G^{(\Lambda)} $ that partition the edges of the graph $ G $. 
-		Then $ G $ is not resilient to $ \log \Lambda $ bits of leakage.
+		\begin{itemize}
+			\item Suppose $ G = (R_A, R_B) $ is a correlation 
+			\item Suppose $ \exists $ $\Lambda$ simple graphs that partition the edges of the graph $ G $
+			\item Then $ G $ is not resilient to $ \log \Lambda $ bits of leakage.
+		\end{itemize}
+		
 	\end{lemma}
 	\pause
 	
+	{\setbeamercolor{block title}{bg=Orchid, fg=white}
 	\begin{block}{Intuition}
-		Small simple partition number implies low maximum leakage resilience
+		An upper bound on the simple partition number of a correlation implies an upper bound on the maximum leakage resilience of the correlation
 	\end{block}
-	\pause
-	\underline{Proof outline.} 
-	\begin{itemize}
-		%\item Consider $ \pi $ resilient to $ \log \Lambda $-bit leakage and securely implements one $\pred{OLE} $.
-		\item Consider the leakage $ \cL: E(G) \rightarrow [\Lambda] $ \st $ \forall e \in E(G), \cL(e) = \ell $ and $ e \in E(G^{(\ell)}) $ 
-		\item Conditioned on the leakage being $ \ell $, the correlaiton $ (R_A, R_B | \ell) \equiv G\p\ell$ is a simple correlation 
-		\item Simple correlations are useless for correlation extractor by \cite{}.
-	\end{itemize}
+	}
+
+%	\begin{itemize}
+%		%\item Consider $ \pi $ resilient to $ \log \Lambda $-bit leakage and securely implements one $\pred{OLE} $.
+%		\item Consider the leakage $ \cL: E(G) \rightarrow [\Lambda] $ \st $ \forall e \in E(G), \cL(e) = \ell $ and $ e \in E(G^{(\ell)}) $ 
+%		\item Conditioned on the leakage being $ \ell $, the correlaiton $ (R_A, R_B | \ell) \equiv G\p\ell$ is a simple correlation 
+%		\item Simple correlations are useless for correlation extractor by \cite{}.
+%	\end{itemize}
 
 \end{frame}
 
@@ -176,8 +197,8 @@
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
 		\begin{block}{Note}
 			\begin{itemize}
-				\item $ s $ is the secret share size
-				\item $ (\log \pred{sp})/s $ is the upper bound on the maximum leakage resilience
+				%\item $ s $ is the secret share size
+				\item $ (\log \pred{sp})/s $ is the upper bound on the maximum fractional leakage resilience
 			\end{itemize}
 		\end{block}
 	}
@@ -186,29 +207,29 @@
 %	\end{lemma}
 \end{frame}
 
-\begin{frame}{Relevant Prior Work on Common Information}
-
-	{\setbeamercolor{block title}{bg=red, fg=white}
-	\begin{block}{Mutual information $ I(R_A, R_B) $}
-		\begin{itemize}
-			\item $ \# $ bits of the secret key that two parties can agree on
-		\end{itemize}
-	\end{block}}
-	\pause
-	{\setbeamercolor{block title}{bg=brown, fg=white}
-	\begin{block}{\gacs-\korner \cite{} common information  $ K(R_A, R_B) $}
-		\begin{itemize}
-			\item The largest entropy of the common random variable that each party can generate based on their respective secret share
-			\item Corresponding to \textit{number of connected components}
-		\end{itemize}
-	\end{block}}
-	\pause
-	{\setbeamercolor{block title}{bg=blue, fg=white}
-	\begin{block}{Wyner's common information \cite{} $ J(R_A, R_B) $}
-		\begin{itemize}
-			\item Min. amount of leakage that kills the possibility of key agreement
-			\item Corresponding to \textit{biclique partition number}
-		\end{itemize}
-	\end{block}}
-\end{frame}
+%\begin{frame}{Relevant Prior Work on Common Information}
+%
+%	{\setbeamercolor{block title}{bg=red, fg=white}
+%	\begin{block}{Mutual information $ I(R_A, R_B) $}
+%		\begin{itemize}
+%			\item $ \# $ bits of the secret key that two parties can agree on
+%		\end{itemize}
+%	\end{block}}
+%	\pause
+%	{\setbeamercolor{block title}{bg=brown, fg=white}
+%	\begin{block}{\gacs-\korner \cite{} common information  $ K(R_A, R_B) $}
+%		\begin{itemize}
+%			\item The largest entropy of the common random variable that each party can generate based on their respective secret share
+%			\item Corresponding to \textit{number of connected components}
+%		\end{itemize}
+%	\end{block}}
+%	\pause
+%	{\setbeamercolor{block title}{bg=blue, fg=white}
+%	\begin{block}{Wyner's common information \cite{} $ J(R_A, R_B) $}
+%		\begin{itemize}
+%			\item Min. amount of leakage that kills the possibility of key agreement
+%			\item Corresponding to \textit{biclique partition number}
+%		\end{itemize}
+%	\end{block}}
+%\end{frame}
 

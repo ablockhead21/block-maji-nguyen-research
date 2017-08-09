@@ -26,41 +26,41 @@ minimum size = 5mm,
 \node [vert, below = of d01] (d10) {}; 
 %\node [vert, below = of d10] (d11) {11};
 
-\draw (c01) -- (d01) node [midway, above] {$ p(r_A, r_B) $};
+\draw [thick] (c01) -- (d01) node [midway, above] {$ p(r_A, r_B) $};
 
 \coordinate (temp) at ($0.5*(c10)+0.5*(d10)$);
-\node[node distance = 2 cm, below of = temp] {\underline{General Graph}}; 
+\node[node distance = 1 cm, below of = temp] {\underline{Graph of General Correlation}}; 
 
 %\pause 
 
 %%% ROT
-\node [node distance = 1cm, right = of r1] (l2) {$ (x_0, x_1) $};
-\node [vert, below = of l2] (a00) {00}; 
-\node [vert, below = of a00] (a01) {01}; 
-\node [vert, below = of a01] (a10) {10}; 
-\node [vert, below = of a10] (a11) {11}; 
-
-\node [right = of l2] (r2) {$(b, x_b)$};
-\node [vert, below = of r2] (b00) {00}; 
-\node [vert, below = of b00] (b01) {01}; 
-\node [vert, below = of b01] (b10) {10}; 
-\node [vert, below = of b10] (b11) {11}; 
-
-\draw (a00) -- (b00) (a00) -- (b10); 
-\draw (a01) -- (b00) (a01) -- (b11); 
-\draw (a10) -- (b01) (a10) -- (b10); 
-\draw (a11) -- (b01) (a11) -- (b11); 
-
-\coordinate (temp) at ($0.5*(a11)+0.5*(b11)$);
-\node[below of = temp] {\underline{Random Oblivious Transfer}}; 
+%\node [node distance = 1cm, right = of r1] (l2) {$ (x_0, x_1) $};
+%\node [vert, below = of l2] (a00) {00}; 
+%\node [vert, below = of a00] (a01) {01}; 
+%\node [vert, below = of a01] (a10) {10}; 
+%\node [vert, below = of a10] (a11) {11}; 
+%
+%\node [right = of l2] (r2) {$(b, x_b)$};
+%\node [vert, below = of r2] (b00) {00}; 
+%\node [vert, below = of b00] (b01) {01}; 
+%\node [vert, below = of b01] (b10) {10}; 
+%\node [vert, below = of b10] (b11) {11}; 
+%
+%\draw (a00) -- (b00) (a00) -- (b10); 
+%\draw (a01) -- (b00) (a01) -- (b11); 
+%\draw (a10) -- (b01) (a10) -- (b10); 
+%\draw (a11) -- (b01) (a11) -- (b11); 
+%
+%\coordinate (temp) at ($0.5*(a11)+0.5*(b11)$);
+%\node[below of = temp] {\underline{Random Oblivious Transfer}}; 
 
 %\pause 
 
 %% IP
 %%% First Correlation 
-\node [node distance = 1.2cm, right = of r2] {$ \pred{IP} $};
+%\node [node distance = 3cm, right = of r1] {$ \pred{IP} $};
 
-\node [vert, node distance = 1cm, right = of b00] (e00) {00}; 
+\node [vert, node distance = 3cm, right = of b00] (e00) {00}; 
 \node [vert, below = of e00] (e01) {01}; 
 \node [vert, below = of e01] (e10) {10}; 
 \node [vert, below = of e10] (e11) {11}; 
@@ -71,16 +71,16 @@ minimum size = 5mm,
 \node [vert, below = of f10] (f11) {11}; 
 
 
-\draw (e00) -- (f00)  (e00) -- (f01)  (e00) -- (f10)  (e00) -- (f11); 
-\draw (e01) -- (f00)  (e01) -- (f10); 
-\draw (e10) -- (f00)  (e10) -- (f01); 
-\draw (e11) -- (f00)  (e11) -- (f11);
+\draw [thick] (e00) -- (f00)  (e00) -- (f01)  (e00) -- (f10)  (e00) -- (f11); 
+\draw [thick] (e01) -- (f00)  (e01) -- (f10); 
+\draw [thick] (e10) -- (f00)  (e10) -- (f01); 
+\draw [thick] (e11) -- (f00)  (e11) -- (f11);
 
 \coordinate (temp) at ($0.5*(e11)+0.5*(f11)$);
-\node[below of = temp] {\underline{Inner Product}}; 
+\node[below of = temp, align=center] {\underline{$ \IP[\GF{2}^2] $}}; 
 
 
 \end{tikzpicture}
-\caption{Some representative examples of a correlation}
+%\caption{Some representative examples of a correlation}
 \end{center}
 \end{figure}
