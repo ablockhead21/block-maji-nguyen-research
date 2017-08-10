@@ -2,22 +2,23 @@
 {\small Goal: Alice and Bob want to produce $m$ {\OLE}s over \GF{2}.}
 \hrule
 \begin{center}
-	
+
+\begin{adjustbox}{max width={\textwidth}}
 \begin{tikzpicture}[every node/.style={fill=white}, >=stealth]
 
 %% Leaky IP
 \node[draw, rectangle, align=center] (IP) {\IP[\bbK] with \\ $t$-bits\\leaked};
 
 %% OLE K
-\node[draw, rectangle, right=.21\linewidth of IP, align=center] (OLEk) {\underline{one}\\\OLE[\bbK]};
+\node[draw, rectangle, right=.27\linewidth of IP, align=center] (OLEk) {\underline{one}\\\OLE[\bbK]};
 
 %% m-OLE
-\node[draw, rectangle, right=.21\linewidth of OLEk, align=center] (mOLE) {$m$ copies of\\ \OLE[\GF{2}]};
+\node[draw, rectangle, right=.27\linewidth of OLEk, align=center] (mOLE) {$m$ copies of\\ \OLE[\GF{2}]};
 
 \begin{pgfonlayer}{background}
 
 %% second arrow
-\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway, fill opacity=0, text opacity=1] {\scriptsize \OLE[]-Extraction};
+\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway, fill opacity=0, text opacity=1] {\footnotesize \OLE[]-Extraction};
 
 \onslide<2>{
 %% first cloud
@@ -25,14 +26,14 @@
 }
 
 %% first arrow
-\draw[thick, ->] (IP) -- (OLEk) node[above, midway, align=center,fill opacity=0, text opacity=1] {\tiny Random-Output\\\tiny Correlation Extractor};
+\draw[thick, ->] (IP) -- (OLEk) node[above, midway, align=center,fill opacity=0, text opacity=1] {\footnotesize Random-Output\\\footnotesize Correlation Extractor};
 
 \onslide<3->{
 %% second cloud
 \node[draw, cloud, cloud ignores aspect, fit=(OLEk.center)(mOLE.center), cloud puffs=17, inner ysep=1.5em, inner xsep=1em] (cloud2) {};
 
 %% second arrow (again)
-\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway,fill opacity=0, text opacity=1] {\scriptsize \OLE[]-Extraction};
+\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway,fill opacity=0, text opacity=1] {\small \OLE[]-Extraction};
 }
 
 
@@ -40,6 +41,7 @@
 
 
 \end{tikzpicture}
+\end{adjustbox}
 
 \end{center}
 \end{figure}
