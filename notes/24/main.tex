@@ -26,6 +26,9 @@
 \let\slideno\beamer@slideinframe
 \makeatother
 
+\let\otp\titlepage
+\renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-1}}
+
 \title[]{Secure Computation based on Leaky Correlations: High Resilience Setting}
 \author[BMN]{Alexander R. Block, Hemanta K. Maji, \textcolor{red}{Hai H. Nguyen}}
 \institute{Purdue University}
@@ -33,12 +36,12 @@
 \date{\today}
 
 \begin{document}
-\begin{frame}
+\begin{frame}[plain]
 \titlepage
 
 \begin{center}
 	\includegraphics[scale=0.02]{alex}\ \
-	\includegraphics[scale=0.04]{maji} \ \ 
+	\includegraphics[scale=0.12]{maji} \ \ 
 	\includegraphics[scale=0.4]{hai}
 \end{center}
 \end{frame}

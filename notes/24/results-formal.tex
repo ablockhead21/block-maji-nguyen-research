@@ -26,15 +26,12 @@
 \begin{frame}{Main Result II}
 	\begin{theorem}[Hardness of Correlation Extraction]
 	\label{thm:hardness} 
-	Let $(\bbF,+,\cdot)$ be an arbitrary field.
+	$ \exists $ a \underline{universal constant} $\eps^*>0$ such that
 	\begin{itemize}
-		\item $ \exists $ a \underline{universal constant} $\eps^*>0$
-	\end{itemize}
-	such that
-	\begin{itemize}
-		\item  for $(R_A,R_B)=\IP [\bbF^k] $, %or $(R_A,R_B)=\ROLE[\GF{2^{n/2}}]$, 
+		\item for any arbitrary field $(\bbF,+,\cdot)$,
+		%\item  for $(R_A,R_B)=$, %or $(R_A,R_B)=\ROLE[\GF{2^{n/2}}]$, 
 		\item any $(n,1,%(n/k)\ceil{(k+1)/2}
-		n/2,\eps)$-CorrExt for $(R_A,R_B)$ has $\eps\geq\eps^*$, where $n=k\log\abs\bbF$ (the length of secret share of each party)  
+		n/2,\eps)$-CorrExt for $ \IP [\bbF^k] $ has $\eps\geq\eps^*$, where $n=k\log\abs\bbF$ (the length of secret share of each party)  
 	\end{itemize}
 \end{theorem}
 
