@@ -51,8 +51,8 @@
 	\begin{block}{Our Combinatorial Problem}
 		Find two ordered sets $ S = (s_1, s_2, \cdots, s_m) $ and $ T = (t_1, t_2, \cdots, t_m) $ \st
 		\begin{itemize}
-			\item $ s_i$ and $ t_i $ are non-negative integers
-			\item $ s_i + t_i < n $
+			\item $ s_i$ and $ t_i $ are non-negative integers for every $ i $
+			\item $ s_i + t_j < n $ for every $ i, j $
 			\item $ s_i + t_i \neq s_j + t_k  $ for every $ i, j, k $ that are not all identical
 			\item $ m $ is maximized 
 		\end{itemize} 
@@ -118,6 +118,9 @@
 		Which techniques can be used to upper-bound the maximum leakage resilience of a correlation?
 	\end{block}
 }
+
+\pause
+
 {\setbeamercolor{block title}{bg=Turquoise, fg=white}
 	\begin{block}{Answer}
 		Partition argument
@@ -129,6 +132,9 @@
 %		\end{itemize}		
 	\end{block}
 }
+
+\pause
+
 {\setbeamercolor{block title}{bg=Maroon, fg=white}
 \begin{block}{Concerns}
 \begin{itemize}
@@ -143,7 +149,7 @@
 \begin{frame}{Simple Partition Number}
 	\begin{definition}[Simple Graph]
 		A \textit{simple graph} is a bipartite graph such that each of its
-		connected component is a biclique
+		connected component is a biclique (complete bipartite graph)
 	\end{definition}
 	\pause
 	\begin{definition}[Simple Partition Number]
