@@ -16,6 +16,7 @@
 			\item provides $ Z = AX +B $ to Bob 
 		\end{itemize}  
 	\end{definition}
+	\pause
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
 	\begin{block}{Notes}
 	\begin{itemize}
@@ -30,10 +31,10 @@
 
 \begin{frame}{CorrExt Construction Overview II}
 	\input{fig-ext-construction-2}
-	\only<5>{Natural generalization of the \cite{C:GIMS15} protocol for \IP[] over \GF{2} to \IP[] large fields.}
-	\only<6-8>{Embed $ m $ copies of $\OLE[\GF{2}] $ into \underline{one} $ \OLE[\bbK] $}
+	\only<5>{Natural generalization of the \cite{C:GIMS15} protocol for \IP[] over \GF{2} to \IP[] over large fields.}
+	\only<6-8>{Embed $ m $ copies of $\OLE[\GF{2}] $ into \underline{one} $ \OLE[\bbK] $, where $ \bbK $ is a large field of characteristic 2}
 	\only<7>{\begin{center}
-			\textcolor{red}{\huge One of Our Technical Contributions}
+			\textcolor{red}{\Large One of Our Technical Contributions}
 	\end{center}}
 	\only<8>{\setbeamercolor{block title}{bg=Gray, fg=white}
 		\begin{block}{Notes}
@@ -122,7 +123,7 @@
 \pause
 
 {\setbeamercolor{block title}{bg=Turquoise, fg=white}
-	\begin{block}{Answer}
+	\begin{block}{Existing Approach}
 		Partition argument
 %		\begin{itemize}
 %			\item $ n/2 $ samples of the ROT correlation cannot be resilient to more than $ n/4 $ bits of leakage
@@ -136,17 +137,17 @@
 \pause
 
 {\setbeamercolor{block title}{bg=Maroon, fg=white}
-\begin{block}{Concerns}
+\begin{block}{Bottleneck}
 \begin{itemize}
-	\item This technique applies only to ``multiple independent samples of small correlations"
-	\item \textcolor{red}{What if secret shares are sampled from globally correlated correlations, for example, $ \IP[\bbF^n] $?}
+	\item Applies only to ``multiple independent samples of small correlations"
+	\item \textcolor{red}{Does not extend to secret shares sampled from globally correlated correlations, for example, $ \IP[\bbF^n] $}
 \end{itemize}
 \end{block}
 }
 
 \end{frame}
 
-\begin{frame}{Simple Partition Number}
+\begin{frame}{Simple Partition Number (Our Technical Contribution)}
 	\begin{definition}[Simple Graph]
 		A \textit{simple graph} is a bipartite graph such that each of its
 		connected component is a biclique (complete bipartite graph)
@@ -183,7 +184,7 @@
 	\end{lemma}
 	\pause
 	
-	{\setbeamercolor{block title}{bg=Orchid, fg=white}
+	{\setbeamercolor{block title}{bg=Black!80, fg=white}
 	\begin{block}{Intuition}
 		An upper bound on the simple partition number of a correlation implies an upper bound on the maximum leakage resilience of the correlation
 	\end{block}
