@@ -7,10 +7,10 @@
 \begin{tikzpicture}[every node/.style={fill=white}, >=stealth]
 
 %% Leaky IP
-\onslide<2->{\node[draw, rectangle, align=center] (IP) {\IP[\bbK] with \\ $t$-bits\\leaked};}
+\onslide<2->{\node[draw, rectangle, align=center] (IP) {\IP[\bbF^{n/\log|\bbF|}] with \\ $t$-bits leaked};}
 
 %% OLE K
-\onslide<3->{\node[draw, rectangle, right=.27\linewidth of IP, align=center] (OLEk) {\underline{one}\\\OLE[\bbK]};}
+\onslide<3->{\node[draw, rectangle, right=.27\linewidth of IP, align=center] (OLEk) {\underline{one}\\\OLE[\bbF]};}
 
 %% m-OLE
 \onslide<4->{\node[draw, rectangle, right=.27\linewidth of OLEk, align=center] (mOLE) {$m$ copies of\\ \OLE[\GF{2}]};}
@@ -18,7 +18,7 @@
 \begin{pgfonlayer}{background}
 
 %% second arrow
-\onslide<4->{\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway, fill opacity=0, text opacity=1] {\footnotesize \OLE[]-Extraction};}
+\onslide<4->{\draw[thick, ->] (OLEk) -- (mOLE) node[above, midway, fill opacity=0, text opacity=1] {\small \OLE[]-Extraction};}
 
 \onslide<5>{
 %% first cloud

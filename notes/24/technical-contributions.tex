@@ -32,15 +32,15 @@
 \begin{frame}{CorrExt Construction Overview II}
 	\input{fig-ext-construction-2}
 	\only<5>{Natural generalization of the \cite{C:GIMS15} protocol for \IP[] over \GF{2} to \IP[] over large fields.}
-	\only<6-8>{Embed $ m $ copies of $\OLE[\GF{2}] $ into \underline{one} $ \OLE[\bbK] $, where $ \bbK $ is a large field of characteristic 2}
+	\only<6-8>{Embed $ m $ copies of $\OLE[\GF{2}] $ into \underline{one} $ \OLE[\bbF] $, where $ \bbF $ is a large field of characteristic 2}
 	\only<7>{\begin{center}
 			\textcolor{red}{\Large One of Our Technical Contributions}
 	\end{center}}
 	\only<8>{\setbeamercolor{block title}{bg=Gray, fg=white}
 		\begin{block}{Notes}
 			\begin{itemize}
-				\item This embedding relies on finding solutions to a combinatorial problem.
 				\item The larger the value of $ m $, the better the production rate.
+				\item This embedding relies on finding solutions to a combinatorial problem.
 			\end{itemize}
 		\end{block}
 	}
@@ -67,7 +67,7 @@
 			\begin{itemize}
 				\item Under the constraints $ s_i = t_i $, our combinatorial problem is identical to the 3-free set problem 
 			\end{itemize}}
-			\only <3>{
+			\only<3>{
 			\item Using existing explicit constructions of the 3-free set, we achieve $ m = n^{1-o(1)} $
 			\item In an ongoing work, for our combinatorial problem, we show that $ m = o(n) $}
 		\end{itemize}
