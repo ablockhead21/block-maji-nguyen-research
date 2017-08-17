@@ -36,6 +36,10 @@
 
 \date{\today}
 
+\newcommand\addvmargin[1]{
+	\node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
+}
+
 \begin{document}
 \begin{frame}[plain]
 \titlepage

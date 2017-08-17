@@ -3,10 +3,10 @@
 \begin{tikzpicture}[every node/.style={minimum width=0.8cm}, > = stealth]
 
 \onslide<1->{
-%\node [alice] (alice) {Alice};	
-%\node [bob, right= 5cm of alice, mirrored] (bob){Bob};
-\node [label=below:Alice](alice) {\includegraphics[height=1cm]{canal_alice_dep.pdf}};
-\node [label = below:Bob, right= 4cm of alice] (bob) {\includegraphics[height=1cm]{canal_bob_dep.pdf}};
+\node [alice] (alice) {Alice};	
+\node [bob, right= 5cm of alice, mirrored] (bob){Bob};
+%\node [label=below:Alice](alice) {\includegraphics[height=1cm]{canal_alice_dep.pdf}};
+%\node [label = below:Bob, right= 4cm of alice] (bob) {\includegraphics[height=1cm]{canal_bob_dep.pdf}};
 \draw [{Triangle[length=5mm, width=26pt]}-{Triangle[length=5mm, width=26pt]}, line width=16pt, draw=green!30!white] (alice)--(bob);
 
 %\node[right=2mm of alice] (p1) {};

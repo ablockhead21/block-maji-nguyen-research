@@ -63,13 +63,14 @@
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
 	\begin{block}{Notes}
 		\begin{itemize}
-			\onslide<2->{\item This problem is a generalization of the 3-free set problem\only<2>{\footnote{3-free set problem is a problem of constructing dense sets of integers that are free of arithmetic progressions of length 3}} %(sets that avoid any arithmetic progressions of length 3) problem.
+			\onslide<2->{\item This problem is a generalization of the \textcolor{red}{well-known 3-free set problem}\only<2>{\footnote{3-free set problem is a problem of constructing dense sets of integers that are free of arithmetic progressions of length 3}} %(sets that avoid any arithmetic progressions of length 3) problem.
 			\begin{itemize}
-				\item Under the constraints $ s_i = t_i $, our combinatorial problem is identical to the 3-free set problem 
+				\item For $ s_i = t_i $, our problem is identical to the 3-free set problem 
 			\end{itemize}}
-			\only<3>{
+			\only<3->{
 			\item Using existing explicit constructions of the 3-free set, we achieve $ m = n^{1-o(1)} $
-			\item In an ongoing work, for our combinatorial problem, we show that $ m = o(n) $}
+			\item Can $m = \Theta(n)$ be achieved?}
+			\only<4>{\textcolor{red}{Ongoing work: we show $m = o(n)$}}
 		\end{itemize}
 		
 	\end{block}}
@@ -202,6 +203,7 @@
 \begin{frame}{Estimating Simple Partition Number}
 	\input{fig-sp}
 	{\setbeamercolor{block title}{bg=Gray, fg=white}
+		\only<2>{\begin{center}\textcolor{red}{\Large Subsumes the partition argument}\end{center}}
 		\begin{block}{Note}
 			\begin{itemize}
 				%\item $ s $ is the secret share size
