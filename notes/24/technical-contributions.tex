@@ -40,16 +40,16 @@
 		\begin{block}{Notes}
 			\begin{itemize}
 				\item The larger the value of $ m $, the better the production rate.
-				\item This embedding relies on finding solutions to a combinatorial problem.
+				\item This embedding relies on finding solutions to \textcolor{red}{the tri-colored sum-free sets problem}.
 			\end{itemize}
 		\end{block}
 	}
 \end{frame}
 
-\begin{frame}{Our Combinatorial Problem}
+\begin{frame}{Tri-colored Sum-free Sets Problem}
 	
 	{\setbeamercolor{block title}{bg=ForestGreen, fg=white}
-	\begin{block}{Our Combinatorial Problem}
+	\begin{block}{Tri-colored Sum-free Sets Problem}
 		Find two ordered sets $ S = (s_1, s_2, \cdots, s_m) $ and $ T = (t_1, t_2, \cdots, t_m) $ \st
 		\begin{itemize}
 			\item $ s_i$ and $ t_i $ are non-negative integers for every $ i $
@@ -65,12 +65,11 @@
 		\begin{itemize}
 			\onslide<2->{\item This problem is a generalization of the \textcolor{red}{well-known 3-free set problem}\only<2>{\footnote{3-free set problem is a problem of constructing dense sets of integers that are free of arithmetic progressions of length 3}} %(sets that avoid any arithmetic progressions of length 3) problem.
 			\begin{itemize}
-				\item For $ s_i = t_i $, our problem is identical to the 3-free set problem 
+				\item For $ s_i = t_i $, this problem is identical to the 3-free set problem 
 			\end{itemize}}
 			\only<3->{
 			\item Using existing explicit constructions of the 3-free set, we achieve $ m = n^{1-o(1)} $
-			\item Can $m = \Theta(n)$ be achieved?}
-			\only<4>{\textcolor{red}{Ongoing work: we show $m = o(n)$}}
+			\item In an ongoing work, we show that $m = \Theta(n)$ is impossible} 
 		\end{itemize}
 		
 	\end{block}}
