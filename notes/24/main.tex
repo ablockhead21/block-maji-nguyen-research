@@ -34,11 +34,7 @@
 \author[BMN]{Alexander R. Block, Hemanta K. Maji, \textcolor{red}{Hai H. Nguyen}}
 \institute{Purdue University}
 
-%\date{\today}
-
-\newcommand\addvmargin[1]{
-	\node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
-}
+\date{}
 
 \begin{document}
 \begin{frame}[plain]
@@ -72,6 +68,9 @@
 
 \input{conclusions-open-probs}
 
-\bibliographystyle{alpha}
-\bibliography{math,crypto}
+\begin{frame}<beamer:0>
+	\bibliographystyle{alpha}
+	\bibliography{math,crypto}
+\end{frame}
+
 \end{document}
