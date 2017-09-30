@@ -1,4 +1,103 @@
 \section{Szemer\'{e}di's Regularity Lemma}
 \begin{frame}{Szemer\'{e}di's Regularity Lemma}
 	
+We'll carefully define all the necessary components needed for Szemer\'{e}di's Regularity Lemma.
+\begin{itemize}
+	\item Let $G = (V,E)$ be a simple, undirected graph on $n$ vertices
+	\item If $X \subseteq V$ and $Y \subseteq V$, we define $e(X,Y)$ as the number of edges between $X$ and $Y$
+\end{itemize}
+\begin{definition}[Edge Density]
+	For disjoint $X,Y \subseteq V$, we define the {\em edge density} as
+	\begin{align*}
+		d(X,Y) = \dfrac{e(X,Y)}{|X|\cdot |Y|}
+	\end{align*}
+\end{definition}
+	
 \end{frame}
+
+\begin{frame}{Szemer\'{e}di's Regularity Lemma}
+Next we have the Regularity Condition
+\begin{definition}[$\eps$-Regular Pairs]
+	Let $\eps > 0$. Given disjoint $X, Y \subseteq V$, the pair $(X,Y)$ is {\em $\epsilon$-regular} if for every $A \subseteq X$ and $B \subseteq Y$ such that
+	\begin{align*}
+		|A| > \epsilon|X| & & \text{and} & & |B| > \epsilon|Y|
+	\end{align*}
+	we have
+	\begin{align*}
+		|d(A,B) - d(X,Y)| < \epsilon
+	\end{align*}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Szemer\'{e}di's Regularity Lemma}
+	
+\begin{theorem}[Regularity Lemma \cite{..,..}]
+\onslide<1->{$\forall \eps > 0$}
+\begin{description}[abc]
+	\item<2->[$\bullet$] $\exists M = M(\eps) \in \bbZ$ such that
+	\begin{description}[abc]
+		\item<3->[$\bullet$]  $\forall$ simple undirected  $G=(V,E)$ on $n$ vertices
+		\begin{description}[abc]
+			\item<4->[$\bullet$]  $\exists$ a partition of $V$ into $k$ classes $V_1, V_2, \dotsc, V_k$ such that
+			\begin{description}[abc]
+				\item<5->[$\bullet$] $k \leq M$
+				\item<6->[$\bullet$] $|V_i| \leq \ceil{\epsilon |V_j|}$ for every $i$
+				\item<7->[$\bullet$] $\abs{ |V_i| - |V_j| } \leq 1$ for all $i,j$ (equipartition)
+				\item<8->[$\bullet$] $(V_i, V_j)$ is $\eps$-regular in $G$ for all except at most $\eps k^2$ pairs $(i,j)$
+			\end{description}
+		\end{description}
+	\end{description}
+\end{description}
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{Szemer\'{e}di's Regularity Lemma}
+The Regularity Lemma is a very powerful tool in Extremal Graph Theory
+ 
+\begin{block}{Intuitive Statement}
+	\ul{Any large and dense enough} graph ``looks like'' a union of a small amount of \ul{random-looking} bipartite graphs.
+\end{block}
+
+\begin{itemize}
+	\item Large enough graphs can be approximated by a small number of uniform bipartite graph
+	\item For this reason, the Regularity Lemma is also referred to as the Uniformity Lemma
+\end{itemize}
+
+\begin{block}{Note}
+	Gowers \cite{..} showed that the bound obtained for $M(\eps)$ is a tower of 2's of height proportional to $\eps^{-5}$.
+	\begin{itemize}
+		\item He showed this is an \ul{inherent feature} of the Regularity Lemma
+	\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Szemer\'{e}di's Regularity Lemma}
+Szemer\'{e}di created this lemma to prove his famous result
+\begin{theorem}[Szemer\'{e}di's Theorem]
+$\forall k \geq 3$ and $\delta > 0$
+\begin{description}[abc]
+	\item[$\bullet$] $\exists n_0 \in \bbZ$ such that
+	\begin{description}[abc]
+		\item[$\bullet$] $\forall N \geq n_0$
+		\begin{description}[abc]
+			\item[$\bullet$] If $A \subseteq \{1,2,\dotsc,N\}$ and $|A| \geq \delta N$
+			\begin{description}[abc]
+				\item[$\bullet$] then $A$ contains an arithmetic progression of length $k$.
+			\end{description}
+		\end{description}
+	\end{description}
+\end{description}
+\end{theorem}
+
+\begin{itemize}
+	\item For $k = 3$, we have exactly Roth's Theorem for 3-Free Sets
+	\begin{itemize}
+		\item We follow the proof of Roth's Theorem using the Regularity Lemma to prove our result
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+

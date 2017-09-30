@@ -1,0 +1,50 @@
+\begin{figure}[htp]
+\begin{center}
+
+\begin{adjustbox}{max width={\textwidth}, max height={.8\textheight}}
+
+\begin{tikzpicture}
+
+\node at (0,0) (X) {$X$};
+
+\node at ($(X)+(0,-1)$) (x1) {$1$};
+\node at ($(x1)+(0,-1)$) (x2) {$2$};
+\node at ($(x2)+(0,-1)$) (xd1) {$\vdots$};
+\node at ($(xd1)+(0,-1)$) (xn) {$n$};
+
+\draw ($(x1)!0.5!(xn)$) ellipse (.5cm and 2cm);
+
+\node at ($(X) + (.4\textwidth,0)$) (Y) {$Y$};
+
+\node at ($(Y)+(0,-1)$) (y1) {$1$};
+\node at ($(y1)+(0,-1)$) (y2) {$2$};
+\node at ($(y2)+(0,-1)$) (yd1) {$\vdots$};
+\node at ($(yd1)+(0,-1)$) (yn) {$n$};
+\node at ($(yn)+(0,-1)$) (yd2) {$\vdots$};
+\node at ($(yd2)+(0,-1)$) (y2n) {$2n$};
+
+\draw ($(y1)!0.5!(y2n)$) ellipse (.6cm and 3cm);
+
+\node at ($(Y)+ (.4\textwidth,0)$) (Z) {$Z$};
+
+\node at ($(Z)+(0,-1)$) (z1) {$1$};
+\node at ($(z1)+(0,-1)$) (z2) {$2$};
+\node at ($(z2)+(0,-1)$) (zd1) {$\vdots$};
+\node at ($(zd1)+(0,-1)$) (zn) {$n$};
+\node at ($(zn)+(0,-1)$) (zd2) {$\vdots$};
+\node at ($(zd2)+(0,-1)$) (z2n) {$2n$};
+\node at ($(z2n)+(0,-1)$) (zd3) {$\vdots$};
+\node at ($(zd3)+(0,-1)$) (z3n) {$3n$};
+
+\draw ($(z1)!0.5!(z3n)$) ellipse (.7cm and 4cm);
+
+\end{tikzpicture}	
+	
+\end{adjustbox}
+
+\only<2>{$E(X,Y) = \big\lbrace (x, x+s_i)\;\colon\; x\in [n], i \in [m], s_i \in S \big\rbrace$}
+\only<3>{$E(Y,Z) = \big\lbrace (x+s_i, x+s_i+t_i)\;\colon\; x\in[n], i\in[m], s_i \in S, t_i \in T \big\rbrace$}
+\only<4>{$E(X,Z) = \big\lbrace (x, x+s_i+t_i)\;\colon\; x\in[n], i\in[m], s_i \in S, t_i \in T \big\rbrace$}
+
+\end{center}
+\end{figure}
