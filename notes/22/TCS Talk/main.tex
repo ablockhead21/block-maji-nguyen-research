@@ -1,0 +1,69 @@
+\documentclass[
+xcolor={svgnames},
+hyperref={colorlinks,citecolor=DeepPink4,linkcolor=DarkRed,urlcolor=DarkBlue},
+%handout
+]{beamer}
+\input{headers}
+\usepackage[T1]{fontenc}
+
+\usetheme{Madrid}
+\usecolortheme{beaver}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{page number in foot}{size=\large}
+\usefonttheme{serif}
+
+\def\majiemail{hmaji@purdue.edu}
+\def\haiemail{nguye245@purdue.edu}
+\def\alexemail{block9@purdue.edu}
+\author{
+  Alexander R. Block%
+\ifcomment
+  \thanks{
+	Department of Computer Science,
+	Purdue University.
+	\href{mailto:\alexemail}{$\mathtt{\alexemail}$}.
+  }\and 
+  Hemanta K. Maji%
+  \thanks{
+    Department of Computer Science,
+    Purdue University.
+    \href{mailto:\majiemail}{$\mathtt{\majiemail}$}.
+  }\and
+  Hai Nguyen%
+  \thanks{
+	Department of Computer Science,
+	Purdue University.
+	\href{mailto:\haiemail}{$\mathtt{\haiemail}$}.
+  } \fi
+}
+
+\title{A Sublinear Upper Bound on Our Combinatorial Problem}
+
+\date{\today}
+
+\begin{document}
+
+\frame{\maketitle}
+
+\frame{\tableofcontents}
+
+\input{intro}
+
+\input{regularity-lemma}
+
+\input{our-proof}
+
+\input{tri-colored}
+
+\bibliographystyle{alpha}
+\bibliography{math}
+
+\addcontentsline{toc}{section}{References}
+
+%\newpage
+%\appendix
+
+\end{document}

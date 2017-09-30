@@ -1,0 +1,86 @@
+\section{Our Combinatorial Problem}
+\begin{frame}{Our Combinatorial Problem}
+
+In our CRYPTO 2017 Paper ~\cite{BMN17}, we introduced the following problem
+
+{\setbeamercolor{block title}{bg=ForestGreen, fg=white}
+\begin{block}{Our Problem}
+	Find two ordered sets $S = \left(s_1,\dotsc, s_m\right)$ and $T = \left(t_1,\dotsc, t_m\right)$ such that
+	\begin{itemize}
+		\item $s_i$ and $t_i$ are non-negative integers for every $i$
+		\item $s_i + t_j < n$ for every $i,j$
+		\item $s_i + t_j \neq s_k + t_k$ for every $i,j,k$ that are not all identical
+		\item $m$ is maximized
+	\end{itemize}
+\end{block}}
+
+We are interested in upper bounding $m$.
+
+\begin{block}{Question}
+	For large enough $n$, is $m = O(n)$ possible?
+\end{block}
+\begin{itemize}
+	\item $m = O(n)$ is the best bound we can hope for
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Our Results}
+	We prove the following result
+	\begin{theorem}[Our Problem is Sublinear]
+		For our combinatorial problem, $m = O\left(\dfrac{n}{\log^*n}\right)$.
+	\end{theorem}
+
+\begin{itemize}
+	\item Here $\log^*$ is defined with respect to base 2 as
+	\begin{align*}
+		\log^* n = \begin{cases}
+			0 & n\leq 1\\
+			1 + \log^*(\log n) & n > 1
+		\end{cases}
+	\end{align*}
+	\item To gain insight on how to prove this result, we examine similar problems and the techniques used to prove them
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Connection: 3-Free Sets}
+Our combinatorial problem is a generalization of the well-know \textit{3-free set problem}
+
+\begin{block}{3-Free Set Problem}
+	Find $A \subseteq \{1,\dotsc,n\}$ such that
+	\begin{itemize}
+		\item $A$ does not contain any 3-term arithmetic progression
+		\item $|A|$ is maximized
+	\end{itemize}
+\end{block}
+\begin{itemize}
+	\item For our problem, setting $S = T$ yields the 3-Free Set Problem
+	\item Upper bounds for the 3-Free Set problem originated with Roth \cite{}
+	\begin{itemize}
+		\item Roth's Theorem shows that $|A| = o(n)$. In particular, Roth uses Fourier analysis to show $|A| = O(...)$
+		\item Best known upper bound: $O(...)$ and was shown by \cite{..}, using heavy machinery from additive combinatorics
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{A Sublinear Proof}
+
+\begin{itemize}
+	\item Our goal is to show sublinearity of Our Combinatorial Problem
+	\begin{itemize}
+		\item The machinery in many of the proofs for 3-Free Sets do not easily generalize to analysis over 2 sets 
+	\end{itemize}
+\end{itemize}
+
+\begin{block}{Question}
+	Is there a proof of sublinearity of 3-Free Sets that can generalize to our problem?
+\end{block}
+
+\begin{block}{Answer}
+	Yes! We can use a Graph Theoretic reduction and use Szemer\'{e}di's Regularity Lemma
+\end{block}
+
+\end{frame}
+
+
