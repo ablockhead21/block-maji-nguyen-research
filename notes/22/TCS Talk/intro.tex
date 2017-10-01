@@ -36,14 +36,14 @@ In our CRYPTO 2017 Paper \cite{C:BloMajNgu17}, we introduced the following probl
 	\end{theorem}}
 
 \begin{itemize}
-	\item Here $\log^*$ is defined with respect to base 2 as
+	\item<2-> Here $\log^*$ is defined with respect to base 2 as
 	\begin{align*}
 		\log^* n = \begin{cases}
 			0 & n\leq 1\\
 			1 + \log^*(\log n) & n > 1
 		\end{cases}
 	\end{align*}
-	\item To gain insight on how to prove this result, we examine similar problems and the techniques used to prove them
+	\item<3-> To gain insight on how to prove this result, we examine similar problems and the techniques used to prove them
 \end{itemize}
 
 \end{frame}
@@ -59,8 +59,8 @@ Our combinatorial problem is a generalization of the well-know \textit{3-free se
 	\end{itemize}
 \end{block}
 \begin{itemize}
-	\item For our problem, setting $S = T$ yields the 3-Free Set Problem
-	\item Upper bounds for the 3-Free Set problem originated with Roth \cite{Roth53}
+	\item<2-> For our problem, setting $S = T$ yields the 3-Free Set Problem
+	\item<3-> Upper bounds for the 3-Free Set problem originated with Roth \cite{Roth53}
 	\begin{itemize}
 		\item Roth's Theorem shows that $|A| = o(n)$. In particular, Roth uses Fourier analysis to show $|A| = O(n / (\log \log n))$
 		\item Best known upper bound: $O(n(\log \log n)^4 / \log n)$ and was shown by Bloom \cite{Bloom16}, using heavy machinery from additive combinatorics

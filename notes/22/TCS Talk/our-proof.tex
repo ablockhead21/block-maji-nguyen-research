@@ -9,8 +9,8 @@ As a corollary of the Regularity Lemma, we have the following powerful result
 }
 
 \begin{itemize}
-	\item By $H$-free, we mean that $G$ does not contain any copies of $H$ as a subgraph
-	\item The Graph Removal Lemma can be restated more formally as follows
+	\item<2-> By $H$-free, we mean that $G$ does not contain any copies of $H$ as a subgraph
+	\item<3-> The Graph Removal Lemma can be restated more formally as follows
 \end{itemize}
 
 \end{frame}
@@ -25,7 +25,7 @@ As a corollary of the Regularity Lemma, we have the following powerful result
 		\begin{description}[abc]
 			\item<3->[$\bullet$] $\forall G = (V,E)$ on $n$ vertices
 			\begin{description}[abc]
-				\item<4->[$\bullet$] if $G$ contains at most $\delta n^h$ copies of $H$ $\epsilon n^2$-far from being $H$-free
+				\item<4->[$\bullet$] if $G$ contains at most $\delta n^h$ copies of $H$
 				\begin{description}[abc]
 					\item<5->[$\bullet$] then $G$ can be made $H$-free by removing $\epsilon n^2$ edges
 				\end{description}
@@ -97,7 +97,7 @@ $E(G)$ is the union of
 	\item<2-> Since $x \in [n]$ and $|S|=|T|=m$, we have
 	\begin{align*}
 	|E(X,Y)| = &|E(Y,Z)| = |E(X,Z)| = nm\\
-	\implies &|E(G)| \leq 3mn
+	\implies &|E(G)| = 3mn
 	\end{align*}
 	
 	\item<3-> Next, we claim the following about the constructed $E(G)$:
@@ -177,14 +177,13 @@ $E(G)$ is the union of
 
 \begin{frame}{Proof}
 \begin{itemize}
-	\item<1-> Since $G$ is a union of edge-disjoint triangles, we have $E(G) = 3mn$
-	\item<2-> Further, the number of triangles in $G$ is exactly $nm$
-	\item<3-> Since $S, T \subseteq [n]$, we have that
+	\item<1-> Since $G$ is a union of edge-disjoint triangles, we have the number of triangles in $G$ is exactly $nm$
+	\item<2-> Since $S, T \subseteq [n]$, we have that
 	\begin{align*}
 	nm \leq n^2 = o(n^3)
 	\end{align*}
-	\item<4-> For sufficiently large $n$ we know $n^2 < \delta n^3$, where $\delta$ is defined in the Graph Removal Lemma
-	\item<5-> So $G$ has at most $\delta n^3$ triangles
+	\item<3-> For sufficiently large $n$ we know $n^2 < \delta n^3$, where $\delta$ is defined in the Graph Removal Lemma
+	\item<4-> So $G$ has at most $\delta n^3$ triangles
 \end{itemize}
 \end{frame}
 
