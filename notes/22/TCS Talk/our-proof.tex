@@ -2,9 +2,11 @@
 \begin{frame}{Graph Removal Lemma}
 
 As a corollary of the Regularity Lemma, we have the following powerful result
-\begin{lemma}[Graph Removal Lemma \cite{..}]
+{\setbeamercolor{block title}{bg=DarkViolet!50, fg=white}
+\begin{lemma}[Graph Removal Lemma \cite{Fox11}]
 	Let $G$ be an $n$-vertex graph and let $H$ be a fixed $h$-vertex graph. If $G$ contains $o(n^h)$ copies of $H$, then $G$ can be made $H$-free by removing $o(n^2)$ edges.
 \end{lemma}
+}
 
 \begin{itemize}
 	\item By $H$-free, we mean that $G$ does not contain any copies of $H$ as a subgraph
@@ -14,24 +16,27 @@ As a corollary of the Regularity Lemma, we have the following powerful result
 \end{frame}
 
 \begin{frame}{Graph Removal Lemma}
-\begin{lemma}[Graph Removal Lemma \cite{..}]
+
+{\setbeamercolor{block title}{bg=DarkViolet!50, fg=white}
+\begin{lemma}[Graph Removal Lemma \cite{Fox11, Lee15}]
 	$\forall \epsilon > 0$ and graphs $H$ on $h$ vertices
 	\begin{description}[abc]
-		\item[$\bullet$] $\exists \delta > 0$ such that
+		\item<2->[$\bullet$] $\exists \delta > 0$ such that
 		\begin{description}[abc]
-			\item[$\bullet$] $\forall G = (V,E)$ on $n$ vertices
+			\item<3->[$\bullet$] $\forall G = (V,E)$ on $n$ vertices
 			\begin{description}[abc]
-				\item[$\bullet$] if $G$ contains at most $\delta n^h$ copies of $H$ $\epsilon n^2$-far from being $H$-free
+				\item<4->[$\bullet$] if $G$ contains at most $\delta n^h$ copies of $H$ $\epsilon n^2$-far from being $H$-free
 				\begin{description}[abc]
-					\item[$\bullet$] then $G$ can be made $H$-free by removing $\epsilon n^2$ edges
+					\item<5->[$\bullet$] then $G$ can be made $H$-free by removing $\epsilon n^2$ edges
 				\end{description}
 			\end{description}
 		\end{description}
 	\end{description}
 \end{lemma}
+}
 
 \begin{itemize}
-	\item We use this version of the lemma to obtain our bound on $m$
+	\item<6-> We use this version of the lemma to obtain our bound on $m$
 \end{itemize}
 
 \end{frame}
@@ -59,13 +64,15 @@ Suppose we have two sets $S$ and $T$ which satisfy Our Combinatorial Problem:
 		\end{itemize}
 \end{block}}
 
+\onslide<2->{
 \begin{block}{Notation}
 	For integer $n$, let $[n]\defeq \{1,2,\dotsc, n\}$
 \end{block}
+}
 
 \begin{itemize}
-	\item Construct a 3-partite graph $G$ with vertex sets $X = [n]$, $Y = [2n]$, and $Z = [3n]$
-	\item Construct the edge sets as the union of the following sets
+	\item<3-> Construct a 3-partite graph $G$ with vertex sets $X = [n]$, $Y = [2n]$, and $Z = [3n]$
+	\item<4-> Construct the edge sets as the union of the following sets
 \end{itemize}
 
 \end{frame}
@@ -87,48 +94,49 @@ $E(G)$ is the union of
 \end{itemize}
 \end{block}
 \begin{itemize}
-	\item Since $x \in [n]$ and $|S|=|T|=m$, we have
+	\item<2-> Since $x \in [n]$ and $|S|=|T|=m$, we have
 	\begin{align*}
 	|E(X,Y)| = &|E(Y,Z)| = |E(X,Z)| = nm\\
 	\implies &|E(G)| \leq 3mn
 	\end{align*}
 	
-	\item Next, we claim the following about the constructed $E(G)$:
+	\item<3-> Next, we claim the following about the constructed $E(G)$:
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}{Proof}
 
+{\setbeamercolor{block title}{bg=Teal,fg=white}
 \begin{claim}
 	$E(G)$ is a union of edge-disjoint triangles.
-\end{claim}
+\end{claim}}
 
 \begin{block}{Note}
 	A triangle is defined by the tuple of vertices $(x,y,z)$ such that $\big\lbrace (x,y), (y,z), (x,z) \big\rbrace$ are edges in $G$
 \end{block}
 
 \begin{itemize}
-	\item For all $x\in [n]$, $i\in [m]$, $s_i \in S$, and $t_i \in T$, the tuple $(x,\; x+s_i,\; x+s_i+t_i)$ is a triangle in $G$.
+	\item<2-> For all $x\in [n]$, $i\in [m]$, $s_i \in S$, and $t_i \in T$, the tuple $(x,\; x+s_i,\; x+s_i+t_i)$ is a triangle in $G$.
 	
-	\item This follows by construction of $E(G)$ since
+	\item<3-> This follows by construction of $E(G)$ since
 	\begin{itemize}
 		\item $E(X,Y) = \big\lbrace (x, x+s_i)\;\colon\; x\in [n], i \in [m], s_i \in S \big\rbrace$
 		\item $E(Y,Z) = \big\lbrace (x+s_i, x+s_i+t_i)\;\colon\; x\in[n], i\in[m], s_i \in S, t_i \in T \big\rbrace$
 		\item $E(X,Z) = \big\lbrace (x, x+s_i+t_i)\;\colon\; x\in[n], i\in[m], s_i \in S, t_i \in T \big\rbrace$
 	\end{itemize}
-	\item We proceed by contradiction
+	\item<4-> We proceed by contradiction
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Proof}
 \begin{itemize}
 	\item Suppose there exist two non-edge-disjoint triangles $(x,\; x+s_i,\; x+s_i+t_i)$ and $(y,\; y+s_j,\; y+s_j + t_j)$ in $G$
-	\item Let $(x,x+s_i) = (y,y+s_j)$ be the shared edge
+	\item<2-> Let $(x,x+s_i) = (y,y+s_j)$ be the shared edge
 	\begin{itemize}
-		\item This implies $x = y$ and $s_i = s_j$
-		\item Since $S$ is a solution to our problem, $s_i = s_j$ if and only if $i = j$.
-		\item Since $i = j$, we have that $t_i = t_j$ also; so the two triangles are the same (contradiction)
+		\item<3-> This implies $x = y$ and $s_i = s_j$
+		\item<4-> Since $S$ is a solution to our problem, $s_i = s_j$ if and only if $i = j$.
+		\item<5-> Since $i = j$, we have that $t_i = t_j$ also; so the two triangles are the same (contradiction)
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -136,20 +144,20 @@ $E(G)$ is the union of
 \begin{frame}{Proof}
 \begin{itemize}
 	\item Suppose there exist two non-edge-disjoint triangles $(x,\; x+s_i,\; x+s_i+t_i)$ and $(y,\; y+s_j,\; y+s_j + t_j)$ in $G$
-	\item Let $(x+s_i,\; x+s_i+t_i) = (y + s_j,\; y+s_j+t_j)$ be the shared edge
+	\item<2-> Let $(x+s_i,\; x+s_i+t_i) = (y + s_j,\; y+s_j+t_j)$ be the shared edge
 	\begin{itemize}
-		\item This implies that
+		\item<3-> This implies that
 		\begin{align}
 			x+s_i &= y + s_j\\
 			x+s_i+t_i &= y + s_j + t_j
 		\end{align}
-		\item Substituting equation (1) into (2) we have
+		\item<4-> Substituting equation (1) into (2) we have
 		\begin{align*}
 			y+s_j+t_i = y + s_j + t_j
 		\end{align*}
-		\item This implies $t_i = t_j$, which again implies $i = j$
-		\item So $s_i = s_j$ and by equation (1), $x = y$
-		\item Again, these triangles are the same (contradiction)
+		\item<5-> This implies $t_i = t_j$, which again implies $i = j$
+		\item<6-> So $s_i = s_j$ and by equation (1), $x = y$
+		\item<6-> Again, these triangles are the same (contradiction)
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -157,52 +165,52 @@ $E(G)$ is the union of
 \begin{frame}{Proof}
 \begin{itemize}
 	\item Suppose there exist two non-edge-disjoint triangles $(x,\; x+s_i,\; x+s_i+t_i)$ and $(y,\; y+s_j,\; y+s_j + t_j)$ in $G$
-	\item Let $(x,\; x+s_i+t_i) = (y,\; y + s_j + t_j)$ be the shared edge
+	\item<2-> Let $(x,\; x+s_i+t_i) = (y,\; y + s_j + t_j)$ be the shared edge
 	\begin{itemize}
-		\item This implies $x = y$ and $s_i + t_i = s_j + t_j$
-		\item If $i \neq j$, then $(s_i, t_i)$ and $(s_j, t_j)$ are a witness to $S$ and $T$ not satisfying our problem (contradicts our assumption about $S$ and $T$)
-		\item It must be the case $i = j$, and again these two triangles are the same (contradiction)
+		\item<3-> This implies $x = y$ and $s_i + t_i = s_j + t_j$
+		\item<4-> If $i \neq j$, then $(s_i, t_i)$ and $(s_j, t_j)$ are a witness to $S$ and $T$ not satisfying our problem (contradicts our assumption about $S$ and $T$)
+		\item<5-> It must be the case $i = j$, and again these two triangles are the same (contradiction)
 	\end{itemize}
-	\item Therefore, all triangles are edge-disjoint!
+	\item<6-> Therefore, all triangles are edge-disjoint!
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Proof}
 \begin{itemize}
-	\item Since $G$ is a union of edge-disjoint triangles, we have $E(G) = 3mn$
-	\item Further, the number of triangles in $G$ is exactly $nm$
-	\item Since $S, T \subseteq [n]$, we have that
+	\item<1-> Since $G$ is a union of edge-disjoint triangles, we have $E(G) = 3mn$
+	\item<2-> Further, the number of triangles in $G$ is exactly $nm$
+	\item<3-> Since $S, T \subseteq [n]$, we have that
 	\begin{align*}
 	nm \leq n^2 = o(n^3)
 	\end{align*}
-	\item For sufficiently large $n$ we know $n^2 < \delta n^3$, where $\delta$ is defined in the Graph Removal Lemma
-	\item So $G$ has at most $\delta n^3$ triangles
+	\item<4-> For sufficiently large $n$ we know $n^2 < \delta n^3$, where $\delta$ is defined in the Graph Removal Lemma
+	\item<5-> So $G$ has at most $\delta n^3$ triangles
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Proof}
 \begin{itemize}
 	\item Thus by the Graph Removal Lemma, we can remove $\epsilon n^2$ edges to make $G$ triangle-free
-	\item Since there are $nm$ edge-disjoint triangles in $G$, it is sufficient to remove one edge from each triangle to destroy all triangles in $G$
+	\item<2-> Since there are $nm$ edge-disjoint triangles in $G$, it is sufficient to remove one edge from each triangle to destroy all triangles in $G$
 	\begin{itemize}
-		\item So we can remove $nm$ edges to destroy all triangles
-		\item This implies $nm = \epsilon n^2$, and thus $m = \epsilon n$
+		\item<3-> So we can remove $nm$ edges to destroy all triangles
+		\item<4-> This implies $nm = \epsilon n^2$, and thus $m = \epsilon n$
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Proof}
 \begin{itemize}
-	\item As noted in \cite{..}, $\delta^{-1}$ is a tower of twos of height proportional to $\epsilon^{-5}$
+	\item As noted in \cite{Fox11,Lee15}, $\delta^{-1}$ is a tower of twos of height proportional to $\epsilon^{-5}$
 	\begin{itemize}
-		\item Choose $n$ large enough such that $\log^* n = \epsilon^{-5}$
-		\item This implies 
+		\item<2-> Choose $n$ large enough such that $\log^* n = \epsilon^{-5}$
+		\item<3-> This implies 
 		\begin{align*}
 			\delta^{-1} &= 2^{2^{\iddots^2}} \bigg\rbrace O(\epsilon^{-5})\\
 			&= 2^{2^{\iddots^2}} \bigg\rbrace O(\log^* n)\\
 			&= O(n)
 		\end{align*}
-		\item This implies that
+		\item<4-> This implies that
 		\begin{align*}
 			\epsilon \delta^{-1} = O(\epsilon n) = O\left(\frac{n}{\log^* n}\right) < n
 		\end{align*}
@@ -213,10 +221,11 @@ $E(G)$ is the union of
 \begin{frame}{Proof}
 \begin{itemize}
 	\item In particular, $\epsilon n = O\left(\frac{n}{\log^* n}\right)$
-	\item This implies
+	\item<2-> This implies
 	\begin{align*}
 		m = \epsilon n = O\left(\frac{n}{\log^* n}\right)
 	\end{align*}
+	\qed
 \end{itemize}
 \end{frame}
 

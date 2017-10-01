@@ -1,11 +1,11 @@
 \section{Our Combinatorial Problem}
 \begin{frame}{Our Combinatorial Problem}
 
-In our CRYPTO 2017 Paper ~\cite{BMN17}, we introduced the following problem
+In our CRYPTO 2017 Paper \cite{C:BloMajNgu17}, we introduced the following problem
 
 {\setbeamercolor{block title}{bg=ForestGreen, fg=white}
 \begin{block}{Our Problem}
-	Find two ordered sets $S = \left\lbrace s_1,\dotsc, s_m\right)$ and $T = \left(t_1,\dotsc, t_m\right\rbrace$ such that
+	Find two ordered sets $S = \left\lbrace s_1,\dotsc, s_m\right\rbrace$ and $T = \left\lbrace t_1,\dotsc, t_m\right\rbrace$ such that
 	\begin{itemize}
 		\item $s_i$ and $t_i$ are non-negative integers for every $i$
 		\item $s_i + t_j < n$ for every $i,j$
@@ -14,22 +14,26 @@ In our CRYPTO 2017 Paper ~\cite{BMN17}, we introduced the following problem
 	\end{itemize}
 \end{block}}
 
-We are interested in upper bounding $m$.
+\onslide<2->{We are interested in upper bounding $m$.}
 
+\onslide<3->{
+{\setbeamercolor{block title}{bg=Red, fg=white}
 \begin{block}{Question}
 	For large enough $n$, is $m = O(n)$ possible?
-\end{block}
+\end{block}}
+}
 \begin{itemize}
-	\item $m = O(n)$ is the best bound we can hope for
+	\item<4-> $m = O(n)$ is the best bound we can hope for
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}{Our Results}
 	We prove the following result
+	{\setbeamercolor{block title}{bg=Coral, fg=white}
 	\begin{theorem}[Our Problem is Sublinear]
 		For our combinatorial problem, $m = O\left(\dfrac{n}{\log^*n}\right)$.
-	\end{theorem}
+	\end{theorem}}
 
 \begin{itemize}
 	\item Here $\log^*$ is defined with respect to base 2 as
@@ -56,10 +60,10 @@ Our combinatorial problem is a generalization of the well-know \textit{3-free se
 \end{block}
 \begin{itemize}
 	\item For our problem, setting $S = T$ yields the 3-Free Set Problem
-	\item Upper bounds for the 3-Free Set problem originated with Roth \cite{..-}
+	\item Upper bounds for the 3-Free Set problem originated with Roth \cite{Roth53}
 	\begin{itemize}
-		\item Roth's Theorem shows that $|A| = o(n)$. In particular, Roth uses Fourier analysis to show $|A| = O(...)$
-		\item Best known upper bound: $O(...)$ and was shown by Bloom \cite{..}, using heavy machinery from additive combinatorics
+		\item Roth's Theorem shows that $|A| = o(n)$. In particular, Roth uses Fourier analysis to show $|A| = O(n / (\log \log n))$
+		\item Best known upper bound: $O(n(\log \log n)^4 / \log n)$ and was shown by Bloom \cite{Bloom16}, using heavy machinery from additive combinatorics
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -73,13 +77,18 @@ Our combinatorial problem is a generalization of the well-know \textit{3-free se
 	\end{itemize}
 \end{itemize}
 
+
+\onslide<2->{\setbeamercolor{block title}{bg=Red, fg=white}
 \begin{block}{Question}
 	Is there a proof of sublinearity of 3-Free Sets that can generalize to our problem?
 \end{block}
+}
 
+\onslide<3->{\setbeamercolor{block title}{bg=Green, fg=white}
 \begin{block}{Answer}
 	Yes! We can use a Graph Theoretic reduction and use Szemer\'{e}di's Regularity Lemma
 \end{block}
+}
 
 \end{frame}
 

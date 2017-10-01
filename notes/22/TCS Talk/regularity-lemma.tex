@@ -3,20 +3,22 @@
 	
 We'll carefully define all the necessary components needed for Szemer\'{e}di's Regularity Lemma.
 \begin{itemize}
-	\item Let $G = (V,E)$ be a simple, undirected graph on $n$ vertices
-	\item If $X \subseteq V$ and $Y \subseteq V$, we define $e(X,Y)$ as the number of edges between $X$ and $Y$
+	\item<2-> Let $G = (V,E)$ be a simple, undirected graph on $n$ vertices
+	\item<3-> If $X \subseteq V$ and $Y \subseteq V$, we define $e(X,Y)$ as the number of edges between $X$ and $Y$
 \end{itemize}
+\onslide<4->{\setbeamercolor{block title}{bg=CornflowerBlue, fg=white}
 \begin{definition}[Edge Density]
 	For disjoint $X,Y \subseteq V$, we define the {\em edge density} as
 	\begin{align*}
 		d(X,Y) = \dfrac{e(X,Y)}{|X|\cdot |Y|}
 	\end{align*}
-\end{definition}
+\end{definition}}
 	
 \end{frame}
 
 \begin{frame}{Szemer\'{e}di's Regularity Lemma}
 Next we have the Regularity Condition
+{\setbeamercolor{block title}{bg=CornflowerBlue, fg=white}
 \begin{definition}[$\eps$-Regular Pairs]
 	Let $\eps > 0$. Given disjoint $X, Y \subseteq V$, the pair $(X,Y)$ is {\em $\epsilon$-regular} if for every $A \subseteq X$ and $B \subseteq Y$ such that
 	\begin{align*}
@@ -26,12 +28,13 @@ Next we have the Regularity Condition
 	\begin{align*}
 		|d(A,B) - d(X,Y)| < \epsilon
 	\end{align*}
-\end{definition}
+\end{definition}}
 \end{frame}
 
 \begin{frame}{Szemer\'{e}di's Regularity Lemma}
-	
-\begin{theorem}[Regularity Lemma \cite{..,..}]
+
+{\setbeamercolor{block title}{bg=Coral, fg=white}
+\begin{theorem}[Regularity Lemma \cite{Szemeredi75,KSSS02}]
 \onslide<1->{$\forall \eps > 0$}
 \begin{description}[abc]
 	\item<2->[$\bullet$] $\exists M = M(\eps) \in \bbZ$ such that
@@ -48,7 +51,7 @@ Next we have the Regularity Condition
 		\end{description}
 	\end{description}
 \end{description}
-\end{theorem}
+\end{theorem}}
 
 \end{frame}
 
@@ -60,44 +63,46 @@ The Regularity Lemma is a very powerful tool in Extremal Graph Theory
 \end{block}
 
 \begin{itemize}
-	\item Large enough graphs can be approximated by a small number of uniform bipartite graph
-	\item For this reason, the Regularity Lemma is also referred to as the Uniformity Lemma
+	\item<2-> Large enough graphs can be approximated by a small number of uniform bipartite graph
+	\item<3-> For this reason, the Regularity Lemma is also referred to as the Uniformity Lemma
 \end{itemize}
 
+\onslide<4->{
 \begin{block}{Note}
-	Gowers \cite{..} showed that the bound obtained for $M(\eps)$ is a tower of 2's of height proportional to $\eps^{-5}$.
+	Gowers \cite{Gowers1997} showed that the bound obtained for $M(\eps)$ is a tower of 2's of height proportional to $\eps^{-5}$.
 	\begin{itemize}
 		\item He showed this is an \ul{inherent feature} of the Regularity Lemma
 	\end{itemize}
-\end{block}
+\end{block}}
 
 \end{frame}
 
 \begin{frame}{Szemer\'{e}di's Regularity Lemma}
 Szemer\'{e}di created this lemma to prove his famous result
-\begin{theorem}[Szemer\'{e}di's Theorem]
+
+{\setbeamercolor{block title}{bg=Coral, fg=white}
+\begin{theorem}[Szemer\'{e}di's Theorem \cite{Szemeredi75-2}]
 $\forall k \geq 3$ and $\delta > 0$
 \begin{description}[abc]
-	\item[$\bullet$] $\exists n_0 \in \bbZ$ such that
+	\item<2->[$\bullet$] $\exists n_0 \in \bbZ$ such that
 	\begin{description}[abc]
-		\item[$\bullet$] $\forall N \geq n_0$
+		\item<3->[$\bullet$] $\forall N \geq n_0$
 		\begin{description}[abc]
-			\item[$\bullet$] If $A \subseteq \{1,2,\dotsc,N\}$ and $|A| \geq \delta N$
+			\item<4->[$\bullet$] If $A \subseteq \{1,2,\dotsc,N\}$ and $|A| \geq \delta N$
 			\begin{description}[abc]
-				\item[$\bullet$] then $A$ contains an arithmetic progression of length $k$.
+				\item<5->[$\bullet$] then $A$ contains an arithmetic progression of length $k$
 			\end{description}
 		\end{description}
 	\end{description}
 \end{description}
-\end{theorem}
+\end{theorem}}
 
 \begin{itemize}
-	\item For $k = 3$, we have exactly Roth's Theorem for 3-Free Sets
+	\item<6-> For $k = 3$, we have exactly Roth's Theorem for 3-Free Sets
 	\begin{itemize}
 		\item We follow the proof of Roth's Theorem using the Regularity Lemma to prove our result
 	\end{itemize}
 \end{itemize}
-
 \end{frame}
 
 

@@ -3,8 +3,9 @@
 
 \begin{adjustbox}{max width={\textwidth}, max height={.8\textheight}}
 
-\begin{tikzpicture}
+\begin{tikzpicture}[enode/.style={inner sep=0pt}]
 
+\onslide<1-2,4->{
 \node at (0,0) (X) {$X$};
 
 \node at ($(X)+(0,-1)$) (x1) {$1$};
@@ -12,8 +13,13 @@
 \node at ($(x2)+(0,-1)$) (xd1) {$\vdots$};
 \node at ($(xd1)+(0,-1)$) (xn) {$n$};
 
-\draw ($(x1)!0.5!(xn)$) ellipse (.5cm and 2cm);
+\node[draw, ellipse, minimum height = 4cm, minimum width = 1cm] at ($(x1)!0.5!(xn)$) (e1) {};
 
+}
+
+%\draw ($(x1)!0.5!(xn)$) ellipse (.5cm and 2cm);
+
+\onslide<1-3>{
 \node at ($(X) + (.4\textwidth,0)$) (Y) {$Y$};
 
 \node at ($(Y)+(0,-1)$) (y1) {$1$};
@@ -23,8 +29,11 @@
 \node at ($(yn)+(0,-1)$) (yd2) {$\vdots$};
 \node at ($(yd2)+(0,-1)$) (y2n) {$2n$};
 
-\draw ($(y1)!0.5!(y2n)$) ellipse (.6cm and 3cm);
+\node[draw, ellipse, minimum height = 6cm, minimum width = 1.2cm] at ($(y1)!0.5!(y2n)$) (e2) {};
 
+}
+%\draw ($(y1)!0.5!(y2n)$) ellipse (.6cm and 3cm);
+\onslide<1,3->{
 \node at ($(Y)+ (.4\textwidth,0)$) (Z) {$Z$};
 
 \node at ($(Z)+(0,-1)$) (z1) {$1$};
@@ -36,7 +45,41 @@
 \node at ($(z2n)+(0,-1)$) (zd3) {$\vdots$};
 \node at ($(zd3)+(0,-1)$) (z3n) {$3n$};
 
-\draw ($(z1)!0.5!(z3n)$) ellipse (.7cm and 4cm);
+\node[draw, ellipse, minimum height = 8cm, minimum width = 1.4cm] at ($(z1)!0.5!(z3n)$) (e3) {};
+
+}
+
+%\draw ($(z1)!0.5!(z3n)$) ellipse (.7cm and 4cm);
+
+\onslide<2>{
+	\foreach \x in {0,2,...,10}{
+		\pgfmathsetmacro{\xtmp}{80-\x*15}
+		\foreach \y in {0,2,...,10}{
+			\pgfmathsetmacro{\ytmp}{100+\y*16}
+			\draw (e1.\xtmp) -- (e2.\ytmp);
+		}
+	}
+}
+
+\onslide<3>{
+	\foreach \y in {0,2,...,10}{
+		\pgfmathsetmacro{\ytmp}{80-\y*15}
+		\foreach \z in {0,2,...,10}{
+			\pgfmathsetmacro{\ztmp}{100+\z*16}
+			\draw (e2.\ytmp) -- (e3.\ztmp);
+		}
+	}
+}
+
+\onslide<4>{
+	\foreach \x in {0,2,...,10}{
+		\pgfmathsetmacro{\xtmp}{80-\x*15}
+		\foreach \z in {0,2,...,10}{
+			\pgfmathsetmacro{\ztmp}{100+\z*16}
+			\draw (e1.\xtmp) -- (e3.\ztmp);
+		}
+	}
+}
 
 \end{tikzpicture}	
 	
