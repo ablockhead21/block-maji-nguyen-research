@@ -20,11 +20,30 @@ Next we have the seemingly stronger version of LPN, namely Decisional LPN.
 
 \noindent Here is a summary for LPN. 
 \begin{enumerate}
-	\item Decisional and search problems are polynomially equivalent \cite{??}. 
-	\item The search LPN problem can be stated as the NP-complete problem of decoding random linear code \cite{??}.
-	\item The best knwon algorithms to recover an $ \ell $ bit secret need $ 2^{\Theta(\ell / \log \ell)} $ time and sample. If given only polynomially many $ q = \pred{poly}(\ell) $ samples, the running time of best known algorithms goes up to $ 2^{\Theta(\ell/ \log \log \ell)} $, and given only linearly many samples $ q = \Theta(\ell) $, it is $ 2^{\Theta(\ell)} $. Unlike most others, no fast quantum algorithms for LPN \cite{??}. 
-	\item The secret $ s $ is usually assumed to be uniformly random. This is the hardest distribution. Suprisingly, the uniform distribution is not the unique hardest distribution. The LPN problem where $ \vec{s} \getsr \pred{Ber}^n_\tau $ is as hard as for uniform $ \vec{s} \getsr  \bbZ^n_2 $. 
-	\textcolor{red}{Nothing is known about the hardness of LPN for general distributions of high min-entropy.} However, subspace LPN problem is equivalent to (as hard as) the LPN problem. 
+	\item Decisional and search problems are polynomially equivalent \cite{C:BFKL93,JC:KatShiSmi10}.
+	The following lemma gives the result formally.
+	
+	\begin{importedlemma}[{\cite[Lemma 1]{JC:KatShiSmi10}}]
+		If decisional $\LPN_{\tau, \ell}$ is not $(q,t,\eps)$ secure, then search $\LPN_{\tau,\ell}$ is not $O(q',t',\eps')$ secure, where
+		\begin{align*}
+			q' = O(q\cdot \log \ell/\eps^2) & & t' = O(t\cdot \ell \cdot \log \ell/\eps^2) & & \eps' = \eps/4.
+		\end{align*}
+	\end{importedlemma}
+	
+	\item The search LPN problem can be stated as the NP-complete problem of decoding random linear code \cite{BerlMcElTilb78}.
+	\item The best known algorithms to recover an $ \ell $ bit secret need $ 2^{\Theta(\ell / \log \ell)} $ time and samples \cite{STOC:BluKalWas00,Levieil06}. 
+	If given only polynomially many $ q = \pred{poly}(\ell) $ samples, the running time of best known algorithms becomes to $ 2^{\Theta(\ell/ \log \log \ell)} $ \cite{Lyubashevsky05}.
+	Further, when given only linearly many samples $ q = \Theta(\ell) $, the best known algorithms have running time $ 2^{\Theta(\ell)} $ \cite{AC:MayMeuTho11,Jacques89}. 
+	Unlike most others, no quantum algorithms for LPN are known which are significantly faster than the classical ones. 
+	
+	\item The secret $ s $ is usually assumed to be uniformly random. 
+	This is one of the hardest distributions.  
+	The LPN problem where $ \vec{s} \getsr \pred{Ber}^n_\tau $ is as hard as for uniform $ \vec{s} \getsr  \bbZ^n_2 $ \cite{C:ACPS09}. 
+	\textcolor{red}{Nothing is known about the hardness of LPN for \textit{general} distributions of high min-entropy.} 
+	However, subspace LPN problem is equivalent to (as hard as) the LPN problem. 
+	In this case, the secret $s \in \bbZ^\ell_2$ is uniformly sampled from $V \subseteq \bbZ^\ell_2$ such that $\dim(V) = \ell' \leq \ell$ (\ie, any $s \getsr V$ has min-entropy $\ell'$).
+	This can be shown to be exactly as hard as the standard LPN problem with an $\ell'$-bit uniform e
+	
 	\item Sampling of the random matrix $ A  \getsr \bbZ^{n\times \ell}_2 $ is the most expensive part in generating LPN. Using Toeplitz matrix requires only $ n + \ell $ random bits (as opposed $ n \cdot \ell $) \cite{??}. \textcolor{red}{Can we use  Wozencraft's technique to save randomness?} One major drawback of this is that it requires $ n = 2 \ell $.
 	\item  Exact LPN: a minor variation of LPN where $ \vec{e} $ has weight exactly $ n \tau $. \textcolor{red}{It is open whether decisional XLPN is equivalent to LNP or not.} 
 \end{enumerate} 
