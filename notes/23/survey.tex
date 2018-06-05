@@ -1,7 +1,7 @@
 \section{Survey}
 Here, we have a survey of results and open problems concerning LPN.
 
-\begin{definition}[(Search) Learning Parity with Noise~\cite{??}]
+\begin{definition}[(Search) Learning Parity with Noise~\cite{Piet12}]
 	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(n, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
 	\begin{align*}
 		\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{As}\xor\vec{e}\right)=\vec{s}\right] \leq \epsilon,
@@ -9,7 +9,7 @@ Here, we have a survey of results and open problems concerning LPN.
 	where $\vec{s} \getsr \bbZ^\ell_2$, $\vec{A} \getsr \bbZ^{n\times \ell}_2$, and $\vec{e} \drawn \pred{Ber}^n_\tau$.
 \end{definition}
 Next we have the seemingly stronger version of LPN, namely Decisional LPN.
-\begin{definition}[(Decisional) Learning Parity with Noise~\cite{??}]
+\begin{definition}[(Decisional) Learning Parity with Noise~\cite{Piet12}]
 	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(n, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
 	\begin{align*}
 	\abs{\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{As}\xor\vec{e}\right)\right] -
@@ -40,21 +40,80 @@ Next we have the seemingly stronger version of LPN, namely Decisional LPN.
 	This is one of the hardest distributions.  
 	The LPN problem where $ \vec{s} \getsr \pred{Ber}^n_\tau $ is as hard as for uniform $ \vec{s} \getsr  \bbZ^n_2 $ \cite{C:ACPS09}. 
 	\textcolor{red}{Nothing is known about the hardness of LPN for \textit{general} distributions of high min-entropy.} 
-	However, subspace LPN problem is equivalent to (as hard as) the LPN problem. 
+	However, subspace LPN problem \cite{Piet12} is equivalent to (as hard as) the LPN problem. 
 	In this case, the secret $s \in \bbZ^\ell_2$ is uniformly sampled from $V \subseteq \bbZ^\ell_2$ such that $\dim(V) = \ell' \leq \ell$ (\ie, any $s \getsr V$ has min-entropy $\ell'$).
-	This can be shown to be exactly as hard as the standard LPN problem with an $\ell'$-bit uniform e
+	This can be shown to be exactly as hard as the standard LPN problem with an $\ell'$-bit uniform secret.
 	
-	\item Sampling of the random matrix $ A  \getsr \bbZ^{n\times \ell}_2 $ is the most expensive part in generating LPN. Using Toeplitz matrix requires only $ n + \ell $ random bits (as opposed $ n \cdot \ell $) \cite{??}. \textcolor{red}{Can we use  Wozencraft's technique to save randomness?} One major drawback of this is that it requires $ n = 2 \ell $.
-	\item  Exact LPN: a minor variation of LPN where $ \vec{e} $ has weight exactly $ n \tau $. \textcolor{red}{It is open whether decisional XLPN is equivalent to LNP or not.} 
+	\item Sampling of the random matrix $ A  \getsr \bbZ^{n\times \ell}_2 $ is the most expensive part in generating LPN. 
+	Using Toeplitz matrix requires only $ n + \ell $ random bits (as opposed $ n \cdot \ell $) \cite{EC:GilRobSeu08}. 
+	\textcolor{red}{Can we use  Wozencraft's technique to save randomness?} 
+	One major drawback of this is that it requires $ n = 2 \ell $.
+	\textcolor{red}{What if $A$ is drawn from a high min-entropy source? (Beyond linear subspace, which can be proven to be hard still.)}
+	
+	\item  Exact LPN: a minor variation of LPN where $ \vec{e} $ has weight exactly $ n \tau $. 
+	Hardness of \textit{search} XLPN follows directly from standard LPN.
+	For search XLPN, it is important that the adversary only gets a single sample.
+	If given polynomial many samples, the search to decision reduction can be shown, but then the it is not known if the ``many samples'' search XLPN is equivalent to standard LPN.
+	\textcolor{red}{It is open whether decisional XLPN is equivalent to LPN or not.}
+	
+	\item \cite{JC:KatShiSmi10} have suggested a version of LPN where Hamming weight is restricted to be at most $\lceil q\tau \rfloor$ as a way to have more efficient LPN based cryptosystem instantiations.
+	
 \end{enumerate} 
 
-\noindent Constructions of crypto primitives from LPN. 
+\noindent Constructions, results, and open problems from LPN. 
 \begin{enumerate}
-	\item LPN -> OWF
-	\item LPN -> PRG
-	\item LPN -> secret-key encryption \cite{??}
-	\item LPN -> PKE \cite{??} (CRYPTO 2016). \textcolor{red}{More efficient PKE form constant-noise LPN?}
+	\item LPN -> OWFs
+	\paragraph{Construction.} Fix $A\getsr \bbZ_2^{n\times \ell}$.
+	For a function $f$ on input $x$ such that $x$ is sufficiently long, use $x$ to sample $\bs \drawn U_r$ and $\be \drawn \pred{Ber}_\tau^n$.
+	If $\pred{wt}(e) \geq n\cdot \frac{1/2+\tau}{2}$, output $\bot$ (by Chernoff this happens with exponentially small probability).
+	Else, output $(A, A\cdot\bs\oplus\be)$.
+	Any algorithm which finds a preimage must find the unique $\bs$, which would contradict the LPN hardness assumption.
+	So $f$ is one-way.
+	\begin{itemize}
+		\item This implies standard corollaries of OWFs, like PRGs, PRFs, or PRPs.
+		\textcolor{red}{It is open if the construction of these primitives in this manner (LPN -> OWF -> PRP, for example) can compete with dedicated constructions in efficiency.}
+	\end{itemize}
+
+	\item LPN -> PRGs
+	\paragraph{Construction.} By the equivalence of search and decisional LPN, by definition a sample from the decisional LPN problem is already pseudorandom.
+	Therefore it is an efficient and simple PRG \cite{C:BFKL93}.
+	Use an input $\br$ to sample $A, \bs, \be$ and output $(A,A\cdot\bs\oplus \be)$.
+	\cite{C:ACPS09} make the observation that $A$ can be fixed as a public parameter, so it need not be sampled or included in the output.
+	This reduces the overall randomness complexity.
+	
+	For any $\tau < 1/2$, $\ell \in \bbZ$, and sufficiently large $n$, we can indeed construct this PRG using seed $\br$ where $\mathrm{len}(\br) = r < n$.
+	We need $\ell$ bits to sample $\bs \drawn U_\ell$.
+	Further, each bit of $\be \drawn \pred{Ber}_\tau^n$ only has $h_2(\tau)$ bits of entropy.
+	Efficient sampling using roughly this many bits is possible \cite{C:ACPS09}.
+	So $(\bs, \be)$ has $\ell + nh_2(\tau)$ bits of entropy.
+	For sufficiently large $n$, we indeed have $r = \ell + nh_2(\tau) < n$.
+	This gives a PRG with stretch $(1 - h_2(\tau))n-\ell$, which is linear in the length $\ell + nh_2(\tau)$ of the seed.
+	
+	\cite{C:ACPS09} also suggest a variant using several (say $k$) $\ell$-bit keys arranged as a matrix $S \getsr \bbZ^{\ell \times k}_2$.
+	For a right choice of $n = \poly(\ell)$, fast matrix multiplication \cite{Coppersmith82} to compute $A\cdot S \oplus E$, where $E \drawn \pred{Ber}_\tau^{n\times k}$, which gives a PRG which can be evaluated in time $\widetilde{O}(nk)$.
+	This is asymptotic and it is not clear if this useful in practice, as $n$ and $k$ must be on the order of $\ell^6$, so the seed has size on the order $\ell^{12}$.
+	
+	\item LPN -> secret-key encryption \cite{ICALP:GilRobSeu08}.
+	\paragraph{Construction.} The encryption scheme using LPN given by \cite{ICALP:GilRobSeu08} is as follows.
+	For a message $\bm$ with secret key $\bs \drawn U_\ell$, we encrypt $\bm$ as $(A, A\cdot\bs \oplus \be \oplus G\cdot \bm)$.
+	Here, $G \in \bbZ_2^{n\times \ell}$ is the generator matrix of a linear code such that the code $C$ generated by $G$ can correct $\tau'\cdot n$ errors, for some $\tau' > \tau$.
+	Decryption of ciphertext $(A, \by)$ is done by computing $y \oplus A\cdot\bs = G\cdot \bm \oplus \be$.
+	Since $G\cdot \bm \oplus \be$ is a noisy codeword with $\tau \cdot n$ errors (with high probability), we can perform error recovery and recover $G\cdot \bm$ (assuming $\pred{wt}(e) \leq \tau'\cdot n$.
+	The scheme is secure under chosen message attacks, which follows from the decisional LPN assumption.
+	
+	Further, since subspace LPN and LPN are equivalent, the scheme is secure against {\em related key attacks}, where the adversary also is given encryptions under they key $\phi(s)$, where $\phi$ is any adaptively chosen affine function such that the linear part has sufficiently high rank $\ell' \leq \ell$ such that LPN is hard for $\ell'$.
+	\cite{C:ACPS09} show a minor variant of the scheme is secure under a large class of key-dependent message attacks.
+	
+	\item LPN -> Secret-Key Identification and Message Authentication.
+	
+	\item LPN -> Public-Key Identification, String Commitments, and Zero-Knowledge.
+	
+	\item LPN -> PKE \cite{C:YuZha16,HanLiu17}.
+	
 	\item LPN -> PRF \cite{??} (EUROPCRYPT 2016). \textcolor{red}{Constant depth construction?}
 	\item \textcolor{red}{LPN -> CRHF}
 	\item \textcolor{red}{LPN -> FHE}
+	
+	\item \textcolor{red}{Does LPN for a given $\tau$ imply LPN is hard for any $\tau' < \tau$?
+	Is there a threshold such that LPN is hard for $\tau$ but easy for any $\tau' < \tau$?}
 \end{enumerate}
