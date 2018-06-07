@@ -59,7 +59,7 @@ Next we have the seemingly stronger version of LPN, namely Decisional LPN.
 	\item \cite{JC:KatShiSmi10} have suggested a version of LPN where Hamming weight is restricted to be at most $\lceil q\tau \rfloor$ as a way to have more efficient LPN based cryptosystem instantiations.
 	\textcolor{red}{Any follow-up/results from this?}
 	
-	\item \textbf{Ring-LPN.} 
+	\item \textbf{Ring-LPN \cite{HKLPP12}.} 
 	
 \end{enumerate} 
 
@@ -126,6 +126,7 @@ Next we have the seemingly stronger version of LPN, namely Decisional LPN.
 	
 	The result also gives a variant of the LPN problem called \textit{LPN on squared-log entropy}.
 	That is, the secret $\bs$ need not be uniform, but have some squared-logarithmic entropy (\ie, $\minentropy[\bs] \geq \Theta(\log^2 n)$), and the matrix $A$ is sampled from a random subspace of sublinear dimension.
+	This answers one part of the LPN problem from min-entropy secrets; others remain for general min-entropy (\ie $\minentropy[\bs]\geq k$ for some $k$).
 	
 	\paragraph{Result of \cite{HanLiu17}.}
 	This result gives the first KDM-secure public key encryption scheme for affine functions from constant noise LPN, for $\ell$ predefined users.
