@@ -1,25 +1,59 @@
 \section{Survey}
 Here, we have a survey of results and open problems concerning LPN.
 
-\begin{definition}[(Search) Learning Parity with Noise~\cite{Piet12}]
-	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(n, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
+\begin{definition}[(Search) Learning Parity with Noise~\cite{Piet12}]\label{def:slpn}
+	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(k, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
 	\begin{align*}
-		\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{As}\xor\vec{e}\right)=\vec{s}\right] \leq \epsilon,
+		\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \bs\bA\xor\vec{e}\right)=\vec{s}\right] \leq \epsilon,
 	\end{align*}
-	where $\vec{s} \getsr \bbZ^\ell_2$, $\vec{A} \getsr \bbZ^{n\times \ell}_2$, and $\vec{e} \drawn \pred{Ber}^n_\tau$.
+	where $\vec{s} \getsr \bbF^k_2$, $\vec{A} \getsr \bbF^{k\times n}_2$, and $\vec{e} \drawn \pred{Ber}^n_\tau$.
 \end{definition}
 Next we have the seemingly stronger version of LPN, namely Decisional LPN.
-\begin{definition}[(Decisional) Learning Parity with Noise~\cite{Piet12}]
-	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(n, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
+\begin{definition}[(Decisional) Learning Parity with Noise~\cite{Piet12}]\label{def:dlpn}
+	For $\tau \in (0,1/2)$, $\ell \in \bbN$, the search $\pred{LPN}_{\tau, \ell}$ problem is $(k, t, \epsilon)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
 	\begin{align*}
-	\abs{\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{As}\xor\vec{e}\right) = 1\right] -
+	\abs{\underset{\vec{s}, \vec{A}, \vec{e}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{sA}\xor\vec{e}\right) = 1\right] -
 	\underset{\vec{r}, \vec{A}}{\pr}\left[\pred{D}\left(\vec{A}, \vec{r} \right)=1\right] } \leq \epsilon,
 	\end{align*}
-	where $\vec{s} \getsr \bbZ^\ell_2$, $\vec{A} \getsr \bbZ^{n\times \ell}_2$, $\vec{e} \drawn \pred{Ber}^n_\tau$, and $\vec{r}\getsr\bbZ^n_2$.
+	where $\vec{s} \getsr \bbF^k_2$, $\vec{A} \getsr \bbF^{k\times n}_2$, $\vec{e} \drawn \pred{Ber}^n_\tau$, and $\vec{r}\getsr\bbF^n_2$.
 \end{definition}
 
+Hardness of LPN is a direct consequence of assuming hardness of decoding a (noisy) random linear code.
+Formally, following the definition of \cite{applebaum2008fast}, the intractability of decoding a random linear code is defined as follows (note we change notation to be consistent with the LPN definition).
 
+For code length parameter $n = n(k)$, and noise parameter $0 < \tau < \frac{1}{2}$, consider the following decoding game.
+\begin{boxedalgo}
+	$\mathrm{DECODE}(n(k),\tau)$:
+	\begin{enumerate}
+		\item Pick $\bA \getsr \bbF_2^{k\times n}$
+		\item Pick $\bs \getsr \bbF_2^k$
+		\item Encode $\bs$ with $\bA$ as $\by = \bs\bA$
+		\item Create $\hat{\by}$ by flipping each bit of $\by$ independently with probability $\tau$.
+		\item Output $\hat{\by}$.
+	\end{enumerate}
+\end{boxedalgo}
+The game $\mathrm{DECODE}(n,\tau)$ is intractable if every PPT adversary wins with no more than probability negligible in $k$.
+The hardness of decoding assumptions states that for every constant $0 < \tau < \frac{1}{2}$ and polynomial $n(\cdot)$, the game $\mathrm{DECODE}(n(k),\tau)$ is intractable, where $k$ is the length of the secret.
 
+The hardness of decoding assumption is therefore equivalent to the Search LPN assumption (\defref{slpn}), where $n = n(k)$ for some polynomial $n(\cdot)$, and $\eps = \negl(n)$, and the generator matrix $\bA$ is also given as output (or, is public).
+Therefore, algorithms for decoding random linear codes give rise to algorithms for breaking LPN.
+We state some notable algorithms for the decoding random linear code problem.
+
+\bgroup
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+\begin{tabular}{|c|c|c|>{\centering}p{0.45\textwidth}|}
+	\hline
+	Result & Run-Time & Sample Complexity ($n$) & Algorithm Description\tabularnewline
+	\hline
+	\cite{STOC:BluKalWas00} & $2^{O(k/\log k)}$ & $2^{O(k/\log k)}$ & Gives a $\poly(k)$-time algorithm for decoding linear $n\times k$ codes with random noise, in the case that $n = c\log k \loglog k$ for some $c > 0$. Assume noise-rate $\tau$ is {\em constant}.  \tabularnewline
+	\hline
+	
+\end{tabular}
+\end{center}
+\egroup
+
+\subsection{Old Survey}
 \noindent Here is a summary for LPN. 
 \begin{enumerate}
 	\item Decisional and search problems are polynomially equivalent \cite{C:BFKL93,JC:KatShiSmi10}.
