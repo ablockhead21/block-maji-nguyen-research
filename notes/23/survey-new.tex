@@ -1,0 +1,90 @@
+\section{Learning Parity with Noise.}
+We discuss results related to the Learning Parity with Noise problem.
+Formally, there are two ways to define hardness of the \LPN problem: the so called {\em search} and {\em decision} \LPN problems.
+
+\begin{definition}[Learning Parity with Noise Problem]
+	For $0 < \tau < \frac{1}{2}$ and $n \in \bbN$, the $\LPN_{\tau, k}$ problem samples secret $\bs \getsr \bbF_2^k$, matrix $\bA \getsr \bbF_2^{k \times n}$, and $\be \getsr \pred{Ber}_\tau^{n}$ and outputs $(\bA, \bs\bA\oplus \be)$.
+	
+	The {\em Search} $\LPN$ assumption states that $\LPN_{\tau, k}$ is $(n, t, \eps)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
+	\begin{align*}
+		\underset{\bs,\bA,\be}{\Pr}\left[\pred{D}(\bA,\bs^\top\bA\oplus\be)=\bs\right] \leq \eps.
+	\end{align*}
+	
+	The {\em Decisional} $\LPN$ assumption states that $\LPN_{\tau, k}$ is $(n, t, \eps)$-hard if for every distinguisher $\pred{D}$ running in time $t$,
+	\begin{align*}
+		\abs{\underset{\bs,\bA,\be}{\Pr}\left[\pred{D}(\bA,\bs^\top\bA\oplus\be)=1\right] - \underset{\br, \bA}{\Pr}\left[\pred{D}(\bA,\br)=1\right] }\leq \eps,
+	\end{align*}
+	where $\br \getsr \bbF_2^n$.
+\end{definition}
+The first hardness assumption states that given an \LPN sample, it is computationally difficult to output the original secret $\bs$.
+The second hardness assumption simply states that \LPN samples are pseduo-random.
+
+The \LPN problem can also be formulated as the problem of decoding (noisy) random linear codes \cite{applebaum2008fast}.
+\begin{definition}[Decoding Random Linear Code Problem {\cite{applebaum2008fast}}]
+	Let $n = n(k)$be the code length parameter and $0 < \tau < \frac{1}{2}$ be a noise parameter.
+	Consider the following ``decoding game''.
+	\begin{boxedalgo}
+		$\decode(n,\tau)$:
+		\vspace*{-8pt}
+		\begin{enumerate}
+			\itemsep-2pt
+			\item Pick $\bA \getsr \bbF_2^{k\times n}$
+			\item Pick $\bs \getsr \bbF_2^{k}$
+			\item Encode $\by = \bs^\top\bA$
+			\item Output $\hat{\by}$, where $\hat{\by}$ is obtained by independently flipping each bit of $\by$ with probability $\tau$.
+		\end{enumerate}
+	Given $\hat{\by}$, an adversary \cA wins the game if it outputs $\bs$.
+	\end{boxedalgo}
+
+	The {\em Hardness of Decoding Random Linear Code} assumption states that for every constant $0 < \tau < \frac{1}{2}$ and polynomial $n(\cdot)$, any PPT adversary $\cA$ wins $\decode(n,\tau)$ with probability no more than $\eps = \negl(k)$. 
+\end{definition}
+The following results give support for the plausibility of these hardness assumptions.
+Algorithms for both the \LPN and decoding random linear code problems are given.
+For all algorithms, we assume $k$-bit secrets, noise parameter $\tau$, and output length $n$.
+
+
+\paragraph{The BKW Algorithm.} Blum \etal \cite{STOC:BluKalWas00} give an algorithm for constant $\tau$ that solves the \LPN problem in time and sample complexity $2^{O(k/\log k)}$.
+The basic idea of the algorithm is as follows (restated from the description provided in \cite[Section 2]{Levieil06}).
+
+The algorithm gets a large \LPN sample $(\bA, \by = \bs^\top\bA \oplus \be)$ such that $\bA \in \bbF_2^{k\times n}$ with $n = 2^{O(k/\log k)}$.
+Next the algorithm carefully picks $2^a = O(k/\log k)$ columns of $\bA$ and computes their sum such that the sum results in some basis vector $e_j$.
+Let $\cI = {i_1, \dotsc, i_{2^a}}$ be the indices of the columns chosen.
+The algorithm then computes
+\begin{align*}
+	\bigoplus_{i \in \cI} \by_i &= \ip{\bs}{\bigoplus_{i \in \cI} \bA_i}\oplus \bigoplus_{i \in \cI}\be_i=\ip{\bs}{e_j} \oplus \bigoplus_{i \in \cI}\be_i =\bs_j \oplus \bigoplus_{i \in \cI}\be_i.
+\end{align*} 
+Note here $\bA_i$ is the $i$-th column of the matrix $\bA$, and $\be_i$ is the $i$-th bit of the noise vector $\be$.
+Note also that the sum $\bigoplus_{i \in \cI}\be_i$ has less bias than the individual bits of $\be_i$ (cf. \cite[Lemma 4]{STOC:BluKalWas00}).
+However, since $|\cI|$ is small, the bias is not too small.
+Thus taking enough independent combinations of columns of $\bA$ which sum to $e_j$ and taking majority, with high probability we can compute the correct value of $\bs_j$.
+
+The algorithm does the above process recursively by first splitting the columns into $a$ blocks of size $b = \ceil{\frac{k}{a}}$ bits each.
+Recursively, starting with the last block and continuing until the second, use the $b$ bits of the current block to partition the columns into equivalence classes.
+For each class, the algorithm chooses a vector at random, computes the vector sum of this vector with all others in the class, then removes the chosen vector from the class.
+Then at the end of this step, all bits in the current block are zero.
+After repeating this process recursively, if there are enough equations left, we can take majority vote which gives information about $\bs_j$ with high probability, and repeat for different $j$ to recover $\bs$.
+
+%Using a large number of vectors in $\bbF_2^k$ (\ie, $n$ is large), carefully pick a few vectors and compute the vector sum such that the sum results in some basis vector $e_j$.
+%For parameter $a$, the algorithm finds $2^a = O(k/\log k)$ vectors $\ba_{i_1},\dotsc, \ba_{i_{2^a}}$ such that
+%\begin{align*}
+%	\ba_{i_1} \xor\cdots\xor \ba_{i_{2^a}} = e_j.
+%\end{align*}
+%Note that these samples are erroneous, so there is a blow-up in the noise (cf. \cite[Lemma 4]{STOC:BluKalWas00}).
+%However, since the number of samples is small, the blow-up is not too much.
+%Therefore with enough independent combinations which equal $e_j$, taking majority allows us to recover $\bs_j$.
+%
+%Assuming $b = \ceil{\frac{k}{a}}$ and $k = ab$, the algorithm splits the $k$ bits of each sample $\ba_i$ into $a$ blocks of $b$ bits.
+%Next according to the last $b$ bits, compute $2^b$ equivalence classes and classify each $\ba_i$ according to these classes.
+%For each class, the algorithm chooses a random vector, performs the XOR with all other vectors of the same class, then removes the randomly chosen vector from the class.
+%Therefore the last $b$ bits of every class are zero.
+%
+%The procedure is called recursively from the last block until the second block.
+%After, there are enough equations such that $e_j$ is recovered and by majority gives the value $\bs_j$ with high probability.
+%Applying for each $j$ gives the result.
+
+\paragraph{Improved BKW Algorithm.} Levieil and Fouque \cite{Levieil06} give an significant improvement to the query complexity of the BKW Algorithm at the cost of a slight loss in running time.
+In particular, they show that using $\poly(k)$ queries (\ie, $n = \poly(k)$), their variation of the BKW algorithm runs in time $2^{O(k/\log\log k)}$.
+
+The algorithm modifies the BKW algorithm by dealing with equations over $b$ bits instead of one bit, thus wasting less time and queries than the BKW algorithm.
+In particular, they use the Walsh-Hadamard transform to find the best possibility over $b$ bits.
+
