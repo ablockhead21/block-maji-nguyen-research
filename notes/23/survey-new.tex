@@ -38,12 +38,15 @@ The \LPN problem can also be formulated as the problem of decoding (noisy) rando
 
 	The {\em Hardness of Decoding Random Linear Code} assumption states that for every constant $0 < \tau < \frac{1}{2}$ and polynomial $n(\cdot)$, any PPT adversary $\cA$ wins $\decode(n,\tau)$ with probability no more than $\eps = \negl(k)$. 
 \end{definition}
+
+\subsection{Evidence of Hardness}
+
 The following results give support for the plausibility of these hardness assumptions.
 Algorithms for both the \LPN and decoding random linear code problems are given.
 For all algorithms, we assume $k$-bit secrets, noise parameter $\tau$, and output length $n$.
 
 
-\paragraph{The BKW Algorithm.} Blum \etal \cite{STOC:BluKalWas00} give an algorithm for constant $\tau$ that solves the \LPN problem in time and sample complexity $2^{O(k/\log k)}$.
+\paragraph{The BKW Algorithm.} Blum \etal \cite{STOC:BluKalWas00} give an algorithm for noise rate $\tau < \frac{1}{2} - 2^{-k^\delta}$, for any constant $\delta < 1$, which solves the \LPN problem in time and sample complexity $2^{O(k/\log k)}$.
 The basic idea of the algorithm is as follows (restated from the description provided in \cite[Section 2]{Levieil06}).
 
 The algorithm gets a large \LPN sample $(\bA, \by = \bs^\top\bA \oplus \be)$ such that $\bA \in \bbF_2^{k\times n}$ with $n = 2^{O(k/\log k)}$.
@@ -82,9 +85,117 @@ After repeating this process recursively, if there are enough equations left, we
 %After, there are enough equations such that $e_j$ is recovered and by majority gives the value $\bs_j$ with high probability.
 %Applying for each $j$ gives the result.
 
-\paragraph{Improved BKW Algorithm.} Levieil and Fouque \cite{Levieil06} give an significant improvement to the query complexity of the BKW Algorithm at the cost of a slight loss in running time.
-In particular, they show that using $\poly(k)$ queries (\ie, $n = \poly(k)$), their variation of the BKW algorithm runs in time $2^{O(k/\log\log k)}$.
+\paragraph{Modified BKW Algorithm.} \cite{Lyubashevsky05} gives an significant improvement to the query complexity of the BKW Algorithm at the cost of a slight loss in running time and error tolerance.
+In particular, they show that using $k^{1+\eps}$ samples (\ie, $n = k^{1+\eps}$), their variation of the BKW algorithm runs in time $2^{O(k/\log\log k)}$, given the noise rate $\tau < \frac{1}{2} - 2^{-(\log k)^\delta}$, for any constant $\delta < 1$, and any $\eps > 0$.
+This algorithm also gives a sub-exponential algorithm for decoding $k\times k^{1+\eps}$ random binary linear codes with noise, and an extension of the techniques used gives a sub-exponential algorithm for dense instances of the random subset sum problem.
+\textcolor{red}{The author notes that the techniques in this result do not allow one to extend the algorithm to decoding random $k \times \alpha k$ random binary linear codes for constant $\alpha > 1$, which is left as an open problem.}
+%\TODO{Check if this is still open.}
 
-The algorithm modifies the BKW algorithm by dealing with equations over $b$ bits instead of one bit, thus wasting less time and queries than the BKW algorithm.
-In particular, they use the Walsh-Hadamard transform to find the best possibility over $b$ bits.
+The main idea of this algorithm is to use the original BKW algorithm as a black box, and build a function to provide the large number of samples needed for the BKW algorithm.
+The key idea is given $k^{1+\eps}$ pairs $(\ba_i, \bl_i)$, for $\ba_i \getsr \bbF_2^k$ and $\bl_i = \ip{\ba_i}{\bs} +\be_i$ for secret $\bs\getsr \bbF_2^k$ (\ie, the output $(\bA, \bs^\top\bA\xor \be)$), the pairs are treated as a random element from a certain family of functions which maps elements from some domain $X$ to some labeled examples (\ie, samples).
+More precisely, given $(\ba_1,\bl_1),\dotsc,(\ba_{k^{1+\eps}}, \bl_{k^{1+\eps}})$ and set $X = \{ \bx \in \bbF_2^{k^{1+\eps}}~\colon~\sum_ix_i = \ceil{\frac{2k}{\eps\log k}} \}$, the function selects a random $\bx \in X$ and outputs
+\begin{align*}
+	\ba' = \bigoplus \bx_i\ba_i & & \bl' = \bigoplus \bx_i\bl_i,
+\end{align*}
+and the generation of these $\ba'$ and $\bl'$ are shown to be statistically close to uniform, so they are nearly identical to more random instances of \LPN.
+
+
+
+
+\subsection{Results using LPN and its Variants}
+We discuss various results using the \LPN assumption and its variants.
+To begin, we note that both \LPN assumptions (namely, search and decisional) are polynomially equivalent \cite{C:BFKL93,JC:KatShiSmi10}, as given by the following lemma.
+
+\begin{importedlemma}[{\cite[Lemma 1]{JC:KatShiSmi10}}]\label{implem:lpn-poly}
+	If decisional $\LPN_{\tau, k}$ is not $(n,t,\eps)$-secure, then search $\LPN_{\tau,k}$ is not $O(n',t',\eps')$ secure, where
+	\begin{align*}
+	n' = O(n\cdot \log k/\eps^2) & & t' = O(t\cdot k \cdot \log k/\eps^2) & & \eps' = \eps/4.
+	\end{align*}
+\end{importedlemma}
+
+In particular, \importedlemmaref{lpn-poly} allows us to use either search or decisional \LPN as a hardness assumption.
+
+\subsubsection{Randomness Requirements of LPN}
+The most expensive cost of generating instances of \LPN is the generation of the matrix \bA, which is assumed to be uniformly random over $\bbF_2^{k\times n}$.
+As an example, if $n = O(k)$, then we need $O(k^2)$ random bits to generate the matrix.
+\cite{EC:GilRobSeu08} suggest using Toeplitz matrices to generate $\bA$ in place of a uniformly random matrix, reducing the randomness needed from $k\cdot n$ to $k + n$.
+\textcolor{red}{However, it is not known if the \LPN problem remains hard if $\bA$ is replaced with a Toeplitz matrix (though it seems plausible).
+Other randomness saving techniques may be possible as well, such as sampling bits of \bA from high-min entropy sources rather than uniformly random.}
+
+The secret $\bs$ of \LPN is also assumed to be drawn uniformly at random.
+\cite{C:ACPS09} show that sampling \bs from $\pred{Ber}_\tau^k$ is also sufficient for \LPN (\ie, \LPN with $\pred{Ber}_\tau^k$ secrets is as hard as with uniform secrets).
+Here is another place with potential to save randomness.
+In particular, if \bs is sampled from a {\em vector subspace} $V \subseteq \bbF_2^k$ of dimension $k'$, where $k' \leq k$, then this instance of \LPN is at most as hard as \LPN with secret length $k'$.
+Formally, this instance of \LPN is known as {\em subspace} \LPN \cite{TCC:Pietrzak12}, and is an interactive assumption.
+Let $\phi_a$ and $\phi_s$ be two affine functions over $\bbF_2^k$. 
+That is, $\phi_a(\by) = \by^\top\bX_a \oplus \bx_a$ and $\phi_s(\by) = \by^\top\bX_s \oplus \bs$, where $\bX_a,\bX_s \in \bbF_2^{k \times k}$ and $\bx_a,\bx_s \in \bbF_2^k$.
+The subspace $\LPN_{\tau, k}$ assumption states that the \LPN problem is hard even when an adversary adaptively chooses $\phi_s$ and $\phi_a$ and receives $\ip{\phi_a(\bA_i)}{\phi_s(\bs)}\oplus \be_i$, where $\bA_i$ is the $i^{th}$ row of $\bA$, in addition to the samples $\bs^\top\bA \oplus \be$.
+\cite{TCC:Pietrzak12} shows that if $\bX_a^\top \cdot \bX_s$ has rank at least $k' \leq k$, then the subspace $\LPN_{\tau,k}$ problem is at most as hard as the standard $\LPN_{\tau, k'}$ problem with secret length $k'$.
+
+The subspace \LPN problem is a particular instance where the secret $\bs$ is chosen from a min-entropy source.
+In the case of subspace \LPN, the secret $\bs$ has min-entropy $k'$ since it is equivalent to $\LPN$ with secret length $k' \leq k$.
+\textcolor{red}{It is an open problem whether the \LPN problem remains hard when sampling \bs from general min-entropy sources.
+Such a result would also save some randomness and allow more versatility.}
+
+\subsubsection{Cryptographic Primitives from LPN}
+We outline constructions of cryptographic primitives from the \LPN assumption.
+We present these constructions \visavis other constructions.
+As noted in \cite{TCC:Pietrzak12}, the main appeal of using \LPN is the fact that \LPN based schemes can be extremely efficient, only requiring relatively few bit operations to compute an inner product of two bit-vectors.
+
+\paragraph{One-way Functions.} We outline the construction of one-way functions from search \LPN.
+Fix matrix $\bA\getsr \bbF_2^{k\times n}$.
+Define function $f_\bA \colon \zo^* \rightarrow \zo^*$ as follows.
+On input $\bx$ which is sufficiently long, use $\bx$ to sample $\bs \getsr \bbF_2^k$ and $\be \drawn \Ber_\tau^n$.
+If $\wt(\be)\geq k\cdot \frac{1/2+\tau}{2}$, output $\bot$.
+Note $\bot$ is output with exponentially small probability by Chernoff bound.
+Otherwise, output $(\bA, \bs^\top\bA\oplus\be)$.
+Note that $f$ is one-way since clearly it is poly-time computable (assuming sampling of $\bs$ and $\be$ can be done in polynomial time) and any algorithm which can easily invert $f_\bA(\bx)$ must find the unique secret $\bs$, contradicting the \LPN assumption.
+
+The construction of a one-way function in this manner invokes the following costs.
+First, there is a one-time cost of generating the matrix $\bA$.
+Next any input $\bx$ must be sufficiently long so that it can be used to generate $\bs$ and $\be$.
+Since $\be$ has $n\cdot h_2(\tau)$ bits of entropy, $\bx$ must have length at least $k + nh_2(\tau)$.
+Finally, the size of the output is $(k+1)n$ bits long.
+Assuming there are efficient ways to sample $\bs$ and $\be$, the cost of computing the one-way function is the cost of sampling $\bs$ and $\be$ and the cost of the matrix multiplication $\bs^\top\bA$, which is $O(kn)$ bit-level multiplications.
+
+
+
+\paragraph{Pseudo-random Generators.} The construction of PRGs from \LPN follows directly from the decisional \LPN assumption.
+Namely, the decisional \LPN assumption states that \LPN samples are pseudorandom.
+Therefore \LPN yields a simple PRG \cite{C:BFKL93}.
+We discuss the construction and efficiency of this PRG.
+
+The PRG is defined as follows. 
+On input $\bx$, use $\bx$ to sample $\bA \getsr \bbF_2^{k\times n}$, $\bs \getsr \bbF_2^k$, and $\be \drawn \Ber_\tau^n$, and output $(\bA, \bs^\top\bA\oplus\be)$.
+The randomness requirements currently are high, but a crucial observation by \cite{C:ACPS09} is that the matrix $\bA$ can be fixed as a public parameter.
+So there is a one-time cost of computing $\bA$ and it no longer needs to be sampled or output by the PRG.
+Therefore on input $\bx$, the PRG uses $\bx$ to sample $\bs$ and $\be$ and outputs the $n$-bit string $\bs^\top\bA\oplus\be$.
+
+For $\tau < \frac{1}{2}$, $k \in \bbZ$, and sufficiently large $n$, we use seed $\bx$ to construct the PRG, where $\mathrm{len}(\bx) = x < n$.
+To sample $\bs \getsr \bbF_2^k$, $k$ bits are needed.
+To sample $\be\drawn\Ber_\tau^n$, we note again that $\be$ has $nh_2(\tau)$ bits of entropy, since each bit of $\be$ has $h_2(\tau)$-bits of entropy.
+As noted in \cite{C:ACPS09}, efficient sampling of $\be$ is possible using roughly the same number of bits $nh_2(\tau)$.
+Therefore the pair $(\bs,\be)$ has $k+nh_2(\tau)$ bits of entropy, where $r\defeq k+nh_2(\tau) < n$ for sufficiently large $n$.
+This construction yields a PRG with stretch $(1 - h_2(\tau))n-k$, which is linear in the length of the seed $r = k+nh_2(\tau)$.
+
+To summarize the construction of a PRG from the decisional \LPN assumption, we note the following.
+\begin{itemize}
+	\item The running time of this PRG is $O(k\cdot n)$; that is, it is dominated by the matrix multiplication of $\bA$ with $\bs$.
+	\item $\bA$ can be set as a public parameter, so there is no need to sample this matrix or include it in the output.
+	\item Any seed of length $r = k + nh_2(\tau)$ yields a linear stretch PRG $G \colon \zo^r \rightarrow \zo^n$, with stretch $(1-h_2(\tau))n - k$, where $\tau$ is the noise parameter of the \LPN problem.
+\end{itemize}
+
+
+
+\paragraph{Secret Key Encryption.} t
+
+
+
+
+
+
+\subsubsection{Variants of \LPN}
+We discuss two variants of \LPN and their results in this section.
+
+\paragraph{Exact \LPN.} Exact \LPN, or \XLPN
 
