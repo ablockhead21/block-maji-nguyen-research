@@ -1,0 +1,15 @@
+\begin{figure}[!hp]
+\begin{center}
+
+\begin{tabular}{|>{\centering}m{.15\linewidth}|>{\centering}m{.16\linewidth}|>{\centering}m{.15\linewidth}|>{\centering}m{.15\linewidth}|>{\centering}m{.2\linewidth}|}
+	\hline
+	\multirow{2}{*}{Algorithm} & Sample & Noise-Rate & \multirow{2}{*}{Run-Time} & \multirow{2}{*}{Notes}\tabularnewline
+	& Complexity ($n$) & ($\tau$) & & \tabularnewline \hline
+	BKW \cite{STOC:BluKalWas00} & $2^{O(k/\log k)}$ & $< \frac{1}{2} - 2^{-k^\delta}$ & $2^{O(k/\log k)}$ & for any constant $\delta < 1$ \tabularnewline \hline
+	Modified BKW \cite{Lyubashevsky05} & $k^{1+\eps}$ & $< \frac{1}{2} - 2^{-(\log k)^\delta}$ & $2^{O(k/\log\log k)}$ & for any $\eps > 0$ and any constant $\delta < 1$. \tabularnewline \hline
+\end{tabular}
+
+\end{center}
+\caption{Algorithms for solving \LPN problems with secret key length $k$.}
+\label{fig:lpn-alg-table}
+\end{figure}
