@@ -7,7 +7,7 @@
 \end{theorem}
 
 To prove the theorem we shall use the following lemma.
-\begin{lemma}
+\begin{lemma}\label{lem:secret-info}
 	Fix a set $\cB \subseteq [n]$ of corrupt servers such that $|\cB| < n/2 - \delta$ and let $\overline{\cB} = [n]\setminus \cB$.
 	Over the choice of generator matrix $G$ for codespace $C$, with probability at least $1-2^{-\delta}$ the following holds.
 	For any $(x_1,\dotsc, x_n) \in \zo$, define
@@ -33,13 +33,47 @@ To prove the theorem we shall use the following lemma.
 	Therefore if $b$ is the starting bit of this codeword, by \lemmaref{min-qual-secret} we have that $\cJ$ is qualified for only $m_b$ and not $m_{1-b}$.\qed
 \end{proof}
 
-\begin{proof}[Proof of \theoremref{main}]
+\begin{proof}[of \theoremref{main}]
 	First we consider security against malicious Bob corrupting a set of $\cB \subseteq[n]$ servers such that $|\cB| = t$.
 	Define $\overline{\cB} = [n]\setminus\cB$.
 	We construct $\pred{Sim}_B$ as follows:
 	\begin{enumerate}
-		\item 
+		\item $\pred{Sim}_B$ receives $(x_1',\dotsc, x_n') \in \zo$ from Bob.
+		\item For $i \in \overline{\cB}$, extend $x_i'$ to a valid codeword in $C^\perp$.
+		If reconstruction succeeds, let $x \in \zo$ be the first coordinate.
+		Else, let $x = \bot$.
+		\item If $x \neq \bot$, $\pred{Sim}_B$ submits $x$ to $\cF_{OT}$ and receives $m_x$.
+		$\pred{Sim}_B$ the samples $m_{1-x} \getsr \zo$.
+		If $x = \bot$, $\pred{Sim}_B$ samples $m_0,m_1 \getsr \zo$.
+		\item $\pred{Sim}_B$ generates sharing $\{ s_{i,j} \}_{i \in [n], j \in \zo}$ of $(m_0, m_1)$.
+		\item For each $i \in \overline{\cB}$, $\pred{Sim}_B$ sends $s_{i, x_i'}$ to Bob.
+		For each $i \in \cB$, $\pred{Sim}_B$ sends $(s_{i,0}, s_{i,1})$ to Bob.
 	\end{enumerate}
+	We now use \lemmaref{secret-info} to argue the view of malicious Bob and $\pred{Sim}_B$ are indistinguishable with high probability.
+	Note that for corrupted servers $\cB \subseteq [n]$ where $|\cB| < n/2 - \delta$, the probability that $\cB$ is qualified for $G_0$ is at most $2^{-\delta}$.
+	This implies that a malicious Bob in the real world, upon seeing shares $\{ (s_{i,0}, s_{i,1}) \}$ for $i \in \cB$, can reconstruct the secret $m_0$ (by \lemmaref{min-qual-secret}).
+	Then Bob can pick dual codeword $(1, x'_1,\dotsc,x'_n) \in C^\perp$ and submit $x\sub{n}$, receiving $s_{i, x'_i}$ for all $i \in \overline{\cB}$.
+	Then by \lemmaref{min-qual-secret}, Bob can reconstruct $m_1$ as well.
+	Thus with probability $2^{-\delta}$ the two views are distinguishable.
+	
+	Otherwise, with probability at least $1 - 2^{-\delta}$, the set of corrupted servers $\cB$ is unqualified for $G_0$.
+	Then we consider two cases.
+	Let $x'\sub{n} \in \zo^n$ be the submitted value by Bob.
+	In the first case, suppose $\{ x_i' \colon i \in \overline{\cB} \}$ cannot be extended to a valid codeword in $C^\perp$ \textcolor{red}{(this happens with some small probability...)}.
+	By \lemmaref{secret-info}, this implies the shares Bob receives in the real world give no information about $(m_0,m_1)$, and thus Bob must guess these values.
+	In this same case, if $\pred{Sim}_B$ is unable to extend $\{ x_i' \colon i \in \overline{\cB} \}$ to a codeword in $C^\perp$, then the simulator chooses $m_0, m_1 \getsr \zo$.
+	Then again by \lemmaref{secret-info}, the secret sharing of $(m_0, m_1)$ that $\pred{Sim}_B$ submits to Bob gives no information about $(m_0,m_1)$.
+	Thus the views are indistinguishable in this case.
+	
+	In the other case suppose $\{x_i \colon i \in \overline{\cB} \}$ does extend to a valid codeword in $C^\perp$ \textcolor{red}{(happens with some large probability...)}.
+	Let $x \in \zo$ be the first bit of this codeword.
+	By \lemmaref{secret-info}, this implies the shares Bob receives in the real world reconstruct to value $m_x$, and give no information about $m_{1-x}$.
+	So Bob must guess the value of $m_{1-x}$.
+	In the same case, $\pred{Sim}_B$ extends $\{ x_i' \colon i \in \overline{\cB} \}$ to a codeword in $C^\perp$ and gets the first bit of this codeword $x$.
+	The simulator then submits $x$ to $\cF_{OT}$ and receives $m_x$, then picks $m_{1-x} \getsr \zo$.
+	The simulator then generates a sharing of $(m_0, m_1)$ and submits this sharing to Bob.
+	By \lemmaref{secret-info}, the values submitted by the simulator exactly give Bob $m_x$ and reveal no information about $m_{1-x}$.
+	Thus the views are indistinguishable in this case.
 \end{proof}
 
 
