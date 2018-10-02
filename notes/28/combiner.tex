@@ -25,7 +25,7 @@ To prove the theorem we shall use the following lemma.
 	Then, we consider the case where $\cB$ is not qualified for $G_0$.
 	By \lemmaref{min-qual-secret}, since $\cB$ is not qualified for $G_0$, the set $(\cB, 0) \union (\cB,1) \subseteq \cJ$ is not qualified for reconstructing $m_0$.
 	
-	Next, if the vector $x_{\overline{\cB}}$ cannot be extended to a valid codeword in $C^\perp$, by \lemmaref{min-qual-secret} we have that $\cJ$ cannot be qualified for $m_1$ or $v^* = m_0 \xor m_1$.
+	Next, if the vector $x_{\overline{\cB}}$ cannot be extended to a valid codeword in $C^\perp$, by \lemmaref{min-qual-secret} we have that $\cJ$ cannot be qualified for $m_1$ or $m_0 \xor m_1$.
 	Therefore in this case the shares $\{ s_{i,j} \}_{(i,j) \in \cJ}$ reveal no information about $m_0$ and $m_1$.
 	
 	If $x_{\overline{\cB}}$ extends to a valid codeword in $C^\perp$, this implies that $\overline{\cB}$ is qualified for $H_0$ \textcolor{red}{except with probability...}.
@@ -52,7 +52,7 @@ To prove the theorem we shall use the following lemma.
 	We now use \lemmaref{secret-info} to argue the view of malicious Bob and $\pred{Sim}_B$ are indistinguishable with high probability.
 	Note that for corrupted servers $\cB \subseteq [n]$ where $|\cB| < n/2 - \delta$, the probability that $\cB$ is qualified for $G_0$ is at most $2^{-\delta}$.
 	This implies that a malicious Bob in the real world, upon seeing shares $\{ (s_{i,0}, s_{i,1}) \}$ for $i \in \cB$, can reconstruct the secret $m_0$ (by \lemmaref{min-qual-secret}).
-	Then Bob can pick dual codeword $(1, x'_1,\dotsc,x'_n) \in C^\perp$ and submit $x\sub{n}$, receiving $s_{i, x'_i}$ for all $i \in \overline{\cB}$.
+	Then Bob can pick dual codeword $(0, x'_1,\dotsc,x'_n) \in C^\perp$ and submit $x'\sub{n}$, receiving $s_{i, x'_i}$ for all $i \in \overline{\cB}$.
 	Then by \lemmaref{min-qual-secret}, Bob can reconstruct $m_1$ as well.
 	Thus with probability $2^{-\delta}$ the two views are distinguishable.
 	
