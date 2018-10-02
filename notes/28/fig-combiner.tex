@@ -1,0 +1,23 @@
+\begin{figure}[!hp]
+\begin{boxedalgo}
+{\bfseries Private Input.} Alice has private input $(m_0,m_1)$ and Bob has private input $b$.\\
+
+{\bfseries Common Randomness.} Both parties use CRS to sample generator matrix $G \in \zo^{n/2 \times (n+1)}$ of the form $[I_{n/2\times n/2}\Vert P]$ where $P$ is a random Toeplitz matrix.
+Let $C$ be the code spanned by $G$, and $C^\perp$ be the dual code spanned by $H$.\\
+
+{\bfseries Protocol.}
+\begin{enumerate}
+	\item Alice secret shares $(m_0, m_1)$ into $\{s_{i,j}\}_{i \in [n],j \in \zo}$ as follows.
+	Alice samples $c_u = (m_0,u_1,\dotsc, u_n) \getsr C$ and $c_v = (v, v_1, \dotsc, v_n) \getsr C_\parity$ such that $m_1 = m_0 \xor v$.
+	For $ i\in [n]$, set $s_{i,0} = v_i$ and $s_{i,1} = u_i \xor v_i$.
+	Send $(s_{i,0}, s_{i,1})$ to server $S_i$ for all $i \in[n]$.
+	
+	\item Bob samples random $(b, x_1,\dotsc, x_n) \getsr C^\perp$, and sends $x_i$ to server $S_i$ for all $i \in [n]$, and receives output $y_i$.
+	
+	\item Bob computes $y = \xor_{i \in [n]} y_i$.
+\end{enumerate}
+	
+\end{boxedalgo}
+\label{fig:combiner}
+\caption{Malicious secure OT combiner.}
+\end{figure}

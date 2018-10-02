@@ -1,0 +1,46 @@
+\documentclass{llncs}
+\input{headers}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\makeatletter
+\newcommand{\specificthanks}[1]{\@fnsymbol{#1}}% Inserts a specific \thanks symbol
+\makeatother 
+
+%\def\divyaemail{divya.gupta@microsoft.com}
+%\def\majiemail{hmaji@purdue.edu}
+%\def\haiemail{nguye245@purdue.edu}
+%\def\alexemail{block9@purdue.edu}
+%\author{
+%	Alexander R. Block\inst{1}%
+%	\and 
+%	Divya Gupta\inst{2}%
+%	\and 
+%	Hemanta K. Maji\inst{1}%
+%	\and   
+%	Hai H. Nguyen\inst{1}%
+%}
+
+\title{\textcolor{red}{Malicious Combiner}}
+\date{}
+\author{}
+\institute{}
+%\institute{Department of Computer Science, Purdue University, West Lafayette, Indiana, U.S.A.\\\email{\{block9,hmaji,nguye245\}@purdue.edu} \and Microsoft Research, Bangalore, India\\\email{\divyaemail}}
+
+\pagestyle{plain}
+
+
+\begin{document}
+
+\maketitle
+
+\input{abstract}
+\input{secret-sharing}
+\input{combiner}
+
+\bibliographystyle{splncs04}
+\bibliography{abbrev3,crypto,math,journals,small-bib,crossrefs,local}
+
+\end{document}
+
+

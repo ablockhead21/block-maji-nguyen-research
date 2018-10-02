@@ -1,0 +1,17 @@
+\begin{figure}[!h]
+\begin{center}
+\bgroup
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|>{\centering}p{.4\textwidth}|}
+	\hline
+	Algorithm & Noise Rate $(\tau)$ & Run-Time & \# of Samples & Algorithm Description \tabularnewline
+	\hline\hline
+	\cite{STOC:BluKalWas00} & constant & $2^{O(k/\log k)}$ & $2^{O(k/\log k)}$ & {\footnotesize Takes a large number of samples to write a basis vector in terms of a small number of samples. Incurs an increase in noise rate in the summed vector (cf. \cite[Lemma 4]{STOC:BluKalWas00}). Takes enough so that sums are polynomially distinguishable from random. Runtime of algorithm also depends on $\frac{1}{1-2\tau}$.} \tabularnewline
+	\hline
+	\cite{Levieil06}
+\end{tabular}
+\egroup
+\end{center}
+\caption{List of best algorithms for solving \LPN or decoding random linear codes.
+Here, $n$ is assumed to be the block length and $k$ is assumed to be the secret length.}
+\end{figure}

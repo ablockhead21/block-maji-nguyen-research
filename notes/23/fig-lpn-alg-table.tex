@@ -1,13 +1,15 @@
 \begin{figure}[!hp]
 \begin{center}
 
-\begin{tabular}{|>{\centering\footnotesize}m{.15\linewidth}|>{\centering}m{.16\linewidth}|>{\centering}m{.15\linewidth}|>{\centering}m{.15\linewidth}|>{\centering}m{.2\linewidth}|}
+\begin{tabular}{|>{\centering\footnotesize}m{.14\linewidth}|>{\centering}m{.15\linewidth}|>{\centering}m{.15\linewidth}|>{\centering}m{.14\linewidth}|>{\centering}m{.3\linewidth}|}
 	\hline
 	\multirow{2}{*}{\normalsize Algorithm} & Sample & Noise-Rate & \multirow{2}{*}{Run-Time} & \multirow{2}{*}{Notes}\tabularnewline
 	& Complexity ($n$) & ($\tau$) & & \tabularnewline \hline
 	BKW \cite{STOC:BluKalWas00} & $2^{O(k/\log k)}$ & $< \frac{1}{2} - 2^{-k^\delta}$ & $2^{O(k/\log k)}$ & for any constant $\delta < 1$ \tabularnewline \hline
 	Modified BKW \cite{Lyubashevsky05} & $k^{1+\eps}$ & $< \frac{1}{2} - 2^{-(\log k)^\delta}$ & $2^{O(k/\log\log k)}$ & for any $\eps > 0$ and any constant $\delta < 1$. \tabularnewline \hline
-	Modified Information Set Decoding \cite{AC:MayMeuTho11} & ? & ? & $\widetilde{O}(2^{0.05363k})$ & \tabularnewline \hline
+	Modified Information Set Decoding (of binary linear codes) \cite{AC:MayMeuTho11} & $\approx \frac{k}{0.47}$ & $< \frac{d-1}{2n}$ & $\widetilde{O}(2^{0.05363n})$ & Achieves worst-case run-time around rate $k/n \approx 0.47$.
+	Result focuses on when weight of error vector is $\leq \frac{d-1}{2}$, so $\tau < \frac{d-1}{2n}$ gives correct weight with high probability.
+	Running time in terms of $n$ because the algorithm depends on the block-length of the code.  \tabularnewline \hline
 \end{tabular}
 
 \end{center}
