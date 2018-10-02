@@ -2,6 +2,47 @@
 
 \input{fig-combiner}
 
-\begin{theorem}
+\begin{theorem}\label{thm:main}
 	The protocol in \figureref{combiner} is an $(n,t)$ malicious secure OT combiner for $t < n/2 - \delta$, for all $\delta \geq 1$.
 \end{theorem}
+
+To prove the theorem we shall use the following lemma.
+\begin{lemma}
+	Fix a set $\cB \subseteq [n]$ of corrupt servers such that $|\cB| < n/2 - \delta$ and let $\overline{\cB} = [n]\setminus \cB$.
+	Over the choice of generator matrix $G$ for codespace $C$, with probability at least $1-2^{-\delta}$ the following holds.
+	For any $(x_1,\dotsc, x_n) \in \zo$, define
+	\begin{align*}
+		\cJ = \{ (i,x_i)\colon i \in \overline{\cB} \} \union \{ (i,j) \colon i \in\cB, j \in \zo \}.
+	\end{align*}
+	Then,
+	\begin{enumerate}
+		\item If the set $\{x_i \colon i \in \overline{\cB} \}$ does not extend to a valid codeword in $C^\perp$, then the shares $\{ s_{i,j} \}_{(i,j) \in \cJ}$ give no information about $(m_0,m_1)$.
+		\item If the set $\{x_i\colon i \in \overline{\cB}\}$ extends to a valid codeword in $C^\perp$ starting with $b \in \zo$, then the shares $\{s_{i,j}\}_{(i,j)\in \cJ}$ can be used to reconstruct $m_b$ and give no information about $m_{1-b}$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	For any fixed set $\cB\subseteq [n]$ of corrupt servers where $|\cB| < n/2 - \delta$, by \lemmaref{qual} we have that the probability $\cB$ is qualified for $G_0$ is at most $2^{-n/2 + |\cB|} = 2^{-\delta}$.
+	Then, we consider the case where $\cB$ is not qualified for $G_0$.
+	By \lemmaref{min-qual-secret}, since $\cB$ is not qualified for $G_0$, the set $(\cB, 0) \union (\cB,1) \subseteq \cJ$ is not qualified for reconstructing $m_0$.
+	
+	Next, if the vector $x_{\overline{\cB}}$ cannot be extended to a valid codeword in $C^\perp$, by \lemmaref{min-qual-secret} we have that $\cJ$ cannot be qualified for $m_1$ or $v^* = m_0 \xor m_1$.
+	Therefore in this case the shares $\{ s_{i,j} \}_{(i,j) \in \cJ}$ reveal no information about $m_0$ and $m_1$.
+	
+	If $x_{\overline{\cB}}$ extends to a valid codeword in $C^\perp$, this implies that $\overline{\cB}$ is qualified for $H_0$ \textcolor{red}{except with probability...}.
+	Since $\overline{\cB}$ is qualified for $H_0$, it cannot be the case that the codeword found by extending $x_{\overline{\cB}}$ starts with both $0$ and $1$.
+	Therefore if $b$ is the starting bit of this codeword, by \lemmaref{min-qual-secret} we have that $\cJ$ is qualified for only $m_b$ and not $m_{1-b}$.\qed
+\end{proof}
+
+\begin{proof}[Proof of \theoremref{main}]
+	First we consider security against malicious Bob corrupting a set of $\cB \subseteq[n]$ servers such that $|\cB| = t$.
+	Define $\overline{\cB} = [n]\setminus\cB$.
+	We construct $\pred{Sim}_B$ as follows:
+	\begin{enumerate}
+		\item 
+	\end{enumerate}
+\end{proof}
+
+
+
+
+
