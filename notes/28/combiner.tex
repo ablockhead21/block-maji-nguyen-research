@@ -1,4 +1,4 @@
-\section{Malicious Combiner}
+\section{Malicious Secure OT Combiner}
 
 \input{fig-combiner}
 
@@ -28,7 +28,7 @@ To prove the theorem we shall use the following lemma.
 	Next, if the vector $x_{\overline{\cB}}$ cannot be extended to a valid codeword in $C^\perp$, by \lemmaref{min-qual-secret} we have that $\cJ$ cannot be qualified for $m_1$ or $m_0 \xor m_1$.
 	Therefore in this case the shares $\{ s_{i,j} \}_{(i,j) \in \cJ}$ reveal no information about $m_0$ and $m_1$.
 	
-	If $x_{\overline{\cB}}$ extends to a valid codeword in $C^\perp$, this implies that $\overline{\cB}$ is qualified for $H_0$ \textcolor{red}{except with probability...}.
+	If $x_{\overline{\cB}}$ extends to a valid codeword in $C^\perp$, this implies that $\overline{\cB}$ is qualified for $H_0$.
 	Since $\overline{\cB}$ is qualified for $H_0$, it cannot be the case that the codeword found by extending $x_{\overline{\cB}}$ starts with both $0$ and $1$.
 	Therefore if $b$ is the starting bit of this codeword, by \lemmaref{min-qual-secret} we have that $\cJ$ is qualified for only $m_b$ and not $m_{1-b}$.\qed
 \end{proof}
@@ -59,13 +59,13 @@ To prove the theorem we shall use the following lemma.
 	Otherwise, with probability at least $1 - 2^{-\delta}$, the set of corrupted servers $\cB$ is unqualified for $G_0$.
 	Then we consider two cases.
 	Let $x'\sub{n} \in \zo^n$ be the submitted value by Bob.
-	In the first case, suppose $\{ x_i' \colon i \in \overline{\cB} \}$ cannot be extended to a valid codeword in $C^\perp$ \textcolor{red}{(this happens with some small probability...)}.
+	In the first case, suppose $\{ x_i' \colon i \in \overline{\cB} \}$ cannot be extended to a valid codeword in $C^\perp$.
 	By \lemmaref{secret-info}, this implies the shares Bob receives in the real world give no information about $(m_0,m_1)$, and thus Bob must guess these values.
 	In this same case, if $\pred{Sim}_B$ is unable to extend $\{ x_i' \colon i \in \overline{\cB} \}$ to a codeword in $C^\perp$, then the simulator chooses $m_0, m_1 \getsr \zo$.
 	Then again by \lemmaref{secret-info}, the secret sharing of $(m_0, m_1)$ that $\pred{Sim}_B$ submits to Bob gives no information about $(m_0,m_1)$.
 	Thus the views are indistinguishable in this case.
 	
-	In the other case suppose $\{x_i \colon i \in \overline{\cB} \}$ does extend to a valid codeword in $C^\perp$ \textcolor{red}{(happens with some large probability...)}.
+	In the other case suppose $\{x_i \colon i \in \overline{\cB} \}$ does extend to a valid codeword in $C^\perp$.
 	Let $x \in \zo$ be the first bit of this codeword.
 	By \lemmaref{secret-info}, this implies the shares Bob receives in the real world reconstruct to value $m_x$, and give no information about $m_{1-x}$.
 	So Bob must guess the value of $m_{1-x}$.
@@ -80,7 +80,7 @@ To prove the theorem we shall use the following lemma.
 	We construct $\pred{Sim}_A$ as follows:
 	\begin{enumerate}
 		\item $\pred{Sim}_A$ samples $(0, x_1,\dotsc, x_n) \getsr C^\perp$.
-		\item For $i \in \cA$, $\pred{Sim}_A$ sends $x_i$ to Alice (\textcolor{red}{or Environment}).
+		\item For $i \in \cA$, $\pred{Sim}_A$ sends $x_i$ to Alice.
 		\item $\pred{Sim}_A$ receives $s_{i,x_i}'$ for $i \in \cA$ and $(s_{i,0}', s_{i,1}')$ for $i \in \overline{\cA}$ from Alice.
 		\item $\pred{Sim}_A$ samples another $(1, x_1', \dotsc, x_n') \getsr C^\perp$ such that $x_\cA = x'_\cA$.
 		\item $\pred{Sim}_A$ reconstructs $v = (\xor_{i \in \overline{\cA}} s_{i,x_i}') \xor (\xor_{i \in \cA} s_{i,x_i}')$ and $u = (\xor_{i \in \overline{\cA}} s_{i,x_i'}')\xor (\xor_{i \in \cA} s_{i,x_i}')$.
@@ -97,22 +97,7 @@ To prove the theorem we shall use the following lemma.
 	Therefore these values do not allow a receiver to distinguish the real and ideal worlds.
 	Next, we show that the messages sent to Bob in the ideal and real world are indistinguishable.
 	Note that this must be the case since $\pred{Sim}_B$ reconstructs values $m_0$ and $m_1$ in the same manner as Bob in the real world would reconstruct $m_b$, where Bob has input $b$.
-	Thus the views are indistinguishable.
-
-	\textcolor{red}{
-	Note the following observations.
-	\begin{itemize}
-		\item $\overline{\cA}$ is qualified for $H_0$ with high probability.
-		\item By \lemmaref{min-qual-secret}, if $s_{i, x_i}'$ is a valid sharing of $m_0 \xor m_1$ for $i \in [n]$, then reconstruction is exactly $m_0 \xor m_1 = (\xor_{i \in \overline{\cA}} s_{i,x_i}) \xor (\xor_{i \in \cA} s_{i, x_i}' )$.
-		Otherwise, this reconstruction is some uniform bit $v$ (by properties of linear code $C^\perp$).
-		\item Similarly, if $s_{i, x_i'}'$ is a valid sharing of $m_1$ for $i \in [n]$, then reconstruction is exactly $m_1 = (\xor_{i \in \overline{\cA}} s_{i,x_i'}) \xor (\xor_{i \in \cA} s_{i, x_i}' )$.
-		Otherwise, this reconstruction is some uniform bit $u$ (by properties of linear code $C^\perp$).
-		\item If reconstruction is correct, simulator sends correct $m_0, m_1$ to functionality.
-		Otherwise, simulator sends uniform $m_0, m_1$ to functionality.
-		\item Reconstruction of $m_0$ and $m_1$ by simulator follows exactly the same way as reconstruction of $m_b$ by Bob  in the real world.
-		Therefor the views are indistinguishable.
-	\end{itemize}
-	}
+	Thus the views are indistinguishable.\qed
 \end{proof}
 
 
