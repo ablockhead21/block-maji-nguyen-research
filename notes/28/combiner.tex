@@ -83,8 +83,36 @@ To prove the theorem we shall use the following lemma.
 		\item For $i \in \cA$, $\pred{Sim}_A$ sends $x_i$ to Alice (\textcolor{red}{or Environment}).
 		\item $\pred{Sim}_A$ receives $s_{i,x_i}'$ for $i \in \cA$ and $(s_{i,0}', s_{i,1}')$ for $i \in \overline{\cA}$ from Alice.
 		\item $\pred{Sim}_A$ samples another $(1, x_1', \dotsc, x_n') \getsr C^\perp$ such that $x_\cA = x'_\cA$.
-		\item $\pred{Sim}_A$ reconstructs 
+		\item $\pred{Sim}_A$ reconstructs $v = (\xor_{i \in \overline{\cA}} s_{i,x_i}') \xor (\xor_{i \in \cA} s_{i,x_i}')$ and $u = (\xor_{i \in \overline{\cA}} s_{i,x_i'}')\xor (\xor_{i \in \cA} s_{i,x_i}')$.
+		\item $\pred{Sim}_A$ sets $m_0 = v \xor u$ and $m_1 = u$ and sends $(m_0, m_1)$ to $\cF_{OT}$.
 	\end{enumerate}
+	We now use \lemmaref{min-qual-secret} to argue that the view of malicious Alice and $\pred{Sim}_B$ are indistinguishable with high probability.
+	Note first that for corrupted servers $\cA$ where $|\cA| < n/2 - \delta$, the probability that $\cA$ is qualified for $H_0$ is at most $2^{-\delta-1}$.
+	This implies that a malicious Alice in the real world, upon seeing shares $\{x_i\}_{i \in \cA}$, can reconstruct Bob's choice bit $b$, violating privacy of Bob.
+	Notice also that $\pred{Sim}_B$ cannot know Bob's choice bit $b$, even if $\cA$ is qualified for $H_0$.
+	Thus with probability at most $2^{-\delta-1}$ the two views are distinguishable.
+	
+	Otherwise, with probability at least $1 - 2^{-\delta-1}$, the set of corrupted servers $\cA$ is unqualified for $H_0$.
+	By the construction of $x\sub{n}$ and $x'\sub{n}$, malicious Alice cannot distinguish if $x_\cA$ is a sharing of $0$ or $1$.
+	Therefore these values do not allow a receiver to distinguish the real and ideal worlds.
+	Next, we show that the messages sent to Bob in the ideal and real world are indistinguishable.
+	Note that this must be the case since $\pred{Sim}_B$ reconstructs values $m_0$ and $m_1$ in the same manner as Bob in the real world would reconstruct $m_b$, where Bob has input $b$.
+	Thus the views are indistinguishable.
+
+	\textcolor{red}{
+	Note the following observations.
+	\begin{itemize}
+		\item $\overline{\cA}$ is qualified for $H_0$ with high probability.
+		\item By \lemmaref{min-qual-secret}, if $s_{i, x_i}'$ is a valid sharing of $m_0 \xor m_1$ for $i \in [n]$, then reconstruction is exactly $m_0 \xor m_1 = (\xor_{i \in \overline{\cA}} s_{i,x_i}) \xor (\xor_{i \in \cA} s_{i, x_i}' )$.
+		Otherwise, this reconstruction is some uniform bit $v$ (by properties of linear code $C^\perp$).
+		\item Similarly, if $s_{i, x_i'}'$ is a valid sharing of $m_1$ for $i \in [n]$, then reconstruction is exactly $m_1 = (\xor_{i \in \overline{\cA}} s_{i,x_i'}) \xor (\xor_{i \in \cA} s_{i, x_i}' )$.
+		Otherwise, this reconstruction is some uniform bit $u$ (by properties of linear code $C^\perp$).
+		\item If reconstruction is correct, simulator sends correct $m_0, m_1$ to functionality.
+		Otherwise, simulator sends uniform $m_0, m_1$ to functionality.
+		\item Reconstruction of $m_0$ and $m_1$ by simulator follows exactly the same way as reconstruction of $m_b$ by Bob  in the real world.
+		Therefor the views are indistinguishable.
+	\end{itemize}
+	}
 \end{proof}
 
 
