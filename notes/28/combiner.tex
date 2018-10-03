@@ -74,6 +74,17 @@ To prove the theorem we shall use the following lemma.
 	The simulator then generates a sharing of $(m_0, m_1)$ and submits this sharing to Bob.
 	By \lemmaref{secret-info}, the values submitted by the simulator exactly give Bob $m_x$ and reveal no information about $m_{1-x}$.
 	Thus the views are indistinguishable in this case.
+	
+	Now we consider a malicious Alice corrupting a set of servers $\cA$ such that $|\cA| = t$.
+	Let $\overline{\cA} = [n]\setminus\cA$.
+	We construct $\pred{Sim}_A$ as follows:
+	\begin{enumerate}
+		\item $\pred{Sim}_A$ samples $(0, x_1,\dotsc, x_n) \getsr C^\perp$.
+		\item For $i \in \cA$, $\pred{Sim}_A$ sends $x_i$ to Alice (\textcolor{red}{or Environment}).
+		\item $\pred{Sim}_A$ receives $s_{i,x_i}'$ for $i \in \cA$ and $(s_{i,0}', s_{i,1}')$ for $i \in \overline{\cA}$ from Alice.
+		\item $\pred{Sim}_A$ samples another $(1, x_1', \dotsc, x_n') \getsr C^\perp$ such that $x_\cA = x'_\cA$.
+		\item $\pred{Sim}_A$ reconstructs 
+	\end{enumerate}
 \end{proof}
 
 
