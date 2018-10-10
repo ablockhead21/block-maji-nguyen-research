@@ -139,6 +139,15 @@ In the case of subspace \LPN, the secret $\bs$ has min-entropy $k'$ since it is 
 \textcolor{red}{It is an open problem whether the \LPN problem remains hard when sampling \bs from general min-entropy sources.
 Such a result would also save some randomness and allow more versatility.}
 
+For non-uniform noise, there are a few negative results.
+For example, if $\ell$ positions of the noise vector $\be$ are fixed, then an adversary knows $\ell$ linear equations without noise $\ip{\ba}{\bs} = y$ and can compute $\bs$ from these equations using Gaussian elimination.
+There is also an attack due to \cite{ICALP:AroGe11} where the bits of $\be$ are not i.i.d., but are sampled in the following manner.
+For some $m$, the noise vector $e \in \bbF_2^n$ is sampled $m$-bits at a time.
+Each $m$-bit block is sampled independently, with the condition that this block has at most $w = m \cdot \tau$ positions which are $1$.
+Thus $\be$ is distributed according to $\Ber_\tau^n$, but noise bits are no longer independent.
+\cite{ICALP:AroGe11} then use ``linearization'' to show one can recover the secret in time $n^w$.
+\textcolor{red}{Though it seems to be difficult to adjust the noise distribution, are there any other noise distributions for which \LPN remains hard?}
+
 \subsubsection{Cryptographic Primitives from LPN}
 We outline constructions of cryptographic primitives from the \LPN assumption.
 We present these constructions \visavis other constructions.
@@ -238,6 +247,8 @@ This would allow \bA to be sampled once and used multiple times (up to some limi
 Initiated by \cite{AC:HopBlu01}, their initial HB protocol is a 2 round symmetric message authentication protocol provably secure against passive adversaries assuming \LPN is hard.
 Subsequently, \cite{C:JueWei05} improved the HB protocol, called HB$^+$, to active security at the cost of 3 rounds. 
 However, the above protocol (and many other variants) were all susceptible to man-in-the-middle attacks.
+
+\paragraph{Oblivious Transfer.} \cite{EPRINT:DGMN08a}
 
 
 
