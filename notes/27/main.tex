@@ -1,4 +1,4 @@
-\documentclass{llncs}
+\documentclass{article}
 \input{headers}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
@@ -7,25 +7,19 @@
 \newcommand{\specificthanks}[1]{\@fnsymbol{#1}}% Inserts a specific \thanks symbol
 \makeatother 
 
-%\def\divyaemail{divya.gupta@microsoft.com}
-%\def\majiemail{hmaji@purdue.edu}
-%\def\haiemail{nguye245@purdue.edu}
-%\def\alexemail{block9@purdue.edu}
-%\author{
-%	Alexander R. Block\inst{1}%
-%	\and 
-%	Divya Gupta\inst{2}%
-%	\and 
-%	Hemanta K. Maji\inst{1}%
-%	\and   
-%	Hai H. Nguyen\inst{1}%
-%}
+\def\divyaemail{divya.gupta@microsoft.com}
+\def\majiemail{\footnotesize \ttfamily hmaji@purdue.edu}
+\def\haiemail{\footnotesize \ttfamily nguye245@purdue.edu}
+\def\alexemail{\footnotesize \ttfamily block9@purdue.edu}
+\author{
+	{\normalsize Alexander R. Block}\\
+	{\footnotesize Department of Computer Science, Purdue University, Lafayette, Indiana, USA} \\ {\alexemail}\\ \\%
+	{\normalsize Hemanta K. Maji}\\{\footnotesize Department of Computer Science, Purdue University, Lafayette, Indiana, USA} \\ {\majiemail}\\ \\% 
+	{\normalsize Hai H. Nguyen}\\ {\footnotesize Department of Computer Science, Purdue University, Lafayette, Indiana, USA} \\ {\haiemail}%
+}
 
-\title{\textcolor{red}{Secure Computation based on Leaky Correlations}}
+\title{\textcolor{red}{\bfseries Secure Computation based on Leaky Correlations}}
 \date{}
-\author{}
-\institute{}
-%\institute{Department of Computer Science, Purdue University, West Lafayette, Indiana, U.S.A.\\\email{\{block9,hmaji,nguye245\}@purdue.edu} \and Microsoft Research, Bangalore, India\\\email{\divyaemail}}
 
 \pagestyle{plain}
 
@@ -79,7 +73,10 @@
 			$D\big( E(\ba)\cdot E(\bb) \big) = \ba*\bb$. 
 		\end{enumerate}
 	\end{theorem}
-\bibliographystyle{plain}
+
+
+\newpage
+\bibliographystyle{abbrv}
 \bibliography{abbrev3,crypto,math,journals,small-bib,crossrefs,local}
 
 \end{document}
