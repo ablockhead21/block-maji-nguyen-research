@@ -1,8 +1,18 @@
 \section{Preliminaries}\label{sec:prelims}
 \textcolor{red}{As a note, we shall keep these preliminaries general so that they apply to each section below. Any additional background will be presented on a per section basis.}
 
+We let $\lg$ denote the binary logarithm.
 We denote random variables and distributions by capital letters, for example $X$, and the values taken by small letters, for example $X = x$ or $x \drawn X$.
 For a positive integer $n$, we write $[n]$ and $[-n]$ to denote the sets $\{ 1,\dotsc, n \}$ and $\{ -n,\dotsc, -1 \}$, respectively.
+We consider the field $\bbF = \GF{q}$, where $q = p^a$ for prime $p$ and positive integer $a$.
+We let $c\sub{n}$ denote the vector $(c_1,\dotsc, c_n) \in \bbF^n$.
+For any $c\sub{n} \in \bbF^n$, define the function \wt{c\sub{n}} as the cardinality of the set $\{ i \colon c_i \neq 0 \}$.
+We let $\cS_n$ denote the set of all permutation $\pi \colon [n] \rightarrow [n]$.
+For any two $x\sub{n}, y\sub{n} \in \bbF^n$, we let $\ip{x\sub{n}}{y\sub{n}} \in \bbF$ denote the inner-product of $x\sub{n}$ and $y\sub{n}$, and let $x\sub{n}*y\sub{n} \in \bbF^n$ denote the point-wise (Schur) product of $x\sub{n}$ and $y\sub{n}$.
+For any vector $c\sub{n} \in \bbF^n$ and permutation $\pi \in \cS_n$, we define $\pi(c\sub{n})\defeq (x_{\pi(1)},\dotsc, x_{\pi(n)})$.
+We also denote sets by capital letters, and given a set $Y$ we let $U_Y$ denote the uniform distribution on the set $Y$.
+We denote sampling $y$ according to $U_Y$ as $y \getsr Y$.
+
 
 \subsection{Functionalities and Correlations}\label{sec:prelim-func-corr}
 We define some useful functionalities and correlations.
@@ -44,6 +54,13 @@ For $m \in \bbN$, the functionality or correlation $\cF^m$ represents the functi
 \subsection{Fourier Analysis over Finite Fields}\label{sec:prelim-fourier}
 
 \subsection{Distributions and Min-Entropy}\label{sec:prelim-min-ent}
+For a probability distribution $X$ over sample space $U$, the entropy of $x \in X$ is defined as $H_X(x) = -\lg\Pr[X = x]$.
+The min-entropy of $X$, denoted by $\minentropy(X)$, is defined to be $\min_{x \in \supp(X)} H_X(x)$.
+The binary entropy function, denoted by $\binent(x)$, is defined to be $-x \lg x - (1-x) \lg(1-x)$ for every $x \in (0,1)$.
+
+For a joint distribution $(X,Y)$ over sample space $U \times V$, the marginal distribution $Y$ is a distribution over sample space $V$ such that for every $y \in V$, $\Pr[y] = \sum_{x \in U} \Pr[X = x, Y = y]$.
+The conditional distribution $(X|y)$ is the distribution over sample space $U$ such that for every $x \in U$, $\Pr[x] = \Pr[X = x | Y = y]$.
+The average min-entropy \cite{DORS08}, denoted by $\ame(X|Y)$, is defined to be $-\E_{y \drawn Y}[2^{-\minentropy(X|y)}]$.
 
 \subsubsection{Family of Small-Bias Distributions}\label{sec:prelim-small-bias}
 
