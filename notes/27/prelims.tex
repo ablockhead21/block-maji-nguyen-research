@@ -1,36 +1,55 @@
-\section{Preliminaries}
-\textcolor{red}{As a note, we shall keep these preliminaries general so that they apply to each section below. Any additional background will be presented on a per section basis.
-In addition, we should include a generalized unpredictability lemma using the codes $\{(\cC_i, \cD_i)\}$ and initialize the proper codes per section and use the lemma applied to those codes.
-For example, with \cite{C:BloMajNgu17}, the codes are Toeplitz matrices over fields.}
+\section{Preliminaries}\label{sec:prelims}
+\textcolor{red}{As a note, we shall keep these preliminaries general so that they apply to each section below. Any additional background will be presented on a per section basis.}
 
 We denote random variables and distributions by capital letters, for example $X$, and the values taken by small letters, for example $X = x$ or $x \drawn X$.
 For a positive integer $n$, we write $[n]$ and $[-n]$ to denote the sets $\{ 1,\dotsc, n \}$ and $\{ -n,\dotsc, -1 \}$, respectively.
 
-\subsection{Functionalities and Correlations}
+\subsection{Functionalities and Correlations}\label{sec:prelim-func-corr}
+We define some useful functionalities and correlations.
 
-\textbf{Oblivious Transfer.}
+\paragraph{Oblivious Transfer.}
+Oblivious transfer, denoted by \OT, is a two-party functionality which takes $(m_0,m_1) \in \zo^2$ as input from Alice and $c \in \zo$ as input from Bob and outputs $m_c$ to Bob.
 
-\textbf{Oblivious Linear-function Evaluation.}
+\paragraph{Oblivious Linear-function Evaluation.}
+For a field $\bbF$, oblivious linear-function evaluation over $\bbF$, denoted by \OLE[\bbF], is a two-party functionality which takes $(a,b) \in \bbF^2$ as input from Alice and $x \in \bbF$ as input from Bob, and outputs $z = ax+b$ to Bob.
+In particular, \OLE[\bbF] is a natural extension of \OT to any finite field, and \OLE[\GF{2}] is functionally equivalent to \OT by the following observation: $m_b = (m_1 - m_0)b + m_0$.
 
-\textbf{Random Oblivious Transfer Correlation.}
+\paragraph{Random Oblivious Transfer Correlation.}
+The random oblivious transfer correlation, denoted by \ROT, is a correlation that samples $m_0,m_1,c \getsr \zo$ uniformly and independently at random and provides secret shares $r_A = (m_0,m_1)$ and $r_B = (c,m_c)$ to Alice and Bob, respectively.
 
-\textbf{Random Oblivious Linear-function Evaluation Correlation.}
+\paragraph{Random Oblivious Linear-function Evaluation Correlation.}
+For a field $\bbF$, the random oblivious-linear function evaluation correlation over $\bbF$, denoted by \ROLE[\bbF], is a correlation which that samples $a,b,x \getsr \bbF$ uniformly and independently at random, and provides secret shares $r_A = (a,b)$ and $r_B = (x, z \defeq ax+b)$ to Alice and Bob, respectively.
+In particular, we let \ROLE denote the \ROLE[\GF{2}] correlation, and note that \ROT and \ROLE are functionally equivalent correlations.
 
-\textbf{Inner-product Correlation.}
+\paragraph{Inner-product Correlation.}
+For a field $\bbF$ and $n \in \bbN$, the inner-product correlation over $\bbF$ of size $n$, denoted by \IP[\bbF^n], is a correlation that samples random $r_A = (x_0,\dotsc, x_{n-1}) \in \bbF^n$ and $r_B = (y_0,\dotsc, y_{n-1}) \in \bbF^n$ subject to the constraint that $x_0 + y_0 = \sum_{i=1}^{n-1} x_iy_i$.
+The secret shares of Alice and Bob are $r_A$ and $r_B$, respectively.
+
+For $m \in \bbN$, the functionality or correlation $\cF^m$ represents the functionality that implements $m$ independent copies of any functionality or correlation $\cF$.
+
+\subsection{Correlation Extractors}\label{sec:prelim-corr-ext}
+
+\textcolor{red}{Note this definition may be moved to section 1.1.}
+\begin{definition}[$(n,m,t,\eps)$-Correlation Extractor]
+	Let $(R_A, R_B)$ be a correlated private randomness such that the size of the secret share of each party is $n$-bits.
+	An $(n,m,t,\eps)$-correlation extractor for $(R_A, R_B)$ is a two-party interactive protocol in the $\leaky{(R_A,R_B)}{t}$-hybrid that securely implements the $\ROT[m/2]$ functionality against information-theoretic semi-honest adversaries with $\eps$ simulation error.
+\end{definition}
+
+\paragraph{Leakage Model.}
+
+\paragraph{Correctness.}
+
+\paragraph{Privacy.}
+
+\subsection{Fourier Analysis over Finite Fields}\label{sec:prelim-fourier}
+
+\subsection{Distributions and Min-Entropy}\label{sec:prelim-min-ent}
+
+\subsubsection{Family of Small-Bias Distributions}\label{sec:prelim-small-bias}
+
+\subsubsection{Distributions over Linear Codes}\label{sec:prelim-codes}
 
 
-\subsection{Correlation Extractors}
 
-\textbf{Leakage Model.}
 
-\textbf{Correctness.}
 
-\textbf{Privacy.}
-
-\subsection{Fourier Analysis over Finite Fields}
-
-\subsection{Distributions and Min-Entropy}
-
-\subsubsection{Family of Small-Bias Distributions}
-
-\subsubsection{Distributions over Linear Codes}
