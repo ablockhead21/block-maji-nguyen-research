@@ -1,0 +1,34 @@
+%%%
+\begin{figure}[htp]%\footnotesize
+\begin{boxedalgo}
+\begin{enumerate}[leftmargin=5mm]
+\item Clients A and B have secret shares $r_A, r_B $ respectively from a correlation from the preprocessing step\\
+\hrule
+\item %Client A and B agree on a pair of linear codes $(\cC,\cD)$, over some field \bbF, from a suitable ensemble  
+  From an ensemble of pair of linear codes $\left\{(\cC_i,\cD_i)\colon i\text{ in the index set}\right\}$, Client A and B agree on a pair of linear codes $(\cC,\cD)$
+\item Let \cE be a linear code that contains all the coordinate-wise product of each codeword in \cC with each codeword in \cD, represented by $\cE \supseteq \cC*\cD$ \\
+\hrule
+\item Client A picks a random codeword $(u_{-\gamma},\dotsc,u_{-1},u_1,\dotsc,u_\eta)\in\cC$
+\item Client B picks a random codeword $(r_{-\gamma},\dotsc,r_{-1},r_1,\dotsc,r_\eta)\in\cD$
+\item Client A picks a random codeword $(v_{-\gamma},\dotsc,v_{-1},v_1,\dotsc,v_\eta)\in\cE$ \\ 
+\hrule 
+\item Clients A and B use their secret shares to help client B securely compute $ z $, which can be used to resconstruct $ z_i = u_i r_i + v_i $ for $ i \in \{-\gamma, \dotsc, -1 \} $ using ereasure recovery algorithm for $ \cE $
+%\item Client B reconstructs $(z_{-\gamma},\dotsc,z_{-1},z_1,\dotsc,z_\eta)\in\cE$ using erasure recovery algorithm for \cE \\
+\hrule 
+\item Client A outputs $(u_i,v_i)$ and Client B outputs $(r_i,z_i)$, for each $i\in\{-\gamma,\dotsc,-1\}$ 
+\end{enumerate}
+\end{boxedalgo}
+\caption{Round-optimal correlation extractor design paradigm based on Massey secret sharing scheme.}
+\label{fig:paradigm}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+

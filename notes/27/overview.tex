@@ -1,1 +1,94 @@
 \subsection{Technical Overview}
+In \figureref{paradigm}, we present the primary technical idea underlying the constructions of our correlation extractors,  which is also common to the protocols in \cite{ISIT:IMSW14,C:GIMS15}.
+
+\input{fig-paradigm}
+
+%Note that only steps (1) and (7) require interaction. 
+%Step (1), which is equivalent to secure coin tossing, can be performed by either party because the parties are semi-honest. 
+%Step (7) is a two-round protocol (\cf~\cite{EC:WolWul06}). 
+%Hence, the overall protocol is a two-round protocol, if the client who sends the first message for step (7) also performs step (1). 
+%If \cE admits an efficient erasure recovery algorithm and $d(\cE) > \gamma$, then client B can efficiently perform step (8). 
+%Note that, for every $i\in\{-\gamma,\dotsc,-1\}$, the outputs $(u_i,v_i)$ and $(r_i,z_i)$ are correct \ROLE[\bbF] secret shares. 
+%The privacy of this protocol, which also subsumes the argument that the output \ROLE[\bbF] secret shares are independent, relies on the particulars of the leakage model and the choices of the ensemble of codes \cC, \cD, and \cE. \\
+
+Following this paradigm, the security argument for the correlation extractor reduces to the observation that, given any particular non-trivial linear test, a random codeword from a random code fools this linear test. 
+Note that linear leakage is a special type of leakage, and surprisingly protecting only against all linear leakages suffices to protect against arbitrary leakage. 
+Thus, protection against linear leakage is not only necessary but also sufficient. 
+
+More concretely, consider any non-zero $S=(S_{-\gamma},\dotsc,S_{-1},S_1,\dotsc,S_\eta) \in \bbF^{\gamma + \eta}$. 
+The linear function $L_S\colon\bbF^{\gamma + \eta}\to\bbF$ is defined by $L_S(x_{-\gamma},\dotsc,x_{-1},x_1,\dotsc,x_\eta) = \sum_{i\in\{-\gamma,\dotsc,-1,1,\dotsc,\eta\}} S_ix_i$. 
+If $x$ is chosen uniformly at random from  $\bbF^{\gamma + \eta}$ then the output of $L_S(x)$ is uniformly random over \bbF, for all non-zero $S$. 
+However, if $x$ is chosen uniformly at random from a vector subspace of $\bbF^{\gamma + \eta}$, then $L_S$ is a constant function for every $S$ in the dual of this subspace.  
+So, sampling $x$ from a {\em particular subspace} of $\bbF^{\gamma + \eta}$ is unable to fool%
+\footnote{
+	A distribution $\cD$ over the sample space $\bbF^{\eta+\gamma}$ {\em fools} a linear test $L_S$ if the distribution of $L_S(x)$, where $x\drawn \cD$, is (close to) the uniform distribution over \bbF. 
+}
+every linear test.
+Sampling $x$ from an {\em ensemble} of subspaces of $\bbF^{\gamma + \eta}$, on the other hand, can fool every non-trivial linear test, except with an exponentially low probability. 
+Such ensembles are called a {\em family of small-bias distributions.} 
+Thererfore, the privacy of client A and client B, respectively, reduces to demonstrating that the ensemble of the codes $\{\cC_i\}$ and the ensemble of the codes $\{\cD_i\}$ satisfy this property.  
+We emphasize that if there exists $S$ such that the linear test $L_S$ is, say, not fooled by the ensemble of codes $\{\cC_i\}$ then an adversarial client B can perform a 1-bit leakage to violate the privacy of client A. 
+
+
+\noindent\textbf{Instantiation for \cite{ISIT:IMSW14,C:GIMS15}.} 
+These recent works on round-optimal correlation extractor construction create the ensemble of codes as follows. 
+Let $\{\cC_i\}$ be the set of all linear codes, and $\cD_i$ is the dual code of $\cC_i$. 
+Consequently, for any pair of linear codes $(\cC,\cD)$ in the ensemble, set $\cE$ as the linear code such that the sum of every element in the codeword is 0, referred to as the {\em parity code}. Since the parity code has distance 2 and it can efficiently recover one erasure, we have $\gamma=1$. 
+%We emphasize that \cite{ISIT:IMSW14,C:GIMS15} use $\bbF=\GF{2}$, while \cite{C:BloMajNgu17} uses large fields with characteristic 2. 
+
+
+%Moreover, intuitively, as the probability of fooling linear tests gets closer to 1, the protocol can have higher production (if permitted by the distance of \cE) and tolerate more leakage. \cmmt{I know that here you are referring to the expression in unpredictability lemma, but its hard to understand. We should rephrase this; I don't know how though.}
+
+%In the terminology of leakage resilience,  
+%\TODO{This approach does not give high production.} \dg{But, note that in above constructions, $d(\cE) = 2$ and hence, we can do only one erasure recovery. This implies that the above small-bias distributions cannot produce high production directly. \textsc{Add a footnote on how GIMS gets more than one OT.}} 
+
+The approach mentioned above (where $\cD_k$ is the dual code of $\cC_k$) only achieves $d(\cE)=2$ and, consequently, $\gamma=1$. 
+To achieve linear production, a potential approach is to ensure that $d(\cE)$ is linear.
+%
+%The discussion above reduces the goals of our work to the following. 
+This approach reduces the goals of our work to the following. 
+\begin{boxedalgo}
+	\noindent{\bfseries Our Target Properties.} 
+	Over suitably chosen finite fields
+	\begin{enumerate}
+		\item Construct the ensemble $\{(\cC_i,\cD_i)\}$ such that the linear code $\cE\supseteq \cC_i*\cD_i$ supports $\gamma$-erasure recovery for each $i$, and 
+		\item The ensembles of codes $\{\cC_i\}$ and $\{\cD_i\}$ are both families of small bias distributions. 
+	\end{enumerate}
+\end{boxedalgo} 
+
+
+
+
+\noindent\textbf{Related work of \cite{TCC:MeiPrzWul07,ICALP:PrzWul08} using secret-sharing schemes of \cite{C:CheCra06}.}%
+\footnote{
+	We emphasize that the original constructions of \cite{TCC:MeiPrzWul07,ICALP:PrzWul08} used Reed-Solomon codes over large fields. 
+	We believe that near-MDS AG codes (\ie, the Singleton Bound $d\leq n-k+1$ is satisfied with a small multiplicative slack) over constant size fields can also be used in their protocols.  
+} 
+Using Algebraic Geometry (AG) Codes, there are near-MDS codes%
+\footnote{
+	A Maximum distance separable code, or MDS code, satisfies the Singleton Bound tightly $d\leq n-k+1$. 
+	A near-MDS code roughly achieves this bound with a slight multiplicative slack. 
+}
+with one of the properties mentioned above, namely, target property (1). 
+%There are Algebraic Geometry Code, which are near-MDS, with target property (1). 
+There is an appropriate AG Code $\cC^*$ such that, if $\cC=\cD=\cC^*$ then the code \cE has linear distance. 
+We have already discussed that any single code cannot fool all linear tests, so this idea clearly {\em does not} suffice for our goals. 
+However, \cite{TCC:MeiPrzWul07,ICALP:PrzWul08} use this idea to achieve the partial goal of protection against the leakage of individual bits of the secret shares. 
+In fact, the construction is robust to linear tests $S$ with small support, and there are 1-bit linear leakages with a large support that render this construction insecure. 
+To achieve our goals, \underline{we need to fool every linear test}, including the ones with large support.  %\dg{It does not fool large linear tests.}
+%\TODO{Generalization from probing to arbitrary leakage.} 
+\\
+
+\noindent\textbf{Related work of \cite{FOCS:IKOS09}.} 
+The approach of Ishai~\etal~\cite{FOCS:IKOS09}, which also uses this AG Code $\cC^*$, can be interpreted in the paradigm presented in \figureref{paradigm}, albeit a minor modification. 
+The ensemble of codes $\{\cC_k\}$ is {\em non-linear} code,% 
+\footnote{
+	Concatenation of an AG code with a binary representation of the field elements, a majority encoding of each bit, and a randomized encoding for a suitable constant-size functionality. 
+	The ensemble is constructed by enumerating all outcomes of the probabilistic encoding procedures.  
+}
+that is a family of small biased distribution, while the code \cD is an appropriate fixed linear code. 
+%The code \cE is not defined by a coordinate-wise product of the each pair of codewords in \cC and \cD, but by coordinate-wise applying a suitable (constant-size) functionality. 
+%Moreover, most crucially, their approach only achieves security against one client. 
+This approach, therefore, achieves security for client A against an adversarial client B. 
+Recall that this is the primary reason that their construction is not round optimal. 
+To achieve our goals, \ul{we need to construct $\{\cC_k, \cD_k\}$ that are both families of small bias distributions.}  
