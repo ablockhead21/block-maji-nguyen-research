@@ -1,18 +1,21 @@
 \section{Linear Production Rate and Half Leakage Resilience}
 
-	\begin{theorem}
-		\label{thm:embed-low}
-		Let $\bbF$ be a finite field, and \bbK be a degree-$n$ extension of \bbF. 
-		There exists a 2-party semi-honest secure protocol for the $\OLE[\bbF]^m$ functionality in the \OLE[\bbK]-hybrid, where $m=\Theta(n)$, that performs only one call to the \OLE[\bbK] functionality (and no additional communication). 
-	\end{theorem}
+\begin{theorem}
+	\label{thm:embed-low}
+	Let $\bbF$ be a finite field, and \bbK be a degree-$n$ extension of \bbF. 
+	There exists a 2-party semi-honest secure protocol for the $\OLE[\bbF]^m$ functionality in the \OLE[\bbK]-hybrid, where $m=\Theta(n)$, that performs only one call to the \OLE[\bbK] functionality (and no additional communication). 
+\end{theorem}
 
-	\begin{theorem}[Embedding Theorem]
-		\label{thm:embed}
-		Let $\bbF_q$ be a finite field of size $q$, a power of a prime. 
-		There exist constants $c_q^* \in \{1,2,3,4,6\}$, $c_q > 0$, and $n_0 \in \bbN$ such that for all $n \geq n_0$ where $c_q^*$ divides $n$, there exist (linear) maps $E \colon \bbF^m_{q} \rightarrow \bbK$ and $D\colon \bbK \rightarrow \bbF^m_{q}$, where \bbK is the degree-$n$ extension of the field $\bbF_q$, such that the following constraints are satisfied.
-		\begin{enumerate}
-			\item We have $m \geq c_qn$, and
-			\item For all $\ba, \bb \in \bbF_{q}^m$, we have: 
-			$D\big( E(\ba)\cdot E(\bb) \big) = \ba*\bb$. 
-		\end{enumerate}
-	\end{theorem}
+\begin{theorem}[Embedding Theorem]
+	\label{thm:embed}
+	Let $\bbF_q$ be a finite field of size $q$, a power of a prime. 
+	There exist constants $c_q^* \in \{1,2,3,4,6\}$, $c_q > 0$, and $n_0 \in \bbN$ such that for all $n \geq n_0$ where $c_q^*$ divides $n$, there exist (linear) maps $E \colon \bbF^m_{q} \rightarrow \bbK$ and $D\colon \bbK \rightarrow \bbF^m_{q}$, where \bbK is the degree-$n$ extension of the field $\bbF_q$, such that the following constraints are satisfied.
+	\begin{enumerate}
+		\item We have $m \geq c_qn$, and
+		\item For all $\ba, \bb \in \bbF_{q}^m$, we have: 
+		$D\big( E(\ba)\cdot E(\bb) \big) = \ba*\bb$. 
+	\end{enumerate}
+\end{theorem}
+
+\subsection{Preliminaries}
+\textcolor{red}{Here we need algebraic function field preliminaries}
