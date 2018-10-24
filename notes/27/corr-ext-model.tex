@@ -1,1 +1,12 @@
 \subsection{Correlation Extractors and Security Model}\label{sec:intro-corr-ext}
+We consider the standard model of Ishai \etal \cite{FOCS:IKOS09} for 2-party semi-honest secure computation in the preprocessing model, which is used by the subsequent works of \cite{C:GIMS15,C:BloMajNgu17,EPRINT:BGMN18,EPRINT:BloMajNgu18}.
+In the preprocessing step, a trusted dealer first randomly samples $(r_A, r_B)$ from the correlated private randomness $(R_A,R_B)$.
+Then the dealer provides Alice and Bob with secret shares $r_A$ and $r_B$, respectively.
+An adversarial party can perform an arbitrary $t$-bits of leakage on the secret share of the honest party at the end of the preprocessing step.
+This leaky correlation hybrid is represented as $\leaky{R_A,R_B}{t}$.
+A {\em correlation extractor} is defined as follows.
+
+\begin{definition}[$(n,m,t,\eps)$-Correlation Extractor]\label{def:corr-ext}
+	Let $(R_A,R_B)$ be a correlated private randomness such that the secret share of each party is $n$-bits.
+	An $(n,m,t,\eps)${\em-correlation extractor for} $(R_A, R_B)$ is a two-party interactive protocol in the $\leaky{R_A,R_B}{t}$-hybrid that securely implements the $\ROT[m/2]$ functionality against information-theoretic semi-honest adversaries with $\eps$ simulation error.
+\end{definition}

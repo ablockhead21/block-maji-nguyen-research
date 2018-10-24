@@ -38,18 +38,26 @@ The secret shares of Alice and Bob are $r_A$ and $r_B$, respectively.
 For $m \in \bbN$, the functionality or correlation $\cF^m$ represents the functionality that implements $m$ independent copies of any functionality or correlation $\cF$.
 
 \subsection{Correlation Extractors}\label{sec:prelim-corr-ext}
+We denote the correlated private randomness by $(R_A,R_B)$ and the $t$-leaky version of $(R_A,R_B)$ by $\leaky{R_A,R_B}{t}$.
+Recall \defref{corr-ext} for the definition of an $(n,m,t,\eps)$-correlation extractor.
+We define the {\em production rate} of a correlation extractor as $m/n$, and the {\em leakage rate} as $t/n$.
 
-\textcolor{red}{Note this definition may be moved to section 1.1.}
-\begin{definition}[$(n,m,t,\eps)$-Correlation Extractor]
-	Let $(R_A, R_B)$ be a correlated private randomness such that the size of the secret share of each party is $n$-bits.
-	An $(n,m,t,\eps)$-correlation extractor for $(R_A, R_B)$ is a two-party interactive protocol in the $\leaky{(R_A,R_B)}{t}$-hybrid that securely implements the $\ROT[m/2]$ functionality against information-theoretic semi-honest adversaries with $\eps$ simulation error.
-\end{definition}
+\paragraph{Leakage Model.} We define our leakage model for a correlation $(R_A,R_B)$ as follows.
+\begin{enumerate}
+	\item {\bfseries Correlation generation phase.} Alice receives $r_A$ and Bob receives $r_B$ such that $(r_A, r_B) \drawn (R_A,R_B)$ and the size of the secret share of each party is $n$-bits.
+	
+	\item {\bfseries Corruption and leakage phase.} A semi-honest adversary corrupts either the sender (Alice) or receiver (Bob).
+	If the sender is corrupted, the adversary sends a leakage function $L \colon R_B \rightarrow \zo^t$ and receives $L(r_B)$.
+	If the receiver is corrupted, the adversary sends a leakage function $L\colon R_A \rightarrow \zo^t$ and receives $L(r_A)$.
+	We emphasize that this leakage need not be on the individual bits of the shares $r_A$ or $r_B$, but on the entire share.
+	Thus this leakage can encode crucial global information.
+\end{enumerate}
 
-\paragraph{Leakage Model.}
+\paragraph{Correctness.} The correctness condition states that the output of the receiver is correct in all $m/2$ instances of $\ROT$.
 
-\paragraph{Correctness.}
-
-\paragraph{Privacy.}
+\paragraph{Privacy.} The privacy requirement states the following.
+Let $(s_0\p{i}, s_1\p{i})$ be the output shares of Alice and let $(c\p{i}, z\p{i})$ be the output shares of Bob in the $i^th$ instance of \ROT.
+A corrupt sender (respectively, receiver) cannot distinguish between $\{ c\p{i} \}_{i \in [m/2]}$ (respectively, $\{ s_{1-\p{i}}\p{i}  \}_{i \in [m/2]}$) and $r \getsr \zo^{m/2}$ with advantage more than $\eps$.
 
 \subsection{Fourier Analysis over Finite Fields}\label{sec:prelim-fourier}
 

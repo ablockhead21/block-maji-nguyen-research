@@ -1,5 +1,10 @@
-\section{Linear Production Rate and Linear Leakage Resilience}
-	\begin{theorem}[Asymptotically Optimal Correlation Extractor for $\ROLE(\bbF)$]
-		\label{thm:main} 
-		There exists a 2-message $(n,m,t,\eps)$-correlation extractor for $\ROLE[\bbF]^{n/2\lg\abs\bbF}$  such that $m=\Theta(n)$, $t=\Theta(n)$, and $\eps=\exp(-\Theta(n))$. %$m/n$, $t/n$, and $-\frac1n \log \eps$ are all positive constants. 
-	\end{theorem}
+\section{Linear Production Rate and Linear Leakage Resilience}\label{sec:bgmn}
+
+\begin{theorem}[Asymptotically Optimal Correlation Extractor for \ROT]\label{thm:bgmn-rot}
+	There exists a 2-message $(n,m,t,\eps)$-correlation extractor for $\ROT[n/2]$ such that $m = \Theta(n)$, $t = \Theta(n)$, and $\eps = \exp(-\Theta(n))$
+\end{theorem}
+
+\begin{theorem}[Asymptotically Optimal Correlation Extractor for $\ROLE(\bbF)$]
+	\label{thm:bgmn-role} 
+	There exists a 2-message $(n,m,t,\eps)$-correlation extractor for $\ROLE[\bbF]^{n/2\lg\abs\bbF}$  such that $m=\Theta(n)$, $t=\Theta(n)$, and $\eps=\exp(-\Theta(n))$. %$m/n$, $t/n$, and $-\frac1n \log \eps$ are all positive constants. 
+\end{theorem}
