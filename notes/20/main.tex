@@ -55,6 +55,12 @@ Towards this, we have the following goals for Simple Partition Number.
 	
 	\item Give at least one or two applications of sp.
 	Recall example of $n$ students needing to meet with some $m$ teachers in one big room, minimize number of hours required, or something of the like.
+	
+	\item New connection: rook's graphs. 
+	Every complete bipartite graph has a corresponding line graph which is a rook's graph.
+	Thus by nature of a line graph, if given a graph $G$ and asked to find a vertex coloring of size $k$ of $G$ such that each induced subgraph from each color is a disjoint union of rook's graphs, this is identical to finding a simple partition of size $k$ of some transformation $G'$ of $G$, where $G'$ is bipartite.
+	Note that in general $G$ could not be some ``line graph'' of some other graph $H$, as line graphs have many forbidden subgraphs.
+	So this transformation would have to only correspond to a line graph inverse after a simple partition is found.
 \end{enumerate}}
 
 \pagestyle{empty}
